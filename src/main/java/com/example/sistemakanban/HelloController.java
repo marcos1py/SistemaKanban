@@ -1,109 +1,229 @@
 package com.example.sistemakanban;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.event.Event;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
-
+import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class HelloController {
     @FXML
-    private Pane kanbanPanel3;
+    private Label LabelResponsavel1;
+
+    @FXML
+    private Label labelStatus11;
+
+    @FXML
+    private Label LabelResponsavel;
+
+    @FXML
+    private Label labelTituloCard11;
+
+    @FXML
+    private AnchorPane anchorPanefazer;
+    @FXML
+    private AnchorPane princial;
+    @FXML
+    private ScrollPane scrollpaneAndamento;
+    @FXML
+    private ScrollPane testea;
+
+
+    @FXML
+    private Label labelDataInicio11;
 
     @FXML
     private Label labelDescriçaoCard;
 
     @FXML
+    private Label labelDescriçaoCard11;
+
+    @FXML
     private Label labelDataInicio;
 
     @FXML
-    private Label labelTituloCard;
+    private AnchorPane anchorPaneAndamento;
 
     @FXML
-    private Label labelStatus;
+    private ScrollPane scrollpaneAfazer;
+
+    @FXML
+    private Label labelDataFim11;
 
     @FXML
     private Label labelDataFim;
 
     @FXML
-    private Label LabelResponsavel;
-    @FXML
-    private Pane kanbanPanel1;
-
+    private Pane atividade3;
 
     @FXML
-    private Pane kanbanPanel2;
+    private Label labelTituloCard1;
+
+    @FXML
+    private ScrollPane scrollpaneConcluidas;
 
     @FXML
     private Pane atividade1;
 
+    @FXML
+    private Pane atividade2;
 
+    @FXML
+    private Label labelStatus;
+    @FXML
+    private AnchorPane principal;
+
+    @FXML
+    private AnchorPane anchorPaneConcluidas;
+
+    @FXML
+    private Pane paneAfazer;
+    @FXML
+    private Pane paneConcluidas;
+    @FXML
+    private Pane paneAndamento;
+    @FXML
+    private Label labelStatus1;
+    private Pane currentPanel;
+    @FXML
+    private Label LabelResponsavel11;
+
+    @FXML
+    private Label labelDescriçaoCard1;
+
+    @FXML
+    private Label labelDataFim1;
+
+    @FXML
+    private Label labelTituloCard;
+
+    @FXML
+    private Label labelDataInicio1;
     private double offsetX;
     private double offsetY;
-    private Pane currentPanel;
-
-
-    @FXML
-    private Button adicionarButton;
-
-
-    @FXML
-    void adicionarButton(ActionEvent event) {
-
-    }
-    private void atualizarLabels() {
-        labelDescriçaoCard.setText("Nova Descrição");
-        labelDataInicio.setText("Nova Data de Início");
-        labelTituloCard.setText("Novo Título");
-        labelStatus.setText("Novo Status");
-        labelDataFim.setText("Nova Data de Fim");
-        LabelResponsavel.setText("Novo Responsável");
-    }
-    int contagem= 0;
-    int eixoX = 15;
+    double x = 0, y = 0;
+    int contagem;
     int eixoY = 0;
     @FXML
-    public void initialize() {
+    private void initialize() {
+        mexerPane(atividade1);
+        mexerPane(atividade2);
+        mexerPane(atividade3);
+    }
 
-        atividade1.setOnMousePressed(event -> {
+    private void mexerPane(Pane atividade) {
 
-            offsetX = event.getSceneX() - atividade1.getLayoutX();
-            offsetY = event.getSceneY() - atividade1.getLayoutY();
+
+        atividade.setOnMousePressed(event -> {
+            System.out.println("Oi");
+
+
+            offsetX = event.getSceneX() - atividade.getLayoutX();
+            offsetY = event.getSceneY() - atividade.getLayoutY();
 
         });
         // Adicione um evento de arrastar o mouse
-        atividade1.setOnMouseDragged(event -> {
+        atividade.setOnMouseDragged(event -> {
+            System.out.println("Oi2");
 
-            atividade1.setLayoutX(event.getSceneX() - offsetX);
-            atividade1.setLayoutY(event.getSceneY() - offsetY);
+            atividade.setLayoutX(event.getSceneX() - offsetX);
+            atividade.setLayoutY(event.getSceneY() - offsetY);
+
         });
 
         // Adicione um evento de soltar o mouse
-        atividade1.setOnMouseReleased(event -> {
+        atividade.setOnMouseReleased(event -> {
+            System.out.println("Oi3");
+
+
+            atividade.toFront();
             Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY());
 
-            // Check if atividade1 is already a child of a panel and remove it if so
-            if (atividade1.getParent() != null) {
-                ((Pane) atividade1.getParent()).getChildren().remove(atividade1);
+            // Check if atividade is already a child of a panel and remove it if so
+            if (atividade.getParent() != null) {
+                ((Pane) atividade.getParent()).getChildren().remove(atividade);
+            }
+            double espaçamento = 0;
+            if (nearestPanel != null) {
+                nearestPanel.getChildren().add(atividade);
+
+                reorganizarAtividades(nearestPanel);
+                currentPanel = nearestPanel;
+
             }
 
-            if (nearestPanel != null) {
-                nearestPanel.getChildren().add(atividade1);
-                atividade1.setLayoutX(15);
-                atividade1.setLayoutY(70);
-                currentPanel = nearestPanel;
-            }
-        });
-        adicionarButton.setOnAction(event -> {
-            Pane newAtividade = createNewAtividade(); // Create a new activity
-            kanbanPanel1.getChildren().add(newAtividade); // Add the new activity to the first panel
+
         });
     }
+    private void reorganizarAtividades(Pane panel) {
+        List<Node> atividades = panel.getChildren().filtered(node -> node instanceof Pane);
+        double spacing = 0;
+
+        for (Node node : atividades) {
+
+            if (node instanceof Pane) {
+                node.setLayoutX(3);
+                node.setLayoutY(spacing);
+                spacing += 108;
+            }
+        }
+    }
+
+
+
+    private Pane findNearestPanel(double x, double y) {
+        try {
+
+            double distanceToPanel1 = calculateDistance(x, y, paneAfazer);
+            double distanceToPanel2 = calculateDistance(x, y, paneAndamento);
+            double distanceToPanel3 = calculateDistance(x, y, paneConcluidas);
+
+
+            double minDistance = Math.min(distanceToPanel1, Math.min(distanceToPanel2, distanceToPanel3));
+
+
+
+
+            if (minDistance == distanceToPanel1) {
+                System.out.println("painel1");
+                return anchorPanefazer;
+            } else if (minDistance == distanceToPanel2) {
+                System.out.println("painel2");
+                return anchorPaneAndamento;
+            } else {
+                System.out.println("painel3");
+                return anchorPaneConcluidas;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private double calculateDistance(double x, double y, Pane panel) {
+        double panelCenterX = panel.getLayoutX() + panel.getWidth() / 2;
+        double panelCenterY = panel.getLayoutY() + panel.getHeight() / 2;
+        return Math.sqrt(Math.pow(x - panelCenterX, 2) + Math.pow(y - panelCenterY, 2));
+    }
+
+
     private Pane createNewAtividade() {
         // Create a new Pane for the activity
+
+
         if (contagem == 0){
             eixoY = 70;
         }
@@ -143,27 +263,5 @@ public class HelloController {
         novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard);
 
         return novaAtividade;
-    }
-
-    private Pane findNearestPanel(double x, double y) {
-        double distanceToPanel1 = calculateDistance(x, y, kanbanPanel1);
-        double distanceToPanel2 = calculateDistance(x, y, kanbanPanel2);
-        double distanceToPanel3 = calculateDistance(x, y, kanbanPanel3);
-
-        double minDistance = Math.min(distanceToPanel1, Math.min(distanceToPanel2, distanceToPanel3));
-
-        if (minDistance == distanceToPanel1) {
-            return kanbanPanel1;
-        } else if (minDistance == distanceToPanel2) {
-            return kanbanPanel2;
-        } else {
-            return kanbanPanel3;
-        }
-    }
-
-    private double calculateDistance(double x, double y, Pane panel) {
-        double panelCenterX = panel.getLayoutX() + panel.getWidth() / 2;
-        double panelCenterY = panel.getLayoutY() + panel.getHeight() / 2;
-        return Math.sqrt(Math.pow(x - panelCenterX, 2) + Math.pow(y - panelCenterY, 2));
     }
 }
