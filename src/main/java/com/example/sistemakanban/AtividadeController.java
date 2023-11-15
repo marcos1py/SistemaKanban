@@ -1,25 +1,16 @@
 package com.example.sistemakanban;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.event.Event;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
-public class HelloController {
+public class AtividadeController {
     @FXML
     private Label LabelResponsavel1;
 
