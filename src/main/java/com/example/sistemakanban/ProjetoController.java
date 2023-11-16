@@ -1,4 +1,5 @@
 package com.example.sistemakanban;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -122,6 +123,17 @@ public class ProjetoController {
         mexerPane(atividade1);
         mexerPane(atividade2);
         mexerPane(atividade3);
+    }
+    @FXML
+    private AnchorPane addPane;
+
+    @FXML
+    void novoProjBtn(ActionEvent event) {
+        addPane.setVisible(true);
+    }
+    @FXML
+    void cancelarBtn(ActionEvent event) {
+        addPane.setVisible(false);
     }
 
     private void mexerPane(Pane atividade) {
