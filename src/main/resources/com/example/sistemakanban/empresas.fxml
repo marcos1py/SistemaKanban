@@ -39,16 +39,6 @@
                   <Font name="High Tower Text" size="20.0" />
                </font>
             </Button>
-            <Text fill="WHITE" layoutX="1241.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="1380.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
             <Circle fill="DODGERBLUE" layoutX="1473.0" layoutY="40.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
@@ -81,7 +71,7 @@
             <Font name="Arial Rounded MT Bold" size="43.0" />
          </font>
       </Label>
-      <Label layoutX="62.0" layoutY="477.0" text="ID" />
+      <Label layoutX="73.0" layoutY="477.0" text="ID" />
       <Label layoutX="155.0" layoutY="478.0" text="Empresa" />
       <Label layoutX="443.0" layoutY="480.0" text="Localizacao" />
       <Label layoutX="1204.0" layoutY="480.0" text="Editar" />
@@ -90,12 +80,12 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="1438.0">
                <children>
-                  <Pane fx:id="atividade1" layoutX="7.0" layoutY="43.0" prefHeight="104.0" prefWidth="1391.0" style="-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;">
+                  <Pane fx:id="atividade1" layoutX="13.0" layoutY="6.0" prefHeight="104.0" prefWidth="1412.0" style="-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                      <children>
-                        <Label layoutX="33.0" layoutY="47.0" text="01" />
+                        <Label layoutX="31.0" layoutY="47.0" text="01" />
                         <Label layoutX="963.0" layoutY="46.0" text="65" />
                         <Label layoutX="751.0" layoutY="45.0" text="62 999999999" />
                         <Label layoutX="399.0" layoutY="44.0" text="Goiania Goias Jardim novo mundo" />
