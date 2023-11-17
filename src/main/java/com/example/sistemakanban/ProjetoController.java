@@ -6,11 +6,14 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.event.Event;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 
 import java.io.File;
@@ -113,6 +116,17 @@ public class ProjetoController {
 
     @FXML
     private Label labelDataInicio1;
+    @FXML
+    private Pane dashboard;
+
+    @FXML
+    private Region nav;
+
+    @FXML
+    private Pane nav1;
+
+    @FXML
+    private Label title;
     private double offsetX;
     private double offsetY;
     double x = 0, y = 0;
@@ -129,12 +143,23 @@ public class ProjetoController {
 
     @FXML
     void novoProjBtn(ActionEvent event) {
+
         addPane.setVisible(true);
+        deixarBorrado();
+
     }
     @FXML
     void cancelarBtn(ActionEvent event) {
         addPane.setVisible(false);
+        limparBorrado();
     }
+    @FXML
+    void confirmarBtn(ActionEvent event) {
+        addPane.setVisible(false);
+
+
+    }
+
 
     private void mexerPane(Pane atividade) {
 
@@ -194,6 +219,37 @@ public class ProjetoController {
         }
     }
 
+    private void deixarBorrado() {
+        BoxBlur boxBlur = new BoxBlur(5, 5, 2); // Ajuste os parâmetros conforme necessário
+        System.out.println(paneAndamento.getEffectiveNodeOrientation());
+        paneAndamento.setEffect(boxBlur);
+        scrollpaneAndamento.setEffect(boxBlur);
+        paneConcluidas.setEffect(boxBlur);
+        scrollpaneConcluidas.setEffect(boxBlur);
+        paneAfazer.setEffect(boxBlur);
+        scrollpaneAfazer.setEffect(boxBlur);
+        nav.setEffect(boxBlur);
+        dashboard.setEffect(boxBlur);
+        nav1.setEffect(boxBlur);
+        title.setEffect(boxBlur);
+    }
+    public void limparBorrado() {
+        DropShadow dropShadow = new DropShadow();
+
+
+        paneAndamento.setEffect(dropShadow);
+        paneConcluidas.setEffect(dropShadow);
+        paneAfazer.setEffect(dropShadow);
+
+        scrollpaneConcluidas.setEffect(null);
+        scrollpaneAndamento.setEffect(null);
+        scrollpaneAfazer.setEffect(null);
+
+        nav.setEffect(null);
+        dashboard.setEffect(dropShadow);
+        nav1.setEffect(null);
+        title.setEffect(null);
+    }
 
 
     private Pane findNearestPanel(double x, double y) {
