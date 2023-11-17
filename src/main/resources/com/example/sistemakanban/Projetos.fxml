@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressIndicator?>
@@ -20,7 +19,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -29,13 +27,13 @@
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
    <children>
-      <Region prefHeight="81.0" prefWidth="1639.0" style="-fx-background-color: black;" />
-      <Label layoutX="56.0" layoutY="91.0" text="Projetos" textFill="#11a9ff">
+      <Region fx:id="nav" prefHeight="81.0" prefWidth="1639.0" style="-fx-background-color: black;" />
+      <Label fx:id="title" layoutX="56.0" layoutY="91.0" text="Projetos" textFill="#11a9ff">
          <font>
             <Font name="Arial Rounded MT Bold" size="30.0" />
          </font>
       </Label>
-      <Pane layoutX="1177.0" layoutY="115.0" prefHeight="669.0" prefWidth="341.0" style="-fx-border-style: solid; -fx-border-width: 1; -fx-background-radius: 5; -fx-background-color: #fff;">
+      <Pane fx:id="dashboard" layoutX="1177.0" layoutY="115.0" prefHeight="669.0" prefWidth="341.0" style="-fx-border-style: solid; -fx-border-width: 1; -fx-background-radius: 5; -fx-background-color: #fff;">
          <effect>
             <DropShadow height="8.56" radius="5.335" width="14.78" />
          </effect>
@@ -142,7 +140,7 @@
             </Pane>
          </children>
       </Pane>
-      <Pane layoutX="43.0" layoutY="133.0" prefHeight="56.0" prefWidth="1110.0" style="-fx-border-radius: 12; -fx-border-style: solid; -border-width: 1px; -fx-background-color: #EEE; -fx-background-radius: 12;">
+      <Pane fx:id="nav1" layoutX="43.0" layoutY="133.0" prefHeight="56.0" prefWidth="1110.0" style="-fx-border-radius: 12; -fx-border-style: solid; -border-width: 1px; -fx-background-color: #EEE; -fx-background-radius: 12;">
          <children>
             <ImageView fitHeight="18.0" fitWidth="15.0" layoutX="228.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -486,85 +484,51 @@
             <DropShadow />
          </effect>
       </Pane>
-      <AnchorPane fx:id="addPane" layoutX="163.0" layoutY="139.0" prefHeight="552.0" prefWidth="1170.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;" visible="false">
+      <AnchorPane fx:id="addPane" layoutX="463.0" layoutY="140.0" prefHeight="554.0" prefWidth="451.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;" visible="false">
          <children>
-            <Text fill="#11a9ff" layoutX="493.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar projeto">
+            <Text fill="#11a9ff" layoutX="140.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar projeto">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <TextField layoutX="117.0" layoutY="96.0" prefHeight="34.0" prefWidth="287.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
-            <Text fill="#11a9ff" layoutX="39.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fim previsto:">
+            <TextField fx:id="txtFieldProjNome" layoutX="125.0" layoutY="63.0" prefHeight="34.0" prefWidth="287.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fim definido:">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fill="#11a9ff" layoutX="39.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Início:">
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="144.0" stroke="#ff1414" strokeType="OUTSIDE" strokeWidth="0.0" text="Início definido:">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fill="#11a9ff" layoutX="39.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fim definido:">
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Responsável:">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text fill="#11a9ff" layoutX="39.0" layoutY="161.0" stroke="#ff1414" strokeType="OUTSIDE" strokeWidth="0.0" text="Início definido:">
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <DatePicker layoutX="196.0" layoutY="320.0" />
-            <DatePicker layoutX="196.0" layoutY="244.0" />
-            <Text fill="#11a9ff" layoutX="39.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Responsável:">
+            <TextField fx:id="txtFieldResp" layoutX="197.0" layoutY="270.0" prefHeight="26.0" prefWidth="219.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição:">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Line endX="100.00006103515625" endY="286.20001220703125" layoutX="323.0" layoutY="193.0" startX="100.00006103515625" startY="-112.20001220703125" stroke="#999999" />
-            <Text fill="#11a9ff" layoutX="39.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:">
+            <TextArea fx:id="txtAreaDesc" layoutX="48.0" layoutY="353.0" prefHeight="120.0" prefWidth="368.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 15; -fx-border-width: 0.6;" />
+            <Button layoutX="43.0" layoutY="491.0" mnemonicParsing="false" onAction="#cancelarBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Cancelar" />
+            <Button layoutX="296.0" layoutY="491.0" mnemonicParsing="false" onAction="#confirmarBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Confirmar" />
+            <DatePicker fx:id="datePickFim" layoutX="204.0" layoutY="174.0" prefHeight="26.0" prefWidth="210.0" />
+            <DatePicker fx:id="datePickInicio" layoutX="204.0" layoutY="125.0" prefHeight="26.0" prefWidth="209.0" />
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area:">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <TextField layoutX="189.0" layoutY="367.0" prefHeight="26.0" prefWidth="219.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
-            <Text fill="#11a9ff" layoutX="442.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descrição">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <TextArea layoutX="448.0" layoutY="126.0" prefHeight="120.0" prefWidth="287.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 15; -fx-border-width: 0.6;" />
-            <Text fill="#11a9ff" layoutX="448.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Obrservações">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fill="#11a9ff" layoutX="805.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ação:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <TextField layoutX="877.0" layoutY="89.0" prefHeight="27.0" prefWidth="259.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
-            <DatePicker layoutX="877.0" layoutY="175.0" prefHeight="27.0" prefWidth="143.0" />
-            <Button layoutX="457.0" layoutY="500.0" mnemonicParsing="false" onAction="#cancelarBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Cancelar" />
-            <Button layoutX="628.0" layoutY="500.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Confirmar" />
-            <TextArea layoutX="448.0" layoutY="334.0" prefHeight="120.0" prefWidth="287.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 15;" />
-            <Text fill="#11a9ff" layoutX="803.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fim:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <Text fill="#11a9ff" layoutX="803.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Início:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Text>
-            <DatePicker layoutX="877.0" layoutY="137.0" prefHeight="27.0" prefWidth="143.0" />
-            <ListView layoutX="797.0" layoutY="271.0" prefHeight="231.0" prefWidth="326.0" />
-            <Line endX="100.00006103515625" endY="286.20001220703125" layoutX="673.0" layoutY="193.0" startX="100.00006103515625" startY="-112.20001220703125" stroke="#999999" />
-            <DatePicker layoutX="196.0" layoutY="187.0" />
-            <DatePicker layoutX="196.0" layoutY="140.0" />
-            <Button layoutX="797.0" layoutY="225.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Adicionar" />
+            <TextField fx:id="txtFieldArea" layoutX="197.0" layoutY="218.0" prefHeight="26.0" prefWidth="219.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />

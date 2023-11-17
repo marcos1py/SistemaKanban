@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.AtividadeController">
+   <stylesheets>
+      <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
+   </stylesheets>
+   <children>
+      <Pane fx:id="nav" layoutX="-5.0" layoutY="-7.0" prefHeight="82.0" prefWidth="1639.0" style="-fx-background-color: black;">
+         <children>
+            <Text fill="WHITE" layoutX="36.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONFIA">
+               <font>
+                  <Font name="High Tower Text" size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="1014.0" layoutY="25.0" mnemonicParsing="false" opacity="0.0" text="Dashboard" textFill="WHITE">
+               <font>
+                  <Font name="High Tower Text" size="20.0" />
+               </font>
+            </Button>
+            <Text fill="WHITE" layoutX="1241.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="1380.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Circle fill="DODGERBLUE" layoutX="1473.0" layoutY="40.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
+      <Pane fx:id="nav1" layoutX="11.0" layoutY="385.0" prefHeight="56.0" prefWidth="1452.0" style="-fx-border-radius: 12; -fx-border-style: solid; -border-width: 1px; -fx-background-color: #EEE; -fx-background-radius: 12;">
+         <children>
+            <TextField layoutX="30.0" layoutY="16.0" maxHeight="23.0" maxWidth="191.0" minHeight="23.0" minWidth="191.0" prefHeight="23.0" prefWidth="191.0" promptText="Pesquisar" />
+            <ImageView fitHeight="18.0" fitWidth="15.0" layoutX="196.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Imagens/lupa.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="1254.0" layoutY="9.0" mnemonicParsing="false" onAction="#novoProjBtn" style="-fx-text-fill: #FFF; -fx-font-size: 15; -fx-background-color: #11ACFF; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-style: solid; -fx-border-width: 1px;" text="Nova Atividade" />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+      <Label fx:id="title" layoutX="32.0" layoutY="316.0" text="Empresas" textFill="#11a9ff">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="title1" layoutX="29.0" layoutY="128.0" text="Seja" textFill="#11a9ff">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="43.0" />
+         </font>
+      </Label>
+      <Label fx:id="title11" layoutX="32.0" layoutY="176.0" text="Bem vindo" textFill="#11a9ff">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="43.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="477.0" text="ID" />
+      <Label layoutX="155.0" layoutY="478.0" text="Empresa" />
+      <Label layoutX="443.0" layoutY="480.0" text="Localizacao" />
+      <Label layoutX="1204.0" layoutY="480.0" text="Editar" />
+      <Label layoutX="1312.0" layoutY="480.0" text="Deletar" />
+      <ScrollPane layoutX="32.0" layoutY="516.0" prefHeight="248.0" prefWidth="1444.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="1438.0">
+               <children>
+                  <Pane fx:id="atividade1" layoutX="7.0" layoutY="43.0" prefHeight="104.0" prefWidth="1391.0" style="-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <children>
+                        <Label layoutX="33.0" layoutY="47.0" text="01" />
+                        <Label layoutX="963.0" layoutY="46.0" text="65" />
+                        <Label layoutX="751.0" layoutY="45.0" text="62 999999999" />
+                        <Label layoutX="399.0" layoutY="44.0" text="Goiania Goias Jardim novo mundo" />
+                        <Button layoutX="1175.0" layoutY="37.0" mnemonicParsing="false" />
+                        <Button layoutX="1288.0" layoutY="39.0" mnemonicParsing="false" />
+                        <Hyperlink layoutX="116.0" layoutY="43.0" text="Bar do ze" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label layoutX="795.0" layoutY="481.0" text="telefone" />
+      <Label layoutX="953.0" layoutY="482.0" text="Total de funcioanario" />
+      <ImageView fitHeight="316.0" fitWidth="701.0" focusTraversable="true" layoutX="936.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Imagens/banner-empresa.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
