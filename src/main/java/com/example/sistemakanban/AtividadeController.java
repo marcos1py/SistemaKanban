@@ -128,6 +128,17 @@ public class AtividadeController {
     @FXML
     private Pane cardDeletar;
     @FXML
+    private AnchorPane addPane;
+    @FXML
+    void novoProjBtn(ActionEvent event) {
+        addPane.setVisible(true);
+    }
+    @FXML
+    void cancelarBtn(ActionEvent event) {
+        addPane.setVisible(false);
+        limpaBorrado();
+    }
+    @FXML
     private void btnDeletar() {
         cardDeletar.setVisible(true);
         deixarBorrado();
@@ -146,8 +157,7 @@ public class AtividadeController {
         nav1.setEffect(boxBlur);
         title.setEffect(boxBlur);
     }
-
-    public void cancelarDelet(ActionEvent event) {
+    private void limpaBorrado() {
         DropShadow dropShadow = new DropShadow();
         cardDeletar.setVisible(false);
 
@@ -163,6 +173,11 @@ public class AtividadeController {
         dashbord.setEffect(dropShadow);
         nav1.setEffect(null);
         title.setEffect(null);
+    }
+
+    public void cancelarDelet(ActionEvent event) {
+        cardDeletar.setVisible(false);
+        limpaBorrado();
     }
     public void novaAtividadeBtn(ActionEvent event) {
         Pane newAtividade = createNewAtividade(); // Create a new activity
