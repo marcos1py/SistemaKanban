@@ -2,10 +2,13 @@ package com.example.sistemakanban;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.*;
@@ -15,15 +18,20 @@ import javafx.event.Event;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import java.io.File;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 
 public class ProjetoController {
+
+
     @FXML
     private Label LabelResponsavel1;
 
@@ -127,19 +135,30 @@ public class ProjetoController {
 
     @FXML
     private Label title;
+
+    @FXML
+    private TextArea txtAreaDesc;
+
+    @FXML
+    private TextField txtFieldProjNome;
     private double offsetX;
     private double offsetY;
     double x = 0, y = 0;
     int contagem;
     int eixoY = 0;
+    GeraPane novoPane = new GeraPane();
     @FXML
     private void initialize() {
         mexerPane(atividade1);
         mexerPane(atividade2);
         mexerPane(atividade3);
+
     }
     @FXML
     private AnchorPane addPane;
+    List<Pane> listaProjetos = novoPane.getListaProjetos();
+
+
 
     @FXML
     void novoProjBtn(ActionEvent event) {
@@ -148,17 +167,30 @@ public class ProjetoController {
         deixarBorrado();
 
     }
+
     @FXML
     void cancelarBtn(ActionEvent event) {
+
         addPane.setVisible(false);
         limparBorrado();
     }
+
+
+
     @FXML
     void confirmarBtn(ActionEvent event) {
-        addPane.setVisible(false);
 
+
+        Pane newPane = novoPane.newProject(txtFieldProjNome.getText(), txtAreaDesc.getText());
+        anchorPaneAndamento.getChildren().add(newPane);
+        listaProjetos.add(newPane);
+        System.out.println(listaProjetos.indexOf(newPane));
+        addPane.setVisible(false);
+        limparBorrado();
 
     }
+
+
 
 
     private void mexerPane(Pane atividade) {
@@ -205,6 +237,11 @@ public class ProjetoController {
 
         });
     }
+
+
+
+
+
     private void reorganizarAtividades(Pane panel) {
         List<Node> atividades = panel.getChildren().filtered(node -> node instanceof Pane);
         double spacing = 0;
@@ -221,7 +258,6 @@ public class ProjetoController {
 
     private void deixarBorrado() {
         BoxBlur boxBlur = new BoxBlur(5, 5, 2); // Ajuste os parâmetros conforme necessário
-        System.out.println(paneAndamento.getEffectiveNodeOrientation());
         paneAndamento.setEffect(boxBlur);
         scrollpaneAndamento.setEffect(boxBlur);
         paneConcluidas.setEffect(boxBlur);
@@ -287,49 +323,4 @@ public class ProjetoController {
         return Math.sqrt(Math.pow(x - panelCenterX, 2) + Math.pow(y - panelCenterY, 2));
     }
 
-
-    private Pane createNewAtividade() {
-        // Create a new Pane for the activity
-
-
-        if (contagem == 0){
-            eixoY = 70;
-        }
-        else {
-            eixoY += 110;
-        }
-        contagem += 1;
-        String nomePane = "atividade" + contagem;
-
-        //eixoX += 15;
-
-        Pane novaAtividade = new Pane();
-        novaAtividade.setPrefSize(318, 104);
-        novaAtividade.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
-        novaAtividade.setLayoutX(15);
-        novaAtividade.setLayoutY(eixoY);
-
-
-        Label labelTituloCard = new Label("Fazer a limpeza da sala"+contagem);
-        labelTituloCard.setLayoutX(22.0);
-        labelTituloCard.setLayoutY(3.0);
-
-        Label labelDescriçãoCard = new Label("TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO ");
-        labelDescriçãoCard.setLayoutX(23.0);
-        labelDescriçãoCard.setLayoutY(27.0);
-        labelDescriçãoCard.setPrefWidth(222.0);
-        labelDescriçãoCard.setPrefHeight(29.0);
-        labelDescriçãoCard.setWrapText(true);
-        labelDescriçãoCard.setFont(new Font(9.0));
-
-
-
-        // Adicione o novo nome como um identificador à nova Pane
-        novaAtividade.setId(nomePane);
-
-        // Adicione os Labels à Pane
-        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard);
-
-        return novaAtividade;
-    }
 }
