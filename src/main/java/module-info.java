@@ -5,4 +5,6 @@ module com.example.sistemakanban {
 
     opens com.example.sistemakanban to javafx.fxml;
     exports com.example.sistemakanban;
+    exports com.example.sistemakanban.classes;
+    opens com.example.sistemakanban.classes to javafx.fxml;
 }

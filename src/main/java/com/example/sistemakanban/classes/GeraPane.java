@@ -1,4 +1,4 @@
-package com.example.sistemakanban;
+package com.example.sistemakanban.classes;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
