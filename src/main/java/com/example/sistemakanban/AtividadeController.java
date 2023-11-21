@@ -218,7 +218,7 @@ public class AtividadeController {
             double espaçamento = 0;
             if (nearestPanel != null) {
                 nearestPanel.getChildren().add(atividade);
-
+                System.out.println(nearestPanel);
                 reorganizarAtividades(nearestPanel);
                 currentPanel = nearestPanel;
 

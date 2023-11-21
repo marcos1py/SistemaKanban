@@ -2,12 +2,14 @@ package com.example.sistemakanban.classes;
 
 public class Empresa {
     private int id;
-    private String nome;
+    private String nomeEmpresa;
+    private String local;
+    private String tel;
+    private String qtFuncionario;
+    int Yeixo;
 
     // Construtor
-    public Empresa(int id, String nome) {
-        this.id = id;
-        this.nome = nome;
+    public Empresa() {
     }
 
     // Getters e Setters
@@ -18,12 +20,43 @@ public class Empresa {
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getNome() {
-        return nome;
+    public int getYeixo() {
+        return Yeixo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void getYeixo(int Yeixo) {
+        this.Yeixo = Yeixo;
+    }
+
+    public String getNomeEmpresa() {
+        return nomeEmpresa;
+    }
+
+    public void setNomeEmpresa(String nomeEmpresa) {
+        this.nomeEmpresa = nomeEmpresa;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getQtFuncionario() {
+        return qtFuncionario;
+    }
+
+    public void setQtFuncionario(String qtFuncionario) {
+        this.qtFuncionario = qtFuncionario;
     }
 }

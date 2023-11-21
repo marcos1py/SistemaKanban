@@ -1,6 +1,10 @@
 package com.example.sistemakanban.classes;
 
+import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
@@ -18,6 +22,19 @@ public class GeraPane {
 
     public GeraPane(){
 
+    }
+
+
+
+    public void addProjeto(Projeto projeto) {
+        System.out.println();
+//Pane novoProjeto = newProject(projeto.getTitulo(), projeto.getDescricao());
+       // projeto.setPane(novoProjeto);
+        //listaProjetos.add(novoProjeto);
+    }
+
+    public void removerProjeto(Projeto projeto) {
+        listaProjetos.remove(projeto.getPane());
     }
     public List<Pane> getListaProjetos() {
         return listaProjetos;
@@ -51,22 +68,24 @@ public class GeraPane {
     public void removerProjeto(Pane novoProjeto){
         listaProjetos.remove(novoProjeto);
     }
-    public Pane newProject(String tituloProj, String descProj){
-        int eixoY = 0;
+
+
+    static int eixoY = 0;
+
+    public Pane newProject(Projeto  meuProjeto){
         int contagem = 0;
-        if (contagem == 0){
-            eixoY = 70;
-        }
-        else {
-            eixoY += 110;
-        }
-        contagem += 1;
+        contagem = meuProjeto.getId();
+        eixoY += 110;
+        System.out.println(eixoY);
+        System.out.println("");
         String nomePane = "projeto "+contagem;
         novoProjeto = new Pane();
         novoProjeto.setPrefSize(318, 104);
         novoProjeto.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
         novoProjeto.setLayoutX(15);
         novoProjeto.setLayoutY(eixoY);
+
+        String tituloProj =  meuProjeto.getTitulo();
 
         Label labelTituloCard = new Label(tituloProj+" "+contagem);
         labelTituloCard.setLayoutX(22.0);
@@ -95,5 +114,64 @@ public class GeraPane {
 
         return novoProjeto;
     }
+    @FXML
+    private AnchorPane achorPaneEmpresa;
+    public Pane newEmpresa(Empresa  meuEmpresa){
+        int contagem = 0;
+        contagem = meuEmpresa.getId();
 
+        if (contagem == 0){
+            eixoY = 70;
+        }
+        else {
+            eixoY += 110;
+        }
+        contagem += 1;
+        String nomePane = "Empresa "+contagem;
+        novoProjeto = new Pane();
+        novoProjeto.setPrefSize(1412, 104);
+        novoProjeto.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
+        novoProjeto.setLayoutX(13);
+        novoProjeto.setLayoutY(eixoY);
+
+        String nomeEmpresa =  meuEmpresa.getNomeEmpresa();
+        System.out.println(nomeEmpresa);
+        String labelLocalGet =  meuEmpresa.getLocal();
+        String tel =  meuEmpresa.getTel();
+        String qtFuncionario =  meuEmpresa.getQtFuncionario();
+
+        // add o titulo da emrpesa
+        Hyperlink tituloEmpresa = new Hyperlink(nomeEmpresa);
+        tituloEmpresa.setLayoutX(116);
+        tituloEmpresa.setLayoutY(43);
+
+        // add o titulo da Local
+        Label labelLocal = new Label(labelLocalGet);
+        labelLocal.setLayoutX(399);
+        labelLocal.setLayoutY(44);
+        labelLocal.setWrapText(true);
+        labelLocal.setFont(new Font(15.0));
+
+        // add o titulo da tel
+        Label labelTel = new Label(tel);
+        labelTel.setLayoutX(751);
+        labelTel.setLayoutY(45);
+        labelTel.setWrapText(true);
+        labelTel.setFont(new Font(15.0));
+
+        // add o titulo da qtFuncionario
+        Label labelQtFuncionario = new Label(qtFuncionario);
+        labelQtFuncionario.setLayoutX(963);
+        labelQtFuncionario.setLayoutY(46);
+        labelQtFuncionario.setWrapText(true);
+        labelQtFuncionario.setFont(new Font(15.0));
+
+
+        // Adicione o novo nome como um identificador à nova Pane
+        novoProjeto.setId(nomePane);
+
+        // Adicione os Labels à Pane
+        novoProjeto.getChildren().addAll(tituloEmpresa, labelLocal,labelTel,labelQtFuncionario);
+        return novoProjeto;
+    }
 }

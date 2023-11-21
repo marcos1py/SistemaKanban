@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -21,7 +30,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -488,7 +497,7 @@
       </Pane>
       <AnchorPane fx:id="addPane" layoutX="463.0" layoutY="140.0" prefHeight="554.0" prefWidth="451.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;">
          <children>
-            <Text fill="#11a9ff" layoutX="140.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar projeto">
+            <Text fill="#11a9ff" layoutX="130.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar projeto">
                <font>
                   <Font size="24.0" />
                </font>
@@ -521,7 +530,7 @@
                </font>
             </Text>
             <TextArea fx:id="txtAreaDesc" layoutX="48.0" layoutY="353.0" prefHeight="120.0" prefWidth="368.0" style="-fx-border-color: black; -fx-border-radius: 5; -fx-background-radius: 15; -fx-border-width: 0.6;" />
-            <Button layoutX="43.0" layoutY="491.0" mnemonicParsing="false" onAction="#cancelarBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Cancelar" />
+            <Button layoutX="48.0" layoutY="491.0" mnemonicParsing="false" onAction="#cancelarBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Cancelar" />
             <Button layoutX="296.0" layoutY="491.0" mnemonicParsing="false" onAction="#confirmarBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Confirmar" />
             <DatePicker fx:id="datePickFim" layoutX="204.0" layoutY="174.0" prefHeight="26.0" prefWidth="210.0" />
             <DatePicker fx:id="datePickInicio" layoutX="204.0" layoutY="125.0" prefHeight="26.0" prefWidth="209.0" />

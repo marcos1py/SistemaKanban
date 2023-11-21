@@ -1,5 +1,6 @@
 package com.example.sistemakanban;
 import com.example.sistemakanban.classes.GeraPane;
+import com.example.sistemakanban.classes.Projeto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -163,15 +164,26 @@ public class ProjetoController {
     }
 
 
-
+    int numeroID2 = 0;
     @FXML
     void confirmarBtn(ActionEvent event) {
 
+        GeraPane gerador = new GeraPane();
 
-        Pane newPane = novoPane.newProject(txtFieldProjNome.getText(), txtAreaDesc.getText());
-        anchorPaneAndamento.getChildren().add(newPane);
-        listaProjetos.add(newPane);
-        System.out.println(listaProjetos.indexOf(newPane));
+        Projeto meuProjeto = new Projeto( ) ;
+
+        meuProjeto.setTitulo(txtFieldProjNome.getText());
+        numeroID2 += 1;
+        meuProjeto.setId(numeroID2);
+
+
+        Pane teste = gerador.newProject(meuProjeto);
+
+        anchorPaneConcluidas.getChildren().add(teste);
+
+
+
+
         addPane.setVisible(false);
         limparBorrado();
 

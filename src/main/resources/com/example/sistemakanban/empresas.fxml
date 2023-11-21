@@ -22,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.AtividadeController">
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.EmpresasController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -50,7 +50,7 @@
                   <Image url="@../../../Imagens/lupa.png" />
                </image>
             </ImageView>
-            <Button layoutX="1254.0" layoutY="9.0" mnemonicParsing="false" onAction="#novoProjBtn" style="-fx-text-fill: #FFF; -fx-font-size: 15; -fx-background-color: #11ACFF; -fx-border-radius: 10; -fx-background-radius: 10; -fx-border-style: solid; -fx-border-width: 1px;" text="Nova Atividade" />
+            <Button layoutX="1301.0" layoutY="9.0" mnemonicParsing="false" onAction="#novoProjBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Add empresa" />
          </children>
          <effect>
             <DropShadow />
@@ -78,7 +78,7 @@
       <Label layoutX="1312.0" layoutY="480.0" text="Deletar" />
       <ScrollPane layoutX="32.0" layoutY="516.0" prefHeight="248.0" prefWidth="1444.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="1438.0">
+          <AnchorPane fx:id="achorPaneEmpresa" minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="1438.0">
                <children>
                   <Pane fx:id="atividade1" layoutX="13.0" layoutY="6.0" prefHeight="104.0" prefWidth="1412.0" style="-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;">
                      <cursor>
@@ -91,7 +91,7 @@
                         <Label layoutX="399.0" layoutY="44.0" text="Goiania Goias Jardim novo mundo" />
                         <Button layoutX="1175.0" layoutY="37.0" mnemonicParsing="false" />
                         <Button layoutX="1288.0" layoutY="39.0" mnemonicParsing="false" />
-                        <Hyperlink layoutX="116.0" layoutY="43.0" text="Bar do ze" />
+                        <Hyperlink fx:id="teste" layoutX="116.0" layoutY="43.0" text="Bar do ze" />
                      </children>
                   </Pane>
                </children>
@@ -105,5 +105,43 @@
             <Image url="@../../../Imagens/banner-empresa.png" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="addPane" layoutX="473.0" layoutY="150.0" prefHeight="347.0" prefWidth="480.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;">
+         <children>
+            <Text fill="#11a9ff" layoutX="149.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar projeto">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nomeEmpresaADD" layoutX="125.0" layoutY="63.0" prefHeight="34.0" prefWidth="287.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="47.0" layoutY="277.0" mnemonicParsing="false" onAction="#cancelarBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Cancelar" />
+            <Button layoutX="295.0" layoutY="277.0" mnemonicParsing="false" onAction="#confirmarBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Confirmar" />
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Local:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="localEmpresaADD" layoutX="125.0" layoutY="122.0" prefHeight="34.0" prefWidth="287.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <TextField fx:id="telefoneEmpresaADD" layoutX="147.0" layoutY="176.0" prefHeight="34.0" prefWidth="265.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade de funcionario:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="qtFuncionarioADD" layoutX="341.0" layoutY="223.0" prefHeight="34.0" prefWidth="70.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
    </children>
 </AnchorPane>
