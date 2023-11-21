@@ -19,6 +19,19 @@ public class GeraPane {
     public GeraPane(){
 
     }
+
+
+
+    public void addProjeto(Projeto projeto) {
+        System.out.println();
+//Pane novoProjeto = newProject(projeto.getTitulo(), projeto.getDescricao());
+       // projeto.setPane(novoProjeto);
+        //listaProjetos.add(novoProjeto);
+    }
+
+    public void removerProjeto(Projeto projeto) {
+        listaProjetos.remove(projeto.getPane());
+    }
     public List<Pane> getListaProjetos() {
         return listaProjetos;
     }
@@ -51,7 +64,7 @@ public class GeraPane {
     public void removerProjeto(Pane novoProjeto){
         listaProjetos.remove(novoProjeto);
     }
-    public Pane newProject(String tituloProj, String descProj){
+    public Pane newProject(Projeto  meuProjeto){
         int eixoY = 0;
         int contagem = 0;
         if (contagem == 0){
@@ -67,6 +80,8 @@ public class GeraPane {
         novoProjeto.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
         novoProjeto.setLayoutX(15);
         novoProjeto.setLayoutY(eixoY);
+
+        String tituloProj =  meuProjeto.getTitulo();
 
         Label labelTituloCard = new Label(tituloProj+" "+contagem);
         labelTituloCard.setLayoutX(22.0);

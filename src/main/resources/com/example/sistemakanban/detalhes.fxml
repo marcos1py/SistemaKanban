@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1505.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.AtividadeController">
+<AnchorPane fx:id="principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.DetalhesController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -52,5 +54,189 @@
             <Circle fill="DODGERBLUE" layoutX="1473.0" layoutY="40.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
+      <CheckBox layoutX="202.0" layoutY="463.0" mnemonicParsing="false" text="CheckBox">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <Button layoutX="119.0" layoutY="137.0" mnemonicParsing="false" style="-fx-background-color: #009dff; -fx-border-radius: 20px;" text="Button" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Line endX="11.199951171875" endY="494.39996337890625" layoutX="803.0" layoutY="205.0" startX="11.199951171875" startY="25.599990844726562" />
+      <Button layoutX="1381.0" layoutY="137.0" mnemonicParsing="false" style="-fx-background-color: #9c0720; -fx-border-radius: 20px;" text="Button" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <Button layoutX="114.0" layoutY="678.0" mnemonicParsing="false" style="-fx-background-color: #1eff05; -fx-border-radius: 20px;" text="Button" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+      <TextField layoutX="618.0" layoutY="118.0" style="-fx-text-fill: #009dff; -fx-background-color: #EEE;" text="Detalhes da atividade">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="30.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="183.0" layoutY="226.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #009dff; -fx-background-color: #EEE;" text="Atividades:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="369.0" layoutY="227.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #20201f; -fx-background-color: #EEE;" text="Atividades">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="25.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="185.0" layoutY="298.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #009dff; -fx-background-color: #EEE;" text="Detalhes:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="188.0" layoutY="413.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #009dff; -fx-background-color: #EEE;" text="Atividades:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="238.0" layoutY="681.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #1eff05; -fx-background-color: #EEE;" text="Mudo com sucesso">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="236.0" layoutY="712.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #9c0720; -fx-background-color: #EEE;" text="Falta algo">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </TextField>
+      <Pane layoutX="929.0" layoutY="250.0" prefHeight="95.0" prefWidth="160.0" style="-fx-background-color: #EEE; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Label layoutX="52.0" layoutY="4.0" text="xxxxxx" textFill="#11a9ff">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="51.0" text="22/22/2222">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="1111.0" layoutY="250.0" prefHeight="95.0" prefWidth="160.0" style="-fx-background-color: #EEE; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Label layoutX="52.0" layoutY="4.0" text="xxxxxx" textFill="#11a9ff">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="51.0" text="22/22/2222">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="929.0" layoutY="359.0" prefHeight="95.0" prefWidth="160.0" style="-fx-background-color: #EEE; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Label layoutX="52.0" layoutY="4.0" text="xxxxxx" textFill="#11a9ff">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="51.0" text="22/22/2222">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="1111.0" layoutY="359.0" prefHeight="95.0" prefWidth="160.0" style="-fx-background-color: #EEE; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Label layoutX="52.0" layoutY="4.0" text="xxxxxx" textFill="#11a9ff">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="51.0" text="22/22/2222">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="1301.0" layoutY="365.0" prefHeight="95.0" prefWidth="160.0" style="-fx-background-color: #EEE; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Label layoutX="52.0" layoutY="4.0" text="xxxxxx" textFill="#11a9ff">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="51.0" text="22/22/2222">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="1301.0" layoutY="255.0" prefHeight="95.0" prefWidth="160.0" style="-fx-background-color: #EEE; -fx-border-radius: 10px; -fx-background-radius: 10px;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Label layoutX="52.0" layoutY="4.0" text="xxxxxx" textFill="#11a9ff">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="51.0" text="pppppppp" textFill="RED">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <PieChart fx:id="grafico2" layoutX="1182.0" layoutY="496.0" prefHeight="224.0" prefWidth="279.0" style="-fx-background-color: #EEE;" title="Grafico 2" />
+      <PieChart fx:id="grafico1" layoutX="912.0" layoutY="506.0" prefHeight="224.0" prefWidth="279.0" style="-fx-background-color: #EEE;" title="Grafico 2" />
+      <ScrollPane layoutX="193.0" layoutY="454.0" prefHeight="200.0" prefWidth="593.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="194.0" prefWidth="584.0" />
+        </content>
+      </ScrollPane>
+      <TextArea editable="false" layoutX="196.0" layoutY="339.0" prefHeight="82.0" prefWidth="584.0" text="asdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasddddddddddd" wrapText="true" />
    </children>
 </AnchorPane>

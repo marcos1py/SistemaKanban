@@ -1,5 +1,6 @@
 package com.example.sistemakanban;
 import com.example.sistemakanban.classes.GeraPane;
+import com.example.sistemakanban.classes.Projeto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -167,11 +168,21 @@ public class ProjetoController {
     @FXML
     void confirmarBtn(ActionEvent event) {
 
+        GeraPane gerador = new GeraPane();
 
-        Pane newPane = novoPane.newProject(txtFieldProjNome.getText(), txtAreaDesc.getText());
-        anchorPaneAndamento.getChildren().add(newPane);
-        listaProjetos.add(newPane);
-        System.out.println(listaProjetos.indexOf(newPane));
+        Projeto meuProjeto = new Projeto( ) ;
+
+        meuProjeto.setTitulo(txtFieldProjNome.getText());
+
+
+
+        Pane newPane = gerador.newProject(meuProjeto);
+
+        anchorPaneConcluidas.getChildren().add(newPane);
+
+
+
+
         addPane.setVisible(false);
         limparBorrado();
 
