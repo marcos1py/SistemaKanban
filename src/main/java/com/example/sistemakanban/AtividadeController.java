@@ -121,9 +121,15 @@ public class AtividadeController {
     int eixoY = 0;
     @FXML
     private void initialize() {
-        mexerPane(atividade1);
-        mexerPane(atividade2);
-        mexerPane(atividade3);
+        if (atividade1 != null) {
+            mexerPane(atividade1);
+        }
+        if (atividade2 != null) {
+            mexerPane(atividade2);
+        }
+        if (atividade3 != null) {
+            mexerPane(atividade3);
+        }
     }
     @FXML
     private Pane cardDeletar;
@@ -277,6 +283,11 @@ public class AtividadeController {
     }
 
     private double calculateDistance(double x, double y, Pane panel) {
+        if (panel == null) {
+            // Adicione um tratamento adequado quando panel é nulo
+            return Double.MAX_VALUE; // Ou outro valor representando uma "distância infinita"
+        }
+
         double panelCenterX = panel.getLayoutX() + panel.getWidth() / 2;
         double panelCenterY = panel.getLayoutY() + panel.getHeight() / 2;
         return Math.sqrt(Math.pow(x - panelCenterX, 2) + Math.pow(y - panelCenterY, 2));

@@ -99,6 +99,8 @@ public class GeraPane {
 
 
 
+
+
         // Adicione o novo nome como um identificador à nova Pane
         novoProjeto.setId(nomePane);
 

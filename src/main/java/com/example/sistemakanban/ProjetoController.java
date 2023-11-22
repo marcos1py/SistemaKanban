@@ -137,9 +137,15 @@ public class ProjetoController {
     GeraPane novoPane = new GeraPane();
     @FXML
     private void initialize() {
-        mexerPane(atividade1);
-        mexerPane(atividade2);
-        mexerPane(atividade3);
+        if (atividade1 != null) {
+            mexerPane(atividade1);
+        }
+        if (atividade2 != null) {
+            mexerPane(atividade2);
+        }
+        if (atividade3 != null) {
+            mexerPane(atividade3);
+        }
 
     }
     @FXML

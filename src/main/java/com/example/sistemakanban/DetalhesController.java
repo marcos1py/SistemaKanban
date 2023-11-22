@@ -30,7 +30,7 @@ public class DetalhesController {
         grafico1.getData().addAll(slice3, slice4);
         grafico2.getData().addAll(slice1, slice2);
 
-        // Outras inicializações, se necessário
+
     }
 
 
