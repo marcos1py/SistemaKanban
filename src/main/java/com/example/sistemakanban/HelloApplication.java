@@ -2,24 +2,54 @@ package com.example.sistemakanban;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("detalhes.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+private static Scene detalhes;
+    private static Stage stage;
+    private static Scene projetos;
 
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
+
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        stage = primaryStage;
+
+
+        FXMLLoader fxmlLoaderProjeto = new FXMLLoader(HelloApplication.class.getResource("Projetos.fxml"));
+        projetos = new Scene(fxmlLoaderProjeto.load());
+
+
+
+
+
+
+
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("detalhes.fxml"));
+        detalhes = new Scene(fxmlLoader.load());
+
+        primaryStage.setTitle("Hello!");
+        primaryStage.setScene(projetos);
 
         // Maximize a janela, mas permita que a barra de tarefas seja visível
-        stage.setMaximized(true);
+        primaryStage.setMaximized(true);
 
-        stage.show();
+        primaryStage.show();
+    }
+    public static void mudarTela(String scr){
+        switch (scr){
+            case "atividades":
+                stage.setScene(detalhes);
+                break;
+            case "alo":
+                stage.setScene(projetos);
+                break;
+        }
     }
 
     public static void main(String[] args) {
