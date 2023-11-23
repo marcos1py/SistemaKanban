@@ -190,7 +190,15 @@ public class ProjetoController {
     }
 
 
+    @FXML
+    void datePickFim(ActionEvent event) {
 
+    }
+
+    @FXML
+    void datePickInicio(ActionEvent event) {
+
+    }
 
     private void mexerPane(Pane atividade) {
 
@@ -218,7 +226,7 @@ public class ProjetoController {
 
 
             atividade.toFront();
-            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY());
+            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(),atividade);
 
             // Check if atividade is already a child of a panel and remove it if so
             if (atividade.getParent() != null) {
@@ -230,6 +238,7 @@ public class ProjetoController {
 
                 reorganizarAtividades(nearestPanel);
                 currentPanel = nearestPanel;
+
 
             }
 
@@ -287,7 +296,7 @@ public class ProjetoController {
     }
 
 
-    private Pane findNearestPanel(double x, double y) {
+    private Pane findNearestPanel(double x, double y,Pane projeto) {
         try {
 
             double distanceToPanel1 = calculateDistance(x, y, paneAfazer);
@@ -300,15 +309,22 @@ public class ProjetoController {
 
 
 
+
             if (minDistance == distanceToPanel1) {
-                System.out.println("painel1");
+                projeto.setStyle("-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
+
                 return anchorPanefazer;
+
             } else if (minDistance == distanceToPanel2) {
-                System.out.println("painel2");
+                projeto.setStyle("-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
+
                 return anchorPaneAndamento;
+
             } else {
-                System.out.println("painel3");
+                projeto.setStyle("-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
+
                 return anchorPaneConcluidas;
+
             }
         } catch (Exception e) {
             e.printStackTrace();

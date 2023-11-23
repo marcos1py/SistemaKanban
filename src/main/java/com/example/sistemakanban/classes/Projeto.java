@@ -1,8 +1,8 @@
 package com.example.sistemakanban.classes;
 
-import com.example.sistemakanban.classes.Atividade;
 import javafx.scene.layout.Pane;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Projeto {
@@ -12,6 +12,11 @@ public class Projeto {
     private String descricao;
     private List<Atividade> atividades;
     private Pane pane;
+    private LocalDate inícioDefinido;
+    private LocalDate fimDefinido;
+    private String status;
+    private String responsavel;
+    private String area;
 
     // Construtor
     public Projeto() {
@@ -21,6 +26,11 @@ public class Projeto {
         this.atividades = atividades;
         this.titulo = titulo;
         this.descricao = descricao;
+        this.fimDefinido = fimDefinido;
+        this.inícioDefinido = inícioDefinido;
+        this.status = status;
+        this.responsavel = responsavel;
+        this.area = area;
 
     }
 
@@ -61,6 +71,13 @@ public class Projeto {
         return titulo;
     }
 
+    public LocalDate getInicioDefinido(){return inícioDefinido;}
+
+    public void setInicioDefinido(LocalDate inicioDefinido){this.inícioDefinido = inicioDefinido;}
+
+    public LocalDate getFimDefinido(){return inícioDefinido;}
+
+    public void setFimDefinido(LocalDate fimDefinido){this.fimDefinido = fimDefinido;}
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -72,4 +89,7 @@ public class Projeto {
     public void setPane(Pane pane) {
         this.pane = pane;
     }
+    public void setResponsavel(String responsavel){this.responsavel = responsavel;}
+
+    public String getResponsavel(){return responsavel;}
 }

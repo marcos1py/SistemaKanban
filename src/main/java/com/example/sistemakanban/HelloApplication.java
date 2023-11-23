@@ -49,7 +49,7 @@ public class HelloApplication extends Application {
         primaryStage.getIcons().add(icon);
 
 
-        primaryStage.setScene(atividades);
+        primaryStage.setScene(projetos);
 
 
         primaryStage.setMaximized(true);

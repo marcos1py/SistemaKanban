@@ -87,13 +87,12 @@ public class GeraPane {
         novoProjeto.setLayoutX(15);
         novoProjeto.setLayoutY(eixoY);
 
-        String tituloProj =  meuProjeto.getTitulo();
+        Hyperlink tituloProjeto = new Hyperlink( meuProjeto.getTitulo()+" "+contagem);
+        tituloProjeto.setLayoutX(22.0);
+        tituloProjeto.setLayoutY(3.0);
+        tituloProjeto.setFont(new Font(15.0));
 
-        Label labelTituloCard = new Label(tituloProj+" "+contagem);
-        labelTituloCard.setLayoutX(22.0);
-        labelTituloCard.setLayoutY(3.0);
-
-        Label labelDescriçãoCard = new Label(descProj);
+        Label labelDescriçãoCard = new Label(meuProjeto.getDescricao());
         labelDescriçãoCard.setLayoutX(23.0);
         labelDescriçãoCard.setLayoutY(27.0);
         labelDescriçãoCard.setPrefWidth(222.0);
@@ -102,14 +101,52 @@ public class GeraPane {
         labelDescriçãoCard.setFont(new Font(9.0));
 
 
+        Label labelInicio = new Label("Início: " );//+ dataInicio.toString());
+        labelInicio.setLayoutX(24.0);
+        labelInicio.setLayoutY(53.0);
 
+        Label labelFim = new Label("Fim: "); // + dataFim.toString());
+        labelFim.setLayoutX(120.0);
+        labelFim.setLayoutY(53.0);
+
+        Label labelStatus = new Label("Status: Normal");
+        labelStatus.setLayoutX(23.0);
+        labelStatus.setLayoutY(65.0);
+
+        Label labelResponsavel = new Label("Responsável: " + meuProjeto.getResponsavel());
+        labelResponsavel.setLayoutX(23.0);
+        labelResponsavel.setLayoutY(80);
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setLayoutX(245.0);
+        progressIndicator.setLayoutY(31.0);
+        progressIndicator.setPrefHeight(59.0);
+        progressIndicator.setPrefWidth(40.0);
+        progressIndicator.setProgress(0);
+
+        MenuButton menuButton = new MenuButton("");
+        menuButton.setLayoutX(284.0);
+        menuButton.setLayoutY(4.0);
+        menuButton.setStyle("-fx-background-color: 0; -fx-cursor: hand;");
+
+// Adicione a imagem à ImageInput do MenuButton
+        ImageInput imageInput = new ImageInput();
+        Image minhaImagem3pontos = new Image(getClass().getResourceAsStream("/Imagens/3pontos.png"));
+        imageInput.setSource(minhaImagem3pontos);
+        menuButton.setEffect(imageInput);
+
+// Adicione itens ao MenuButton
+        MenuItem detalhesItem = new MenuItem("Detalhes");
+        MenuItem editarItem = new MenuItem("Editar");
+        MenuItem deletarItem = new MenuItem("Deletar");
+        menuButton.getItems().addAll(detalhesItem, editarItem, deletarItem);
 
 
         // Adicione o novo nome como um identificador à nova Pane
         novoProjeto.setId(nomePane);
 
         // Adicione os Labels à Pane
-        novoProjeto.getChildren().addAll(labelTituloCard, labelDescriçãoCard);
+        novoProjeto.getChildren().addAll(tituloProjeto, labelDescriçãoCard,labelInicio,labelFim,labelStatus,labelResponsavel,progressIndicator,menuButton);
 
 
 
