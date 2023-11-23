@@ -1,5 +1,7 @@
 package com.example.sistemakanban.classes;
-
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
@@ -8,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,27 +138,29 @@ public class GeraPane {
         novoProjeto.setLayoutY(eixoY);
 
         String nomeEmpresa =  meuEmpresa.getNomeEmpresa();
-        System.out.println(nomeEmpresa);
         String labelLocalGet =  meuEmpresa.getLocal();
         String tel =  meuEmpresa.getTel();
         String qtFuncionario =  meuEmpresa.getQtFuncionario();
+        int empresaID1 =  meuEmpresa.getId();
+        String empresaID = ""+empresaID1;
 
         // add o titulo da emrpesa
         Hyperlink tituloEmpresa = new Hyperlink(nomeEmpresa);
         tituloEmpresa.setLayoutX(116);
-        tituloEmpresa.setLayoutY(43);
+        tituloEmpresa.setLayoutY(46);
+        tituloEmpresa.setFont(new Font(15.0));
 
         // add o titulo da Local
         Label labelLocal = new Label(labelLocalGet);
         labelLocal.setLayoutX(399);
-        labelLocal.setLayoutY(44);
+        labelLocal.setLayoutY(46);
         labelLocal.setWrapText(true);
         labelLocal.setFont(new Font(15.0));
 
         // add o titulo da tel
         Label labelTel = new Label(tel);
         labelTel.setLayoutX(751);
-        labelTel.setLayoutY(45);
+        labelTel.setLayoutY(46);
         labelTel.setWrapText(true);
         labelTel.setFont(new Font(15.0));
 
@@ -167,11 +172,91 @@ public class GeraPane {
         labelQtFuncionario.setFont(new Font(15.0));
 
 
-        // Adicione o novo nome como um identificador à nova Pane
-        novoProjeto.setId(nomePane);
+
+        Label labelID = new Label(empresaID);
+        labelID.setLayoutX(31);
+        labelID.setLayoutY(46);
+
+
+        // Criar um botão
+        Button meuBotaoDeletar = new Button();
+        meuBotaoDeletar.setStyle("-fx-background-color: 0; -fx-cursor: hand;");
+
+        meuBotaoDeletar.setLayoutX(1288);
+        meuBotaoDeletar.setLayoutY(39);
+        meuBotaoDeletar.setPrefHeight(20);
+        Image minhaImagem = new Image(getClass().getResourceAsStream("/Imagens/icone deletar.png"));
+        ImageView imageView = new ImageView(minhaImagem);
+        imageView.setFitWidth(20);
+        imageView.setFitHeight(20);
+        meuBotaoDeletar.setGraphic(imageView);
+
+
+        // Criar um botão
+        Button meuBotaoEditar = new Button();
+        meuBotaoEditar.setStyle("-fx-background-color: 0; -fx-cursor: hand;");
+        meuBotaoEditar.setLayoutX(1175);
+        meuBotaoEditar.setLayoutY(35);
+        meuBotaoEditar.setPrefHeight(15);
+        Image minhaImagemEditar = new Image(getClass().getResourceAsStream("/Imagens/icone editar.png"));
+        ImageView imageViewEditar = new ImageView(minhaImagemEditar);
+        imageViewEditar.setFitWidth(20);
+        imageViewEditar.setFitHeight(20);
+        meuBotaoEditar.setGraphic(imageViewEditar);
 
         // Adicione os Labels à Pane
-        novoProjeto.getChildren().addAll(tituloEmpresa, labelLocal,labelTel,labelQtFuncionario);
+        novoProjeto.getChildren().addAll(tituloEmpresa, labelLocal,labelTel,labelQtFuncionario,labelID,meuBotaoDeletar,meuBotaoEditar);
         return novoProjeto;
+    }
+    public Pane newAtividade(Atividade atividade) {
+        int contagem = 0;
+        contagem = atividade.getId();
+
+        if (contagem == 0){
+            eixoY = 70;
+        }
+        else {
+            eixoY += 110;
+        }
+        contagem += 1;
+
+        String nomeAtividade = atividade.getNome();
+        LocalDate dataInicio = atividade.getInícioDefinido();
+        LocalDate dataFim = atividade.getFimDefinido();
+        String responsavel = atividade.getResponsavel();
+        String descricao = atividade.getDescrição();
+
+
+        int atividadeID1 =  atividade.getId();
+        String atividadeID = ""+atividadeID1;
+
+        //eixoX += 15;
+
+        Pane novaAtividade = new Pane();
+        novaAtividade.setPrefSize(318, 104);
+        novaAtividade.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
+        novaAtividade.setLayoutX(3);
+        novaAtividade.setLayoutY(eixoY);
+
+
+        Label labelTituloCard = new Label(nomeAtividade);
+        labelTituloCard.setLayoutX(22.0);
+        labelTituloCard.setLayoutY(3.0);
+
+        Label labelDescriçãoCard = new Label(descricao);
+        labelDescriçãoCard.setLayoutX(23.0);
+        labelDescriçãoCard.setLayoutY(27.0);
+        labelDescriçãoCard.setPrefWidth(222.0);
+        labelDescriçãoCard.setPrefHeight(29.0);
+        labelDescriçãoCard.setWrapText(true);
+        labelDescriçãoCard.setFont(new Font(9.0));
+
+
+
+
+        // Adicione os Labels à Pane
+        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard);
+
+        return novaAtividade;
     }
 }

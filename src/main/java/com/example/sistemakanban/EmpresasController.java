@@ -71,18 +71,23 @@ public class EmpresasController {
         Pane newPane = gerador.newEmpresa(meuEmpresa);
 
         achorPaneEmpresa.getChildren().add(newPane);
-        int teste =meuEmpresa.getYeixo() + 110;
-        achorPaneEmpresa.setPrefHeight(teste);
+        int teste =meuEmpresa.getYeixo();
+        int teste1 = (int) achorPaneEmpresa.getHeight();
+        teste += 100;
+
+        int teste3 = teste1+teste;
+        achorPaneEmpresa.setPrefHeight(teste3);
 
 
     }
     @FXML
     void cancelarBtn(ActionEvent event) {
+        addPane.setVisible(false);
 
     }
     @FXML
     void novoProjBtn(ActionEvent event) {
-
+        addPane.setVisible(true);
     }
 
 

@@ -3,6 +3,7 @@ package com.example.sistemakanban.classes;
 public class Empresa {
     private int id;
     private String nomeEmpresa;
+
     private String local;
     private String tel;
     private String qtFuncionario;
@@ -24,7 +25,7 @@ public class Empresa {
         return Yeixo;
     }
 
-    public void getYeixo(int Yeixo) {
+    public void setYeixo(int Yeixo) {
         this.Yeixo = Yeixo;
     }
 

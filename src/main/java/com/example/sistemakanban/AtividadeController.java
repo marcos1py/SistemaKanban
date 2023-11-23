@@ -1,9 +1,11 @@
 package com.example.sistemakanban;
+import com.example.sistemakanban.classes.Atividade;
+import com.example.sistemakanban.classes.Empresa;
+import com.example.sistemakanban.classes.GeraPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
@@ -132,6 +134,24 @@ public class AtividadeController {
         }
     }
     @FXML
+    private TextField responsavelID;
+    @FXML
+    private TextField nomeID;
+    @FXML
+    private TextArea descriçaoInput;
+    @FXML
+    private ListView<?> listaAçoes;
+    @FXML
+    private TextField açaoInput;
+    @FXML
+    private DatePicker inicioDefinidoAçao;
+    @FXML
+    private DatePicker fimDefinidoAçao;
+    @FXML
+    private DatePicker inicioDefinido;
+    @FXML
+    private DatePicker fimDefinido;
+    @FXML
     private Pane cardDeletar;
     @FXML
     private AnchorPane addPane;
@@ -180,51 +200,64 @@ public class AtividadeController {
         nav1.setEffect(null);
         title.setEffect(null);
     }
+    public void btnAddAçao(ActionEvent event) {
+
+    }
 
     public void cancelarDelet(ActionEvent event) {
         cardDeletar.setVisible(false);
         limpaBorrado();
     }
-    public void novaAtividadeBtn(ActionEvent event) {
-        Pane newAtividade = createNewAtividade(); // Create a new activity
-        anchorPaneAndamento.getChildren().add(newAtividade); // Add the new activity to the first panel
+    int numeroID = 0;
+    public void btnAddAtividade(ActionEvent event) {
+
+        Atividade atividade = new Atividade();
+        GeraPane gerador = new GeraPane();
+
+        numeroID += 1;
+        atividade.setId(numeroID);
+
+        atividade.setNome(nomeID.getText());
+        atividade.setInícioDefinido(inicioDefinido.getValue());
+        atividade.setFimDefinido(fimDefinido.getValue());
+        atividade.setResponsavel(responsavelID.getText());
+        atividade.setDescrição(descriçaoInput.getText());
+        //atividade.setAções(açaoInput.getText());
+
+
+        Pane newPane = gerador.newAtividade(atividade);
+
+        anchorPanefazer.getChildren().add(newPane);
+
+
     }
     private void mexerPane(Pane atividade) {
 
 
         atividade.setOnMousePressed(event -> {
-            System.out.println("Oi");
-
-
             offsetX = event.getSceneX() - atividade.getLayoutX();
             offsetY = event.getSceneY() - atividade.getLayoutY();
 
         });
+
         // Adicione um evento de arrastar o mouse
         atividade.setOnMouseDragged(event -> {
-            System.out.println("Oi2");
-
             atividade.setLayoutX(event.getSceneX() - offsetX);
             atividade.setLayoutY(event.getSceneY() - offsetY);
-
         });
 
         // Adicione um evento de soltar o mouse
         atividade.setOnMouseReleased(event -> {
-            System.out.println("Oi3");
-
-
-            atividade.toFront();
-            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY());
+            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(),atividade);
 
             // Check if atividade is already a child of a panel and remove it if so
             if (atividade.getParent() != null) {
                 ((Pane) atividade.getParent()).getChildren().remove(atividade);
             }
-            double espaçamento = 0;
             if (nearestPanel != null) {
                 nearestPanel.getChildren().add(atividade);
                 System.out.println(nearestPanel);
+
                 reorganizarAtividades(nearestPanel);
                 currentPanel = nearestPanel;
 
@@ -233,6 +266,7 @@ public class AtividadeController {
 
         });
     }
+
     private void reorganizarAtividades(Pane panel) {
         List<Node> atividades = panel.getChildren().filtered(node -> node instanceof Pane);
         double spacing = 0;
@@ -252,29 +286,29 @@ public class AtividadeController {
     }
 
 
-
-    private Pane findNearestPanel(double x, double y) {
+    private Pane findNearestPanel(double x, double y,Pane atividade) {
         try {
-
             double distanceToPanel1 = calculateDistance(x, y, paneAfazer);
             double distanceToPanel2 = calculateDistance(x, y, paneAndamento);
             double distanceToPanel3 = calculateDistance(x, y, paneConcluidas);
 
-
             double minDistance = Math.min(distanceToPanel1, Math.min(distanceToPanel2, distanceToPanel3));
 
-
-
-
             if (minDistance == distanceToPanel1) {
-                System.out.println("painel1");
+                atividade.setStyle("-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
+
                 return anchorPanefazer;
+
             } else if (minDistance == distanceToPanel2) {
-                System.out.println("painel2");
+                atividade.setStyle("-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
+
                 return anchorPaneAndamento;
+
             } else {
-                System.out.println("painel3");
+                atividade.setStyle("-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
+
                 return anchorPaneConcluidas;
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -291,51 +325,5 @@ public class AtividadeController {
         double panelCenterX = panel.getLayoutX() + panel.getWidth() / 2;
         double panelCenterY = panel.getLayoutY() + panel.getHeight() / 2;
         return Math.sqrt(Math.pow(x - panelCenterX, 2) + Math.pow(y - panelCenterY, 2));
-    }
-
-
-    private Pane createNewAtividade() {
-
-
-
-        if (contagem == 0){
-            eixoY = 70;
-        }
-        else {
-            eixoY += 110;
-        }
-        contagem += 1;
-        String nomePane = "atividade" + contagem;
-
-        //eixoX += 15;
-
-        Pane novaAtividade = new Pane();
-        novaAtividade.setPrefSize(318, 104);
-        novaAtividade.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
-        novaAtividade.setLayoutX(15);
-        novaAtividade.setLayoutY(eixoY);
-
-
-        Label labelTituloCard = new Label("Fazer a limpeza da sala"+contagem);
-        labelTituloCard.setLayoutX(22.0);
-        labelTituloCard.setLayoutY(3.0);
-
-        Label labelDescriçãoCard = new Label("TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO ");
-        labelDescriçãoCard.setLayoutX(23.0);
-        labelDescriçãoCard.setLayoutY(27.0);
-        labelDescriçãoCard.setPrefWidth(222.0);
-        labelDescriçãoCard.setPrefHeight(29.0);
-        labelDescriçãoCard.setWrapText(true);
-        labelDescriçãoCard.setFont(new Font(9.0));
-
-
-
-        // Adicione o novo nome como um identificador à nova Pane
-        novaAtividade.setId(nomePane);
-
-        // Adicione os Labels à Pane
-        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard);
-
-        return novaAtividade;
     }
 }
