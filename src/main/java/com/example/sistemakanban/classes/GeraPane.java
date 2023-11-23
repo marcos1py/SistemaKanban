@@ -1,11 +1,10 @@
 package com.example.sistemakanban.classes;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -244,18 +243,57 @@ public class GeraPane {
         labelTituloCard.setLayoutY(3.0);
 
         Label labelDescriçãoCard = new Label(descricao);
-        labelDescriçãoCard.setLayoutX(23.0);
-        labelDescriçãoCard.setLayoutY(27.0);
+        labelDescriçãoCard.setLayoutX(30.0);
+        labelDescriçãoCard.setLayoutY(20);
         labelDescriçãoCard.setPrefWidth(222.0);
         labelDescriçãoCard.setPrefHeight(29.0);
         labelDescriçãoCard.setWrapText(true);
         labelDescriçãoCard.setFont(new Font(9.0));
 
 
+        Label labelInicio = new Label("Início: " );//+ dataInicio.toString());
+        labelInicio.setLayoutX(24.0);
+        labelInicio.setLayoutY(53.0);
+
+        Label labelFim = new Label("Fim: "); // + dataFim.toString());
+        labelFim.setLayoutX(120.0);
+        labelFim.setLayoutY(53.0);
+
+        Label labelStatus = new Label("Status: Normal");
+        labelStatus.setLayoutX(23.0);
+        labelStatus.setLayoutY(65.0);
+
+        Label labelResponsavel = new Label("Responsável: " + responsavel);
+        labelResponsavel.setLayoutX(23.0);
+        labelResponsavel.setLayoutY(80);
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setLayoutX(245.0);
+        progressIndicator.setLayoutY(31.0);
+        progressIndicator.setPrefHeight(59.0);
+        progressIndicator.setPrefWidth(40.0);
+        progressIndicator.setProgress(0);
+
+        MenuButton menuButton = new MenuButton("");
+        menuButton.setLayoutX(284.0);
+        menuButton.setLayoutY(4.0);
+        menuButton.setStyle("-fx-background-color: 0; -fx-cursor: hand;");
+
+// Adicione a imagem à ImageInput do MenuButton
+        ImageInput imageInput = new ImageInput();
+        Image minhaImagem3pontos = new Image(getClass().getResourceAsStream("/Imagens/3pontos.png"));
+        imageInput.setSource(minhaImagem3pontos);
+        menuButton.setEffect(imageInput);
+
+// Adicione itens ao MenuButton
+        MenuItem detalhesItem = new MenuItem("Detalhes");
+        MenuItem editarItem = new MenuItem("Editar");
+        MenuItem deletarItem = new MenuItem("Deletar");
+        menuButton.getItems().addAll(detalhesItem, editarItem, deletarItem);
 
 
         // Adicione os Labels à Pane
-        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard);
+        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard, labelInicio, labelFim, labelStatus, menuButton,labelResponsavel,progressIndicator);
 
         return novaAtividade;
     }
