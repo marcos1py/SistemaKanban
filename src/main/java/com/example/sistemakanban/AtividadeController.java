@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.jar.Manifest;
 
@@ -232,7 +233,7 @@ public class AtividadeController {
     public void btnAddAtividade(ActionEvent event) {
 
         Atividade atividade = new Atividade();
-        GeraPane gerador = new GeraPane();
+
 
         numeroID += 1;
         atividade.setId(numeroID);
@@ -320,9 +321,14 @@ public class AtividadeController {
 
         String nomeAtividade = atividade.getNome();
         LocalDate dataInicio = atividade.getInícioDefinido();
+        dataInicio = inicioDefinido.getValue();
+        String dataInFormat = dataInicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         LocalDate dataFim = atividade.getFimDefinido();
+        dataInicio = fimDefinido.getValue();
+        String dataFnFormat = dataFim.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String responsavel = atividade.getResponsavel();
         String descricao = atividade.getDescrição();
+        String area = atividade.getArea();
 
 
         int atividadeID1 =  atividade.getId();
@@ -392,7 +398,8 @@ public class AtividadeController {
         detalhesItem.setOnAction (new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                detalhesController.usarDadosRecebidos(nomeAtividade);
+                detalhesController.usarDadosRecebidos(nomeAtividade,descricao,dataInFormat,dataFnFormat,area,responsavel);
+
 
                 Main.mudarTela ("detalhes");
             }

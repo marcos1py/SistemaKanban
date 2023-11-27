@@ -2,18 +2,20 @@ package com.example.sistemakanban;
 import com.example.sistemakanban.classes.GeraPane;
 import com.example.sistemakanban.classes.Projeto;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -31,7 +33,7 @@ public class ProjetoController {
     @FXML
     void BtnIrparaDetalhes(ActionEvent event) {
         // Chama o método diretamente no DetalhesController
-        detalhesController.usarDadosRecebidos("teste");
+        detalhesController.usarDadosRecebidos("teste","aaa","","","","");
 
         // Muda para a tela "detalhes"
         Main.mudarTela("detalhes");
@@ -60,6 +62,12 @@ public class ProjetoController {
     private ScrollPane scrollpaneAndamento;
     @FXML
     private ScrollPane testea;
+    @FXML
+    private DatePicker datePickFim;
+
+    @FXML
+    private DatePicker datePickInicio;
+
 
 
     @FXML
@@ -156,6 +164,8 @@ public class ProjetoController {
     int eixoY = 0;
     GeraPane novoPane = new GeraPane();
     @FXML
+    private TextField txtFieldResp;
+    @FXML
     private void initialize() {
         mexerPane(atividade1);
         mexerPane(atividade2);
@@ -184,41 +194,31 @@ public class ProjetoController {
     }
 
 
-    int numeroID2 = 0;
+    int numeroID = 0;
     @FXML
     void confirmarBtn(ActionEvent event) {
-
-        GeraPane gerador = new GeraPane();
-
-        Projeto meuProjeto = new Projeto( ) ;
-
-        meuProjeto.setTitulo(txtFieldProjNome.getText());
-        numeroID2 += 1;
-        meuProjeto.setId(numeroID2);
+        Projeto projeto = new Projeto();
 
 
-        Pane teste = gerador.newProject(meuProjeto);
+        numeroID += 1;
+        projeto.setId(numeroID);
 
-        anchorPaneConcluidas.getChildren().add(teste);
+        projeto.setTitulo(txtFieldProjNome.getText());
+        projeto.setInicioDefinido(datePickInicio.getValue());
+        projeto.setFimDefinido(datePickFim.getValue());
+        projeto.setResponsavel(txtFieldResp.getText());
+        projeto.setDescricao(txtAreaDesc.getText());
 
+        Pane newPane = newProject(projeto);
 
-
-
+        anchorPanefazer.getChildren().add(newPane);
         addPane.setVisible(false);
         limparBorrado();
 
     }
 
 
-    @FXML
-    void datePickFim(ActionEvent event) {
 
-    }
-
-    @FXML
-    void datePickInicio(ActionEvent event) {
-
-    }
 
     private void mexerPane(Pane atividade) {
 
@@ -322,8 +322,6 @@ public class ProjetoController {
             double distanceToPanel1 = calculateDistance(x, y, paneAfazer);
             double distanceToPanel2 = calculateDistance(x, y, paneAndamento);
             double distanceToPanel3 = calculateDistance(x, y, paneConcluidas);
-
-
             double minDistance = Math.min(distanceToPanel1, Math.min(distanceToPanel2, distanceToPanel3));
 
 
@@ -356,6 +354,84 @@ public class ProjetoController {
         double panelCenterX = panel.getLayoutX() + panel.getWidth() / 2;
         double panelCenterY = panel.getLayoutY() + panel.getHeight() / 2;
         return Math.sqrt(Math.pow(x - panelCenterX, 2) + Math.pow(y - panelCenterY, 2));
+    }
+
+    public Pane newProject(Projeto  meuProjeto){
+        int contagem = 0;
+        contagem = meuProjeto.getId();
+        eixoY += 110;
+        System.out.println(eixoY);
+        System.out.println("");
+        String nomePane = "projeto "+contagem;
+
+
+
+        Pane novoProjeto = new Pane();
+        novoProjeto.setPrefSize(318, 104);
+        novoProjeto.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
+        novoProjeto.setLayoutX(15);
+        novoProjeto.setLayoutY(eixoY);
+
+        String tituloProj =  meuProjeto.getTitulo();
+        LocalDate inicio = meuProjeto.getInicioDefinido();
+        inicio = datePickInicio.getValue();
+        String dataInFormat = inicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalDate fim = meuProjeto.getFimDefinido();
+        fim = datePickFim.getValue();
+        String dataFnFormat = fim.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String area = meuProjeto.getArea();
+        String responsavel = meuProjeto.getResponsavel();
+        String descrição = meuProjeto.getDescricao();
+
+
+        Hyperlink labelTituloCard = new Hyperlink (tituloProj);
+        labelTituloCard.setLayoutX(22.0);
+        labelTituloCard.setLayoutY(3.0);
+        labelTituloCard.setOnMouseClicked (new EventHandler<MouseEvent>() {
+            @Override
+            public void handle (MouseEvent event) {
+
+                Main.mudarTela("atividades");
+            }
+        });
+        Label labelDescriçãoCard = new Label(descrição);
+        labelDescriçãoCard.setLayoutX(23.0);
+        labelDescriçãoCard.setLayoutY(27.0);
+        labelDescriçãoCard.setPrefWidth(222.0);
+        labelDescriçãoCard.setPrefHeight(29.0);
+        labelDescriçãoCard.setWrapText(true);
+        labelDescriçãoCard.setFont(new Font(9.0));
+
+        Label labelInicio = new Label("Início: "+dataInFormat);//+ dataInicio.toString());
+        labelInicio.setLayoutX(24.0);
+        labelInicio.setLayoutY(53.0);
+
+        Label labelFim = new Label("Fim: "+dataFnFormat); // + dataFim.toString());
+        labelFim.setLayoutX(120.0);
+        labelFim.setLayoutY(53.0);
+
+        Label labelStatus = new Label("Status: Normal");
+        labelStatus.setLayoutX(23.0);
+        labelStatus.setLayoutY(65.0);
+
+        Label labelResponsavel = new Label("Responsável: " + responsavel);
+        labelResponsavel.setLayoutX(23.0);
+        labelResponsavel.setLayoutY(80);
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setLayoutX(245.0);
+        progressIndicator.setLayoutY(31.0);
+        progressIndicator.setPrefHeight(59.0);
+        progressIndicator.setPrefWidth(40.0);
+        progressIndicator.setProgress(0);
+
+        // Adicione o novo nome como um identificador à nova Pane
+        novoProjeto.setId(nomePane);
+
+        // Adicione os Labels à Pane
+        novoProjeto.getChildren().addAll(labelTituloCard, labelDescriçãoCard,labelInicio,labelFim,labelStatus,labelResponsavel,progressIndicator);
+
+        return novoProjeto;
     }
 
 }
