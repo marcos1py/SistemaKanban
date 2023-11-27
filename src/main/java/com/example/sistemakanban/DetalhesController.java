@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -18,9 +19,13 @@ public class DetalhesController {
     }
 
     // Método para utilizar os dados recebidos do ProjetoController
-    public void usarDadosRecebidos(String tituloDoProjeto) {
+    public void usarDadosRecebidos(String tituloDoProjeto, String descriçãoDoProjeto,String inicio, String fim,String area, String responsavel) {
+        labelArea.setText(area);
+        labelResponsavel.setText(responsavel);
+        labelInicio.setText(inicio);
+        labelFim.setText(fim);
         atv1.setText(tituloDoProjeto);
-
+        txtArea.setText(descriçãoDoProjeto);
     }
     @FXML
     public void Btnvoltar(ActionEvent event) {
@@ -34,11 +39,21 @@ public class DetalhesController {
     private Label atv1;
     @FXML
     private Pane nav;
-
+    @FXML
+    private TextArea txtArea;
     @FXML
     private PieChart grafico1;
     @FXML
     private PieChart grafico2;
+    @FXML
+    private Label labelFim;
+    @FXML
+    private Label labelArea;
+    @FXML
+    private Label labelResponsavel;
+
+    @FXML
+    private Label labelInicio;
     @FXML
     private void initialize() {
         // Configurar dados do gráfico

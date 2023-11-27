@@ -93,6 +93,10 @@ public class GeraPane {
         System.out.println(eixoY);
         System.out.println("");
         String nomePane = "projeto "+contagem;
+
+        LocalDate inicio = meuProjeto.getInicioDefinido();
+
+
         novoProjeto = new Pane();
         novoProjeto.setPrefSize(318, 104);
         novoProjeto.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
@@ -142,6 +146,7 @@ public class GeraPane {
             eixoY += 110;
         }
         contagem += 1;
+
         String nomePane = "Empresa "+contagem;
         novoProjeto = new Pane();
         novoProjeto.setPrefSize(1412, 104);

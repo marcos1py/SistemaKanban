@@ -1,5 +1,6 @@
 package com.example.sistemakanban.classes;
 
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.Pane;
 
 import java.time.LocalDate;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public class Projeto {
     private int id;
-    private String nome;
+    private Hyperlink nome;
     private String titulo;
     private String descricao;
     private List<Atividade> atividades;
@@ -17,6 +18,8 @@ public class Projeto {
     private String status;
     private String responsavel;
     private String area;
+
+
 
     // Construtor
     public Projeto() {
@@ -43,11 +46,11 @@ public class Projeto {
         this.id = id;
     }
 
-    public String getNome() {
+    public Hyperlink getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(Hyperlink nome) {
         this.nome = nome;
     }
 
@@ -92,4 +95,13 @@ public class Projeto {
     public void setResponsavel(String responsavel){this.responsavel = responsavel;}
 
     public String getResponsavel(){return responsavel;}
+
+    public void setArea(String area){
+        this.area = area;
+    }
+
+    public String getArea(){
+        return area;
+    }
+
 }
