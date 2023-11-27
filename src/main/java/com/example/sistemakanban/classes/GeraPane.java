@@ -1,19 +1,33 @@
 package com.example.sistemakanban.classes;
+import com.example.sistemakanban.AtividadeController;
+import com.example.sistemakanban.DetalhesController;
+import com.example.sistemakanban.Main;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.sistemakanban.AtividadeController.ativarBtnDelet;
+
 public class GeraPane {
+
+
+
+    // Método para configurar o controlador da tela ProjetoController
+
+    public GeraPane(){
+
+    }
     private Pane novoProjeto;
     private String tituloProj;
     private String descProj;
@@ -22,16 +36,14 @@ public class GeraPane {
     List<Pane> listaProjetos = new ArrayList<>();
 
 
-    public GeraPane(){
 
-    }
 
 
 
     public void addProjeto(Projeto projeto) {
         System.out.println();
 //Pane novoProjeto = newProject(projeto.getTitulo(), projeto.getDescricao());
-       // projeto.setPane(novoProjeto);
+        // projeto.setPane(novoProjeto);
         //listaProjetos.add(novoProjeto);
     }
 
@@ -87,12 +99,21 @@ public class GeraPane {
         novoProjeto.setLayoutX(15);
         novoProjeto.setLayoutY(eixoY);
 
-        Hyperlink tituloProjeto = new Hyperlink( meuProjeto.getTitulo()+" "+contagem);
-        tituloProjeto.setLayoutX(22.0);
-        tituloProjeto.setLayoutY(3.0);
-        tituloProjeto.setFont(new Font(15.0));
+        String tituloProj =  meuProjeto.getTitulo();
 
-        Label labelDescriçãoCard = new Label(meuProjeto.getDescricao());
+        Hyperlink labelTituloCard = new Hyperlink (tituloProj);
+        labelTituloCard.setLayoutX(22.0);
+        labelTituloCard.setLayoutY(3.0);
+        labelTituloCard.setOnMouseClicked (new EventHandler<MouseEvent> () {
+            @Override
+            public void handle (MouseEvent event) {
+
+
+
+                Main.mudarTela("atividades");
+            }
+        });
+        Label labelDescriçãoCard = new Label(descProj);
         labelDescriçãoCard.setLayoutX(23.0);
         labelDescriçãoCard.setLayoutY(27.0);
         labelDescriçãoCard.setPrefWidth(222.0);
@@ -100,56 +121,11 @@ public class GeraPane {
         labelDescriçãoCard.setWrapText(true);
         labelDescriçãoCard.setFont(new Font(9.0));
 
-
-        Label labelInicio = new Label("Início: " );//+ dataInicio.toString());
-        labelInicio.setLayoutX(24.0);
-        labelInicio.setLayoutY(53.0);
-
-        Label labelFim = new Label("Fim: "); // + dataFim.toString());
-        labelFim.setLayoutX(120.0);
-        labelFim.setLayoutY(53.0);
-
-        Label labelStatus = new Label("Status: Normal");
-        labelStatus.setLayoutX(23.0);
-        labelStatus.setLayoutY(65.0);
-
-        Label labelResponsavel = new Label("Responsável: " + meuProjeto.getResponsavel());
-        labelResponsavel.setLayoutX(23.0);
-        labelResponsavel.setLayoutY(80);
-
-        ProgressIndicator progressIndicator = new ProgressIndicator();
-        progressIndicator.setLayoutX(245.0);
-        progressIndicator.setLayoutY(31.0);
-        progressIndicator.setPrefHeight(59.0);
-        progressIndicator.setPrefWidth(40.0);
-        progressIndicator.setProgress(0);
-
-        MenuButton menuButton = new MenuButton("");
-        menuButton.setLayoutX(284.0);
-        menuButton.setLayoutY(4.0);
-        menuButton.setStyle("-fx-background-color: 0; -fx-cursor: hand;");
-
-// Adicione a imagem à ImageInput do MenuButton
-        ImageInput imageInput = new ImageInput();
-        Image minhaImagem3pontos = new Image(getClass().getResourceAsStream("/Imagens/3pontos.png"));
-        imageInput.setSource(minhaImagem3pontos);
-        menuButton.setEffect(imageInput);
-
-// Adicione itens ao MenuButton
-        MenuItem detalhesItem = new MenuItem("Detalhes");
-        MenuItem editarItem = new MenuItem("Editar");
-        MenuItem deletarItem = new MenuItem("Deletar");
-        menuButton.getItems().addAll(detalhesItem, editarItem, deletarItem);
-
-
         // Adicione o novo nome como um identificador à nova Pane
         novoProjeto.setId(nomePane);
 
         // Adicione os Labels à Pane
-        novoProjeto.getChildren().addAll(tituloProjeto, labelDescriçãoCard,labelInicio,labelFim,labelStatus,labelResponsavel,progressIndicator,menuButton);
-
-
-
+        novoProjeto.getChildren().addAll(labelTituloCard, labelDescriçãoCard);
 
         return novoProjeto;
     }
@@ -185,8 +161,17 @@ public class GeraPane {
         tituloEmpresa.setLayoutX(116);
         tituloEmpresa.setLayoutY(46);
         tituloEmpresa.setFont(new Font(15.0));
+        tituloEmpresa.setId(empresaID);
 
-        // add o titulo da Local
+        tituloEmpresa.setOnMouseClicked (new EventHandler<MouseEvent> () {
+            @Override
+            public void handle (MouseEvent event) {
+
+
+
+                Main.mudarTela("projetos");
+            }
+        });
         Label labelLocal = new Label(labelLocalGet);
         labelLocal.setLayoutX(399);
         labelLocal.setLayoutY(46);
@@ -207,12 +192,9 @@ public class GeraPane {
         labelQtFuncionario.setWrapText(true);
         labelQtFuncionario.setFont(new Font(15.0));
 
-
-
         Label labelID = new Label(empresaID);
         labelID.setLayoutX(31);
         labelID.setLayoutY(46);
-
 
         // Criar um botão
         Button meuBotaoDeletar = new Button();
@@ -244,7 +226,9 @@ public class GeraPane {
         novoProjeto.getChildren().addAll(tituloEmpresa, labelLocal,labelTel,labelQtFuncionario,labelID,meuBotaoDeletar,meuBotaoEditar);
         return novoProjeto;
     }
+
     public Pane newAtividade(Atividade atividade) {
+
         int contagem = 0;
         contagem = atividade.getId();
 
@@ -326,6 +310,26 @@ public class GeraPane {
         MenuItem detalhesItem = new MenuItem("Detalhes");
         MenuItem editarItem = new MenuItem("Editar");
         MenuItem deletarItem = new MenuItem("Deletar");
+
+        detalhesItem.setOnAction (new EventHandler<ActionEvent> () {
+            @Override
+            public void handle (ActionEvent event) {
+                Main.mudarTela ("detalhes");
+            }
+        });
+        editarItem.setOnAction (new EventHandler<ActionEvent> () {
+            @Override
+            public void handle (ActionEvent event) {
+                // Chama o método mudarTela da classe Main
+                Main.mudarTela ("detalhes");
+            }
+        });
+        deletarItem.setOnAction (new EventHandler<ActionEvent> () {
+            @Override
+            public void handle (ActionEvent event) {
+                System.out.println("");
+            }
+        });
         menuButton.getItems().addAll(detalhesItem, editarItem, deletarItem);
 
 

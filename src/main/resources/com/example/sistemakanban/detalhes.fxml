@@ -41,16 +41,6 @@
                   <Font name="High Tower Text" size="20.0" />
                </font>
             </Button>
-            <Text fill="WHITE" layoutX="1241.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" layoutX="1380.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
             <Circle fill="DODGERBLUE" layoutX="1473.0" layoutY="40.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
@@ -59,47 +49,22 @@
             <Font size="16.0" />
          </font>
       </CheckBox>
-      <Button layoutX="119.0" layoutY="137.0" mnemonicParsing="false" style="-fx-background-color: #009dff; -fx-border-radius: 20px;" text="Button" textFill="WHITE">
+      <Button layoutX="119.0" layoutY="137.0" mnemonicParsing="false" onAction="#Btnvoltar" style="-fx-background-color: #009dff; -fx-border-radius: 20px;" text="Sair" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
       <Line endX="11.199951171875" endY="494.39996337890625" layoutX="803.0" layoutY="205.0" startX="11.199951171875" startY="25.599990844726562" />
-      <Button layoutX="1381.0" layoutY="137.0" mnemonicParsing="false" style="-fx-background-color: #9c0720; -fx-border-radius: 20px;" text="Button" textFill="WHITE">
+      <Button layoutX="1381.0" layoutY="137.0" mnemonicParsing="false" style="-fx-background-color: #9c0720; -fx-border-radius: 20px;" text="Deletar" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <Button layoutX="114.0" layoutY="678.0" mnemonicParsing="false" style="-fx-background-color: #1eff05; -fx-border-radius: 20px;" text="Button" textFill="WHITE">
+      <Button layoutX="114.0" layoutY="678.0" mnemonicParsing="false" style="-fx-background-color: #1eff05; -fx-border-radius: 20px;" text="Salvar" textFill="WHITE">
          <font>
             <Font size="25.0" />
          </font>
       </Button>
-      <TextField layoutX="618.0" layoutY="118.0" style="-fx-text-fill: #009dff; -fx-background-color: #EEE;" text="Detalhes da atividade">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="30.0" />
-         </font>
-      </TextField>
-      <TextField layoutX="183.0" layoutY="226.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #009dff; -fx-background-color: #EEE;" text="Atividades:">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="25.0" />
-         </font>
-      </TextField>
-      <TextField layoutX="369.0" layoutY="227.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #20201f; -fx-background-color: #EEE;" text="Atividades">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="25.0" />
-         </font>
-      </TextField>
-      <TextField layoutX="185.0" layoutY="298.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #009dff; -fx-background-color: #EEE;" text="Detalhes:">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
-         </font>
-      </TextField>
-      <TextField layoutX="188.0" layoutY="413.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #009dff; -fx-background-color: #EEE;" text="Atividades:">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="20.0" />
-         </font>
-      </TextField>
       <TextField layoutX="238.0" layoutY="681.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #1eff05; -fx-background-color: #EEE;" text="Mudo com sucesso">
          <font>
             <Font name="Arial" size="12.0" />
@@ -237,6 +202,30 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="194.0" prefWidth="584.0" />
         </content>
       </ScrollPane>
-      <TextArea editable="false" layoutX="196.0" layoutY="339.0" prefHeight="82.0" prefWidth="584.0" text="asdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasddddddddddd" wrapText="true" />
+      <TextArea editable="false" layoutX="193.0" layoutY="339.0" prefHeight="82.0" prefWidth="584.0" text="asdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasdddddddddddasddddddddddd" wrapText="true" />
+      <Label fx:id="atv1" layoutX="340.0" layoutY="250.0" text="Nome da atividade">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+      <Label layoutX="626.0" layoutY="121.0" text="Detalhes da atividade" textFill="#0095ff">
+         <font>
+            <Font name="System Bold" size="37.0" />
+         </font>
+      </Label>
+      <Label layoutX="193.0" layoutY="244.0" text="Atividade:" textFill="#0095ff">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="193.0" layoutY="298.0" text="Descriçao" textFill="#0095ff">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="193.0" layoutY="421.0" text="Açao" textFill="#0095ff">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

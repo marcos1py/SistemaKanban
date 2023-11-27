@@ -243,7 +243,7 @@
                                  <items>
                                     <MenuItem mnemonicParsing="false" text="Detalhes" />
                                     <MenuItem mnemonicParsing="false" text="Editar" />
-                                    <MenuItem mnemonicParsing="false" onAction="#btnDeletar" text="Deletar" />
+                                    <MenuItem mnemonicParsing="false"  text="Deletar" />
                                  </items>
                               </MenuButton>
                               <Label fx:id="labelDataInicio1" layoutX="50.0" layoutY="56.0" prefHeight="16.0" prefWidth="64.0" text=" 10/02/2023">

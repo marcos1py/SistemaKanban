@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -21,7 +30,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -444,14 +453,14 @@
                               <ProgressIndicator layoutX="245.0" layoutY="31.0" prefHeight="59.0" prefWidth="40.0" progress="0.0" />
                               <MenuButton layoutX="284.0" layoutY="4.0" maxHeight="21.0" maxWidth="24.0" minHeight="15.0" minWidth="15.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="23.0" text="...">
                                 <items>
-                                  <MenuItem mnemonicParsing="false" text="Detalhes" />
+                                  <MenuItem mnemonicParsing="false" onAction="#BtnIrparaDetalhes" text="Detalhes" />
                                   <MenuItem mnemonicParsing="false" text="Editar" />
                                     <MenuItem mnemonicParsing="false" text="Deletar" />
                                 </items>
                                  <effect>
                                     <ImageInput>
                                        <source>
-                                          <Image url="file:/C:/SistemaKanban/src/main/resources/Imagens/3pontos.png" />
+                                          <Image url="file:/C:/Users/marco/Downloads/SistemaKanban/src/main/resources/Imagens/3pontos.png" />
                                        </source>
                                     </ImageInput>
                                  </effect>

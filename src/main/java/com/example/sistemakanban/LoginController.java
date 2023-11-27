@@ -11,7 +11,7 @@ public class LoginController {
 
     @FXML
     void btnLogin(ActionEvent event) {
-        HelloApplication.mudarTela("empresas");
+        Main.mudarTela("empresas");
     }
 
 }

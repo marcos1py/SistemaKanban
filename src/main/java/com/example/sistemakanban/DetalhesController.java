@@ -1,16 +1,37 @@
 package com.example.sistemakanban;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class DetalhesController {
 
+    private ProjetoController projetoController;
+
+    // Método para configurar o controlador da tela ProjetoController
+    public void setProjetoController(ProjetoController projetoController) {
+        this.projetoController = projetoController;
+    }
+
+    // Método para utilizar os dados recebidos do ProjetoController
+    public void usarDadosRecebidos(String tituloDoProjeto) {
+        atv1.setText(tituloDoProjeto);
+
+    }
+    @FXML
+    public void Btnvoltar(ActionEvent event) {
+
+        Main.mudarTela("atividades");
+    }
     @FXML
     private AnchorPane principal;
 
+    @FXML
+    private Label atv1;
     @FXML
     private Pane nav;
 

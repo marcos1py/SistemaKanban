@@ -18,8 +18,28 @@ import java.util.List;
 
 
 public class ProjetoController {
+    private DetalhesController detalhesController;
+    private GeraPane geraPane;
 
+    // Método para configurar o controlador da tela ProjetoController
+    public void setDetalhesController(DetalhesController detalhesController) {
+        this.detalhesController = detalhesController;
+    }
+    public void setGeraPane(GeraPane geraPane) {
+        this.geraPane = geraPane;
+    }
+    @FXML
+    void BtnIrparaDetalhes(ActionEvent event) {
+        // Chama o método diretamente no DetalhesController
+        detalhesController.usarDadosRecebidos("teste");
 
+        // Muda para a tela "detalhes"
+        Main.mudarTela("detalhes");
+    }
+    public void receberDadosDaDetalhes(String tituloDoProjeto) {
+        // Faça o que for necessário com os dados recebidos
+        System.out.println("Recebi o título do projeto: " + tituloDoProjeto);
+    }
     @FXML
     private Label LabelResponsavel1;
 

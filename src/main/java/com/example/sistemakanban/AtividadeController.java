@@ -1,22 +1,33 @@
 package com.example.sistemakanban;
 import com.example.sistemakanban.classes.Atividade;
-import com.example.sistemakanban.classes.Empresa;
 import com.example.sistemakanban.classes.GeraPane;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.GaussianBlur;
+import javafx.scene.effect.ImageInput;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.jar.Manifest;
 
 
 public class AtividadeController {
+    private DetalhesController detalhesController;
+    private GeraPane geraPane;
+
+    // Método para configurar o controlador da tela ProjetoController
+    public void setDetalhesController(DetalhesController detalhesController) {
+        this.detalhesController = detalhesController;
+    }
     @FXML
     private Label LabelResponsavel1;
 
@@ -123,14 +134,14 @@ public class AtividadeController {
     int eixoY = 0;
     @FXML
     private void initialize() {
-        if (atividade1 != null) {
-            mexerPane(atividade1);
-        }
-        if (atividade2 != null) {
-            mexerPane(atividade2);
-        }
-        if (atividade3 != null) {
-            mexerPane(atividade3);
+
+        ObservableList<Node> children = anchorPanefazer.getChildren();
+
+        for (Node node : children) {
+            if (node instanceof Pane) {
+                System.out.println(node);
+                mexerPane((Pane) node);
+            }
         }
     }
     @FXML
@@ -152,23 +163,34 @@ public class AtividadeController {
     @FXML
     private DatePicker fimDefinido;
     @FXML
-    private Pane cardDeletar;
+    public static Pane cardDeletar;
     @FXML
     private AnchorPane addPane;
     @FXML
     void novoProjBtn(ActionEvent event) {
         addPane.setVisible(true);
+        deixarBorrado();
     }
     @FXML
     void cancelarBtn(ActionEvent event) {
         addPane.setVisible(false);
         limpaBorrado();
     }
-    @FXML
-    private void btnDeletar() {
-        cardDeletar.setVisible(true);
-        deixarBorrado();
+    public static void ativarBtnDelet(){
+        btnDeletar();
     }
+
+    @FXML
+    public static void btnDeletar() {
+        cardDeletar.setVisible(true);
+
+    }
+
+    private AtividadeController atividadeController;
+    private EmpresasController empresasController;
+
+
+
     private void deixarBorrado() {
         BoxBlur boxBlur = new BoxBlur(5, 5, 2); // Ajuste os parâmetros conforme necessário
         System.out.println(paneAndamento.getEffectiveNodeOrientation());
@@ -185,7 +207,6 @@ public class AtividadeController {
     }
     private void limpaBorrado() {
         DropShadow dropShadow = new DropShadow();
-        cardDeletar.setVisible(false);
 
         paneAndamento.setEffect(dropShadow);
         paneConcluidas.setEffect(dropShadow);
@@ -206,7 +227,6 @@ public class AtividadeController {
 
     public void cancelarDelet(ActionEvent event) {
         cardDeletar.setVisible(false);
-        limpaBorrado();
     }
     int numeroID = 0;
     public void btnAddAtividade(ActionEvent event) {
@@ -224,11 +244,11 @@ public class AtividadeController {
         atividade.setDescrição(descriçaoInput.getText());
         //atividade.setAções(açaoInput.getText());
 
-
-        Pane newPane = gerador.newAtividade(atividade);
+        Pane newPane = newAtividade(atividade);
 
         anchorPanefazer.getChildren().add(newPane);
-
+        addPane.setVisible(false);
+        limpaBorrado();
 
     }
     private void mexerPane(Pane atividade) {
@@ -285,6 +305,118 @@ public class AtividadeController {
         }
     }
 
+    public Pane newAtividade(Atividade atividade) {
+
+        int contagem = 0;
+        contagem = atividade.getId();
+
+        if (contagem == 0){
+            eixoY = 70;
+        }
+        else {
+            eixoY += 110;
+        }
+        contagem += 1;
+
+        String nomeAtividade = atividade.getNome();
+        LocalDate dataInicio = atividade.getInícioDefinido();
+        LocalDate dataFim = atividade.getFimDefinido();
+        String responsavel = atividade.getResponsavel();
+        String descricao = atividade.getDescrição();
+
+
+        int atividadeID1 =  atividade.getId();
+        String atividadeID = ""+atividadeID1;
+
+        //eixoX += 15;
+
+        Pane novaAtividade = new Pane();
+        novaAtividade.setPrefSize(318, 104);
+        novaAtividade.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
+        novaAtividade.setLayoutX(3);
+        novaAtividade.setLayoutY(eixoY);
+
+
+        Label labelTituloCard = new Label(nomeAtividade);
+        labelTituloCard.setLayoutX(22.0);
+        labelTituloCard.setLayoutY(3.0);
+
+        Label labelDescriçãoCard = new Label(descricao);
+        labelDescriçãoCard.setLayoutX(30.0);
+        labelDescriçãoCard.setLayoutY(20);
+        labelDescriçãoCard.setPrefWidth(222.0);
+        labelDescriçãoCard.setPrefHeight(29.0);
+        labelDescriçãoCard.setWrapText(true);
+        labelDescriçãoCard.setFont(new Font(9.0));
+
+
+        Label labelInicio = new Label("Início: " );//+ dataInicio.toString());
+        labelInicio.setLayoutX(24.0);
+        labelInicio.setLayoutY(53.0);
+
+        Label labelFim = new Label("Fim: "); // + dataFim.toString());
+        labelFim.setLayoutX(120.0);
+        labelFim.setLayoutY(53.0);
+
+        Label labelStatus = new Label("Status: Normal");
+        labelStatus.setLayoutX(23.0);
+        labelStatus.setLayoutY(65.0);
+
+        Label labelResponsavel = new Label("Responsável: " + responsavel);
+        labelResponsavel.setLayoutX(23.0);
+        labelResponsavel.setLayoutY(80);
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setLayoutX(245.0);
+        progressIndicator.setLayoutY(31.0);
+        progressIndicator.setPrefHeight(59.0);
+        progressIndicator.setPrefWidth(40.0);
+        progressIndicator.setProgress(0);
+
+        MenuButton menuButton = new MenuButton("");
+        menuButton.setLayoutX(284.0);
+        menuButton.setLayoutY(4.0);
+        menuButton.setStyle("-fx-background-color: 0; -fx-cursor: hand;");
+
+// Adicione a imagem à ImageInput do MenuButton
+        ImageInput imageInput = new ImageInput();
+        Image minhaImagem3pontos = new Image(getClass().getResourceAsStream("/Imagens/3pontos.png"));
+        imageInput.setSource(minhaImagem3pontos);
+        menuButton.setEffect(imageInput);
+
+// Adicione itens ao MenuButton
+        MenuItem detalhesItem = new MenuItem("Detalhes");
+        MenuItem editarItem = new MenuItem("Editar");
+        MenuItem deletarItem = new MenuItem("Deletar");
+
+        detalhesItem.setOnAction (new EventHandler<ActionEvent>() {
+            @Override
+            public void handle (ActionEvent event) {
+                detalhesController.usarDadosRecebidos(nomeAtividade);
+
+                Main.mudarTela ("detalhes");
+            }
+        });
+        editarItem.setOnAction (new EventHandler<ActionEvent> () {
+            @Override
+            public void handle (ActionEvent event) {
+                System.out.println("oi");
+            }
+        });
+        deletarItem.setOnAction (new EventHandler<ActionEvent> () {
+            @Override
+            public void handle (ActionEvent event) {
+                System.out.println("");
+            }
+        });
+        menuButton.getItems().addAll(detalhesItem, editarItem, deletarItem);
+
+
+        // Adicione os Labels à Pane
+        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard, labelInicio, labelFim, labelStatus, menuButton,labelResponsavel,progressIndicator);
+
+        return novaAtividade;
+    }
 
     private Pane findNearestPanel(double x, double y,Pane atividade) {
         try {
