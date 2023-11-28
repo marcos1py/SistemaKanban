@@ -136,14 +136,6 @@ public class AtividadeController {
     @FXML
     private void initialize() {
 
-        ObservableList<Node> children = anchorPanefazer.getChildren();
-
-        for (Node node : children) {
-            if (node instanceof Pane) {
-                System.out.println(node);
-                mexerPane((Pane) node);
-            }
-        }
     }
     @FXML
     private TextField responsavelID;
@@ -184,7 +176,6 @@ public class AtividadeController {
     @FXML
     public static void btnDeletar() {
         cardDeletar.setVisible(true);
-
     }
 
     private AtividadeController atividadeController;
@@ -246,7 +237,7 @@ public class AtividadeController {
         //atividade.setAções(açaoInput.getText());
 
         Pane newPane = newAtividade(atividade);
-
+        mexerPane(newPane);
         anchorPanefazer.getChildren().add(newPane);
         addPane.setVisible(false);
         limpaBorrado();
@@ -258,7 +249,6 @@ public class AtividadeController {
         atividade.setOnMousePressed(event -> {
             offsetX = event.getSceneX() - atividade.getLayoutX();
             offsetY = event.getSceneY() - atividade.getLayoutY();
-
         });
 
         // Adicione um evento de arrastar o mouse
@@ -400,7 +390,6 @@ public class AtividadeController {
             public void handle (ActionEvent event) {
                 detalhesController.usarDadosRecebidos(nomeAtividade,descricao,dataInFormat,dataFnFormat,area,responsavel);
 
-
                 Main.mudarTela ("detalhes");
             }
         });
@@ -434,17 +423,17 @@ public class AtividadeController {
             double minDistance = Math.min(distanceToPanel1, Math.min(distanceToPanel2, distanceToPanel3));
 
             if (minDistance == distanceToPanel1) {
-                atividade.setStyle("-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
+                atividade.setStyle("-fx-background-color: #fff ;-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
 
                 return anchorPanefazer;
 
             } else if (minDistance == distanceToPanel2) {
-                atividade.setStyle("-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
+                atividade.setStyle("-fx-background-color: #fff ;-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
 
                 return anchorPaneAndamento;
 
             } else {
-                atividade.setStyle("-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
+                atividade.setStyle("-fx-background-color: #fff ;-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
 
                 return anchorPaneConcluidas;
 

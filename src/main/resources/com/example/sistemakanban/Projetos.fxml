@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -21,7 +30,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -202,81 +211,7 @@
             </ImageView>
             <ScrollPane fx:id="scrollpaneAndamento" layoutX="7.0" layoutY="77.0" prefHeight="492.0" prefWidth="333.0">
                <content>
-                  <AnchorPane fx:id="anchorPaneAndamento" layoutX="7.0" layoutY="77.0" minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="323.0">
-                     <children>
-                        <Pane fx:id="atividade2" layoutX="3.0" prefHeight="104.0" prefWidth="320.0" style="-fx-border-color: black black black #ffc700; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;">
-                           <children>
-                              <Label fx:id="labelDescriçaoCard1" alignment="TOP_LEFT" layoutX="23.0" layoutY="27.0" prefHeight="29.0" prefWidth="213.0" text="TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO " wrapText="true">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelTituloCard1" layoutX="22.0" layoutY="3.0" prefHeight="21.0" prefWidth="174.0" text="Fazer a limpeza da sala" />
-                              <Label layoutX="24.0" layoutY="53.0" prefHeight="21.0" prefWidth="89.0" text="Inicio: ">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="111.0" layoutY="53.0" prefHeight="21.0" prefWidth="23.0" text="Fim:">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="23.0" layoutY="65.0" prefHeight="21.0" prefWidth="35.0" text="Status:">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelStatus1" layoutX="58.0" layoutY="67.0" prefHeight="21.0" prefWidth="40.0" text="Normal" textFill="#00ff2f">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="23.0" layoutY="84.0" prefHeight="15.0" prefWidth="70.0" text="Responsavel:  ">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                              <ProgressIndicator layoutX="245.0" layoutY="31.0" prefHeight="59.0" prefWidth="40.0" progress="0.74" />
-                              <MenuButton layoutX="284.0" layoutY="4.0" maxHeight="21.0" maxWidth="24.0" minHeight="15.0" minWidth="15.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="23.0" text="...">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <effect>
-                                    <ImageInput>
-                                       <source>
-                                          <Image url="file:/C:/SistemaKanban/src/main/resources/Imagens/3pontos.png" />
-                                       </source>
-                                    </ImageInput>
-                                 </effect>
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" text="Detalhes" />
-                                    <MenuItem mnemonicParsing="false" text="Editar" />
-                                    <MenuItem mnemonicParsing="false" text="Deletar" />
-                                 </items>
-                              </MenuButton>
-                              <Label fx:id="labelDataInicio1" layoutX="50.0" layoutY="56.0" prefHeight="16.0" prefWidth="64.0" text=" 10/02/2023">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelDataFim1" layoutX="131.0" layoutY="53.0" prefHeight="21.0" prefWidth="81.0" text="10/02/2023">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="LabelResponsavel1" layoutX="87.0" layoutY="83.0" prefHeight="15.0" prefWidth="80.0" text="Marcos Antonio">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </Pane>
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane fx:id="anchorPaneAndamento" layoutX="7.0" layoutY="77.0" minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="323.0" />
                </content>
             </ScrollPane>
          </children>
@@ -288,81 +223,7 @@
          <children>
             <ScrollPane fx:id="scrollpaneConcluidas" layoutX="7.0" layoutY="77.0" prefHeight="492.0" prefWidth="333.0">
                <content>
-                  <AnchorPane fx:id="anchorPaneConcluidas" layoutX="7.0" layoutY="77.0" minHeight="0.0" minWidth="0.0" prefHeight="486.0" prefWidth="323.0">
-                     <children>
-                        <Pane fx:id="atividade3" layoutX="3.0" prefHeight="104.0" prefWidth="320.0" style="-fx-border-color: black black black #41fa00; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;">
-                           <children>
-                              <Label fx:id="labelDescriçaoCard11" alignment="TOP_LEFT" layoutX="23.0" layoutY="27.0" prefHeight="29.0" prefWidth="213.0" text="TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO " wrapText="true">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelTituloCard11" layoutX="22.0" layoutY="3.0" prefHeight="21.0" prefWidth="174.0" text="Fazer a limpeza da sala" />
-                              <Label layoutX="24.0" layoutY="53.0" prefHeight="21.0" prefWidth="89.0" text="Inicio: ">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="111.0" layoutY="53.0" prefHeight="21.0" prefWidth="23.0" text="Fim:">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="23.0" layoutY="65.0" prefHeight="21.0" prefWidth="35.0" text="Status:">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelStatus11" layoutX="58.0" layoutY="67.0" prefHeight="21.0" prefWidth="40.0" text="Normal" textFill="#00ff2f">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="23.0" layoutY="84.0" prefHeight="15.0" prefWidth="70.0" text="Responsavel:  ">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                              <ProgressIndicator layoutX="245.0" layoutY="31.0" prefHeight="59.0" prefWidth="40.0" progress="1.0" />
-                              <MenuButton layoutX="284.0" layoutY="4.0" maxHeight="21.0" maxWidth="24.0" minHeight="15.0" minWidth="15.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="23.0" text="...">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <effect>
-                                    <ImageInput>
-                                       <source>
-                                          <Image url="file:/C:/SistemaKanban/src/main/resources/Imagens/3pontos.png" />
-                                       </source>
-                                    </ImageInput>
-                                 </effect>
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" text="Detalhes" />
-                                    <MenuItem mnemonicParsing="false" text="Editar" />
-                                    <MenuItem mnemonicParsing="false" text="Deletar" />
-                                 </items>
-                              </MenuButton>
-                              <Label fx:id="labelDataInicio11" layoutX="50.0" layoutY="56.0" prefHeight="16.0" prefWidth="64.0" text=" 10/02/2023">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelDataFim11" layoutX="131.0" layoutY="53.0" prefHeight="21.0" prefWidth="81.0" text="10/02/2023">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="LabelResponsavel11" layoutX="87.0" layoutY="83.0" prefHeight="15.0" prefWidth="80.0" text="Marcos Antonio">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </Pane>
-                     </children>
-                  </AnchorPane>
+                  <AnchorPane fx:id="anchorPaneConcluidas" layoutX="7.0" layoutY="77.0" minHeight="0.0" minWidth="0.0" prefHeight="486.0" prefWidth="323.0" />
                </content>
             </ScrollPane>
             <Text fill="#41fa00" layoutX="30.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Concluidas">
@@ -406,81 +267,7 @@
             </ImageView>
             <ScrollPane fx:id="scrollpaneAfazer" layoutX="7.0" layoutY="77.0" prefHeight="492.0" prefWidth="333.0">
               <content>
-                <AnchorPane fx:id="anchorPanefazer" minHeight="0.0" minWidth="0.0" prefHeight="488.0" prefWidth="323.0">
-                     <children>
-                        <Pane fx:id="atividade1" layoutX="3.0" prefHeight="104.0" prefWidth="320.0" style="-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;">
-                           <children>
-                              <Label fx:id="labelDescriçaoCard" alignment="TOP_LEFT" layoutX="23.0" layoutY="27.0" prefHeight="29.0" prefWidth="213.0" text="TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO TEXTO " wrapText="true">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelTituloCard" layoutX="22.0" layoutY="3.0" prefHeight="21.0" prefWidth="174.0" text="Fazer a limpeza da sala" />
-                              <Label layoutX="24.0" layoutY="53.0" prefHeight="21.0" prefWidth="89.0" text="Inicio: ">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="111.0" layoutY="53.0" prefHeight="21.0" prefWidth="23.0" text="Fim:">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="23.0" layoutY="65.0" prefHeight="21.0" prefWidth="35.0" text="Status:">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelStatus" layoutX="58.0" layoutY="67.0" prefHeight="21.0" prefWidth="40.0" text="Normal" textFill="#00ff2f">
-                                 <font>
-                                    <Font size="10.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="23.0" layoutY="84.0" prefHeight="15.0" prefWidth="70.0" text="Responsavel:  ">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                              <ProgressIndicator layoutX="245.0" layoutY="31.0" prefHeight="59.0" prefWidth="40.0" progress="0.0" />
-                              <MenuButton layoutX="284.0" layoutY="4.0" maxHeight="21.0" maxWidth="24.0" minHeight="15.0" minWidth="15.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="23.0" text="...">
-                                <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#BtnIrparaDetalhes" text="Detalhes" />
-                                  <MenuItem mnemonicParsing="false" text="Editar" />
-                                    <MenuItem mnemonicParsing="false" text="Deletar" />
-                                </items>
-                                 <effect>
-                                    <ImageInput>
-                                       <source>
-                                          <Image url="file:/C:/Users/marco/Downloads/SistemaKanban/src/main/resources/Imagens/3pontos.png" />
-                                       </source>
-                                    </ImageInput>
-                                 </effect>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </MenuButton>
-                              <Label fx:id="labelDataInicio" layoutX="50.0" layoutY="56.0" prefHeight="16.0" prefWidth="64.0" text=" 10/02/2023">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="labelDataFim" layoutX="131.0" layoutY="53.0" prefHeight="21.0" prefWidth="81.0" text="10/02/2023">
-                                 <font>
-                                    <Font size="9.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="LabelResponsavel" layoutX="87.0" layoutY="83.0" prefHeight="15.0" prefWidth="80.0" text="Marcos Antonio">
-                                 <font>
-                                    <Font size="11.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                           <cursor>
-                              <Cursor fx:constant="DEFAULT" />
-                           </cursor>
-                        </Pane>
-                     </children>
-                  </AnchorPane>
+                <AnchorPane fx:id="anchorPanefazer" minHeight="0.0" minWidth="0.0" prefHeight="488.0" prefWidth="323.0" />
               </content>
             </ScrollPane>
          </children>
