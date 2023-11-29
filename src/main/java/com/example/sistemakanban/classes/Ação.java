@@ -10,9 +10,10 @@ public class Ação {
     private String areaResponsavel;
     private int barraProgresso;
     private String status;
+    private String nome;
 
     // Construtor
-    public Ação(int id, String descricao, Date dataInicio, Date dataFim, String areaResponsavel, int barraProgresso, String status) {
+    public Ação(String nome) {
         this.id = id;
         this.descricao = descricao;
         this.dataInicio = dataInicio;
@@ -20,6 +21,7 @@ public class Ação {
         this.areaResponsavel = areaResponsavel;
         this.barraProgresso = barraProgresso;
         this.status = status;
+        this.nome = nome;
     }
 
     // Getters e Setters
@@ -78,5 +80,13 @@ public class Ação {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }

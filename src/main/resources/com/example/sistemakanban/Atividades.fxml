@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.AtividadeController">
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.AtividadeController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -526,7 +526,7 @@
             </Button>
          </children>
       </Pane>
-      <AnchorPane fx:id="addPane" layoutX="300.0" layoutY="149.0" prefHeight="552.0" prefWidth="870.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;" visible="false">
+      <AnchorPane fx:id="addPane" layoutX="300.0" layoutY="149.0" prefHeight="552.0" prefWidth="870.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
          <children>
             <Text fill="#11a9ff" layoutX="327.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar Atividade">
                <font>
@@ -582,10 +582,28 @@
                </font>
             </Text>
             <DatePicker fx:id="inicioDefinidoAçao" editable="false" layoutX="526.0" layoutY="119.0" prefHeight="27.0" prefWidth="143.0" promptText="dd/mm/aaaa" />
-            <ListView fx:id="listaAçoes" layoutX="446.0" layoutY="253.0" prefHeight="231.0" prefWidth="404.0" />
+            <ListView fx:id="listaAçoes" layoutX="446.0" layoutY="272.0" prefHeight="212.0" prefWidth="195.0" />
             <DatePicker fx:id="fimDefinido" editable="false" layoutX="196.0" layoutY="187.0" promptText="dd/mm/aaaa" />
             <DatePicker fx:id="inicioDefinido" editable="false" layoutX="196.0" layoutY="140.0" promptText="dd/mm/aaaa" />
             <Button layoutX="446.0" layoutY="207.0" mnemonicParsing="false" onAction="#btnAddAçao" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Adicionar" />
+            <Label fx:id="labelErro" layoutX="346.0" layoutY="509.0" textFill="RED" />
+            <ListView fx:id="listaAçoesData" layoutX="638.0" layoutY="272.0" prefHeight="212.0" prefWidth="108.0" />
+            <ListView fx:id="listaAçoesDataFn" layoutX="746.0" layoutY="272.0" prefHeight="212.0" prefWidth="108.0" />
+            <Text fill="#11a9ff" layoutX="641.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Início:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#11a9ff" layoutX="746.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fim:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text fill="#11a9ff" layoutX="448.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ações:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />
