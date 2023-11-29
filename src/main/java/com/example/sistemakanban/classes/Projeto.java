@@ -4,6 +4,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.Pane;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Projeto {
@@ -18,7 +19,16 @@ public class Projeto {
     private String status;
     private String responsavel;
     private String area;
+    private Empresa empresa;
+    // Getter e Setter para a Empresa
+    public Empresa getEmpresa() {
+        return empresa;
+    }
 
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+    private List<Projeto> projetos;
 
 
     // Construtor
@@ -34,7 +44,12 @@ public class Projeto {
         this.status = status;
         this.responsavel = responsavel;
         this.area = area;
+        this.projetos = new ArrayList<>();
 
+    }
+    // Getter e Setter para a lista de projetos
+    public List<Projeto> getProjetos() {
+        return projetos;
     }
 
     // Getters e Setters

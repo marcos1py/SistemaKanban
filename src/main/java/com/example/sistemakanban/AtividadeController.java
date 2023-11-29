@@ -295,7 +295,10 @@ public class AtividadeController {
             }
         }
     }
-
+    @FXML
+    void btnVoltar(ActionEvent event) {
+        Main.mudarTela("atividades");
+    }
     public Pane newAtividade(Atividade atividade) {
 
         int contagem = 0;
@@ -325,6 +328,9 @@ public class AtividadeController {
         String atividadeID = ""+atividadeID1;
 
         //eixoX += 15;
+
+        CheckBox checkBox = new CheckBox();
+        checkBox.setText("oi");
 
         Pane novaAtividade = new Pane();
         novaAtividade.setPrefSize(318, 104);
@@ -409,7 +415,7 @@ public class AtividadeController {
 
 
         // Adicione os Labels à Pane
-        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard, labelInicio, labelFim, labelStatus, menuButton,labelResponsavel,progressIndicator);
+        novaAtividade.getChildren().addAll(checkBox,labelTituloCard, labelDescriçãoCard, labelInicio, labelFim, labelStatus, menuButton,labelResponsavel,progressIndicator);
 
         return novaAtividade;
     }

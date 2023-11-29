@@ -1,4 +1,5 @@
 package com.example.sistemakanban;
+import com.example.sistemakanban.classes.Empresa;
 import com.example.sistemakanban.classes.GeraPane;
 import com.example.sistemakanban.classes.Projeto;
 import javafx.event.ActionEvent;
@@ -16,13 +17,17 @@ import javafx.scene.text.Font;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ProjetoController {
     private DetalhesController detalhesController;
     private GeraPane geraPane;
-
+    private EmpresasController empresasController;  // Adiciona esta linha
+    public void setEmpresasController(EmpresasController empresasController) {
+        this.empresasController = empresasController;
+    }
     // Método para configurar o controlador da tela ProjetoController
     public void setDetalhesController(DetalhesController detalhesController) {
         this.detalhesController = detalhesController;
@@ -38,10 +43,7 @@ public class ProjetoController {
         // Muda para a tela "detalhes"
         Main.mudarTela("detalhes");
     }
-    public void receberDadosDaDetalhes(String tituloDoProjeto) {
-        // Faça o que for necessário com os dados recebidos
-        System.out.println("Recebi o título do projeto: " + tituloDoProjeto);
-    }
+
     @FXML
     private Label LabelResponsavel1;
 
@@ -67,12 +69,36 @@ public class ProjetoController {
 
     @FXML
     private DatePicker datePickInicio;
+    private List<Projeto> projetos = new ArrayList<>();
+
+    public void usarDadosRecebidosEmpresa(String nomeEmpresa, int idDaEmpresa1) {
+
+        empresaNome.setText(nomeEmpresa);
+        idDaEmpresa.setText(String.valueOf(idDaEmpresa1));
+
+        anchorPanefazer.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
+
+        Empresa minhaEmpresa = empresasController.getEmpresaById(idDaEmpresa1);
 
 
+        // Verifica se a empresa foi encontrada
+        if (minhaEmpresa != null) {
+            for (Projeto projeto : minhaEmpresa.getProjetos()) {
+                System.out.println("Projetos: " + projeto);
+                Pane newPane = newProject(projeto);
+                anchorPanefazer.getChildren().add(newPane);
+            }
+        }
+
+
+    }
 
     @FXML
+    private Label idDaEmpresa;
+    @FXML
+    private Label empresaNome;
+    @FXML
     private Label labelDataInicio11;
-
     @FXML
     private Label labelDescriçaoCard;
 
@@ -167,10 +193,6 @@ public class ProjetoController {
     private TextField txtFieldResp;
     @FXML
     private void initialize() {
-        mexerPane(atividade1);
-        mexerPane(atividade2);
-        mexerPane(atividade3);
-
     }
     @FXML
     private AnchorPane addPane;
@@ -185,7 +207,10 @@ public class ProjetoController {
         deixarBorrado();
 
     }
-
+    @FXML
+    void btnVoltar(ActionEvent event) {
+        Main.mudarTela("empresas");
+    }
     @FXML
     void cancelarBtn(ActionEvent event) {
 
@@ -198,7 +223,7 @@ public class ProjetoController {
     @FXML
     void confirmarBtn(ActionEvent event) {
         Projeto projeto = new Projeto();
-
+        Empresa minhaEmpresa = new Empresa();
 
         numeroID += 1;
         projeto.setId(numeroID);
@@ -209,32 +234,46 @@ public class ProjetoController {
         projeto.setResponsavel(txtFieldResp.getText());
         projeto.setDescricao(txtAreaDesc.getText());
 
-        Pane newPane = newProject(projeto);
+        try {
+            int idEmpresaSelecionada = Integer.parseInt(idDaEmpresa.getText());
+            if (empresasController != null) {
+                minhaEmpresa = empresasController.getEmpresaById(idEmpresaSelecionada);
+                if (minhaEmpresa != null) {
+                    projeto.setEmpresa(minhaEmpresa);
+                    System.out.println("Empresa: " + minhaEmpresa.getNomeEmpresa());
+                    System.out.println("Projetos:"+minhaEmpresa.getProjetos());
+                    for (Projeto p : minhaEmpresa.getProjetos()) {
+                        System.out.println("  - " + p.getTitulo());
+                    }
+                    System.out.println("ID: " + idEmpresaSelecionada);
+                } else {
+                    System.err.println("Empresa não encontrada com o ID: " + idEmpresaSelecionada);
+                }
+            } else {
+                System.err.println("EmpresasController não está definido.");
+            }
+        } catch (NumberFormatException e) {
+            System.err.println("O ID da empresa não é um número válido");
+        }
 
-        anchorPanefazer.getChildren().add(newPane);
-        addPane.setVisible(false);
-        limparBorrado();
-
+            Pane newPane = newProject(projeto);
+            minhaEmpresa.addProjeto(projeto);
+            System.out.println("listaProjetos: "+ minhaEmpresa.getProjetos());
+            anchorPanefazer.getChildren().add(newPane);
+            mexerPane(newPane);
+            addPane.setVisible(false);
+            limparBorrado();
     }
-
-
-
-
     private void mexerPane(Pane atividade) {
 
 
         atividade.setOnMousePressed(event -> {
-            System.out.println("Oi");
-
-
             offsetX = event.getSceneX() - atividade.getLayoutX();
             offsetY = event.getSceneY() - atividade.getLayoutY();
 
         });
         // Adicione um evento de arrastar o mouse
         atividade.setOnMouseDragged(event -> {
-            System.out.println("Oi2");
-
             atividade.setLayoutX(event.getSceneX() - offsetX);
             atividade.setLayoutY(event.getSceneY() - offsetY);
 
@@ -242,9 +281,6 @@ public class ProjetoController {
 
         // Adicione um evento de soltar o mouse
         atividade.setOnMouseReleased(event -> {
-            System.out.println("Oi3");
-
-
             atividade.toFront();
             Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(),atividade);
 

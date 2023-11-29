@@ -18,7 +18,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EmpresasController {
+    private ProjetoController projetoController;
+    public void setProjetoController(ProjetoController projetoController) {
+        this.projetoController = projetoController;
+    }
     int eixoX = 0;
     int eixoY = 0;
     @FXML
@@ -61,7 +68,20 @@ public class EmpresasController {
 
     @FXML
     private AnchorPane achorPaneEmpresa;
+    private List<Empresa> listaEmpresas = new ArrayList<>();
+
     int numeroID = 0;
+    public Empresa getEmpresaById(int id) {
+
+
+        for (Empresa empresa : listaEmpresas) {
+            if (empresa.getId() == id) {
+                System.out.println(empresa.getId());
+                return empresa;
+            }
+        }
+        return null;
+    }
 
 
     @FXML
@@ -76,8 +96,8 @@ public class EmpresasController {
         meuEmpresa.setLocal(localEmpresaADD.getText());
         meuEmpresa.setTel(telefoneEmpresaADD.getText());
         meuEmpresa.setQtFuncionario(qtFuncionarioADD.getText());
-        Pane newPane = gerador.newEmpresa(meuEmpresa);
-
+        Pane newPane = newEmpresa(meuEmpresa);
+        listaEmpresas.add(meuEmpresa);
         achorPaneEmpresa.getChildren().add(newPane);
         int teste =meuEmpresa.getYeixo();
         int teste1 = (int) achorPaneEmpresa.getHeight();
@@ -133,9 +153,7 @@ public class EmpresasController {
         tituloEmpresa.setOnMouseClicked (new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent event) {
-
-
-
+                projetoController.usarDadosRecebidosEmpresa(meuEmpresa.getNomeEmpresa(),meuEmpresa.getId());
                 Main.mudarTela("projetos");
             }
         });

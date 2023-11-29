@@ -34,10 +34,13 @@ public class Main extends Application {
 
         detalhesController.setProjetoController(projetoController);
         projetoController.setDetalhesController(detalhesController);
-        detalhesController.setProjetoController(projetoController);
 
         FXMLLoader fxmlLoaderEmpresas = new FXMLLoader(Main.class.getResource("empresas.fxml"));
         empresas = new Scene(fxmlLoaderEmpresas.load());
+        EmpresasController empresasController = fxmlLoaderEmpresas.getController();
+        projetoController.setEmpresasController(empresasController);
+        empresasController.setProjetoController(projetoController);
+
 
         FXMLLoader fxmlLoaderAtividades = new FXMLLoader(Main.class.getResource("Atividades.fxml"));
         atividades = new Scene(fxmlLoaderAtividades.load());
@@ -52,7 +55,7 @@ public class Main extends Application {
         Image icon = new Image(getClass().getResourceAsStream("/Imagens/icone deletar.png"));
         primaryStage.getIcons().add(icon);
 
-        primaryStage.setScene(empresas);
+        primaryStage.setScene(atividades);
         primaryStage.setMaximized(true);
 
         // Configurar controladores

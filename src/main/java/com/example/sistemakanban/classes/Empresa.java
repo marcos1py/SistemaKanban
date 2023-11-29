@@ -1,18 +1,24 @@
 package com.example.sistemakanban.classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Empresa {
     private int id;
     private String nomeEmpresa;
-
     private String local;
     private String tel;
     private String qtFuncionario;
-    int Yeixo;
+    private int Yeixo;
+    private List<Projeto> projetos;
 
     // Construtor
     public Empresa() {
+        this.projetos = new ArrayList<>();
     }
-
+    public void adicionarProjeto(Projeto projeto) {
+        this.projetos.add(projeto);
+    }
     // Getters e Setters
     public int getId() {
         return id;
@@ -21,6 +27,7 @@ public class Empresa {
     public void setId(int id) {
         this.id = id;
     }
+
     public int getYeixo() {
         return Yeixo;
     }
@@ -59,5 +66,15 @@ public class Empresa {
 
     public void setQtFuncionario(String qtFuncionario) {
         this.qtFuncionario = qtFuncionario;
+    }
+
+    public List<Projeto> getProjetos() {
+        return projetos;
+    }
+    public void addProjeto(Projeto projeto) {
+        this.projetos.add(projeto);
+    }
+    public void setProjetos(List<Projeto> projetos) {
+        this.projetos = projetos;
     }
 }
