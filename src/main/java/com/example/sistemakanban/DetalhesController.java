@@ -1,15 +1,18 @@
 package com.example.sistemakanban;
 
 
+import com.example.sistemakanban.classes.Atividade;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 
@@ -18,30 +21,37 @@ public class DetalhesController {
     private ProjetoController projetoController;
 
     @FXML
-    private AnchorPane anchorPaneAçao;
+    private VBox vboxPaneAçao;
 
     // Método para configurar o controlador da tela ProjetoController
     public void setProjetoController(ProjetoController projetoController) {
         this.projetoController = projetoController;
     }
-    public CheckBox newcheckBox(Object ação){
+    public CheckBox newcheckBox(String idAtividade, String acao){
         CheckBox checkBox = new CheckBox();
-        checkBox.setText((String) ação);
+        checkBox.setText("Atividade " + idAtividade + ": " + acao);
+
+        checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+
+            System.out.println("Ação para " + acao + " da Atividade " + idAtividade + " selecionada: " + newValue);
+        });
 
         return checkBox;
     }
-    public void receberDadosCheckBox(ObservableList lista) {
-        for (Object acao : lista) {
+    public void receberDadosCheckBox(String idAtividade, ObservableList<String> lista) {
+        vboxPaneAçao.getChildren().clear();
+
+        for (String acao : lista) {
             System.out.println(acao);
-            CheckBox açaoTemporaria = newcheckBox(acao);
-            anchorPaneAçao.getChildren().add(açaoTemporaria);
+            CheckBox acaoTemporaria = newcheckBox(idAtividade, acao);
+            vboxPaneAçao.getChildren().add(acaoTemporaria);
 
-        }
-    }
 
-    // Método para utilizar os dados recebidos do ProjetoController
-    public void usarDadosRecebidos(String tituloDoProjeto, String descriçãoDoProjeto,String inicio, String fim,String area, String responsavel) {
-        labelArea.setText(area);
+        }}
+
+
+
+    public void usarDadosRecebidos(String tituloDoProjeto, String descriçãoDoProjeto,String inicio, String fim, String responsavel) {
         labelResponsavel.setText(responsavel);
         labelInicio.setText(inicio);
         labelFim.setText(fim);

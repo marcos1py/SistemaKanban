@@ -136,19 +136,8 @@ public class AtividadeController {
     double x = 0, y = 0;
     int contagem;
     int eixoY = 0;
-    public void validador(DatePicker inicioDefinido, DatePicker fimDefinido) {
-        LocalDate inicio = inicioDefinido.getValue();
-        LocalDate fim = fimDefinido.getValue();
-        if (inicio != null && fim != null) {
-            if (inicio.isAfter(fim)) {
-                System.out.println("nao");
-            } else {
-                System.out.println("Valido");
-            }
-        } else {
-            System.out.println("Coloca as duas");
-        }
-    }
+    private AtividadeController atividadeController;
+    private EmpresasController empresasController;
     @FXML
     private TextField responsavelID;
     @FXML
@@ -178,8 +167,26 @@ public class AtividadeController {
     public static Pane cardDeletar;
     @FXML
     private AnchorPane addPane;
-
+    int numeroID = 0;
     int cont = 0;
+    private ObservableList<String> açoes;
+
+    private ObservableList<String> dataFn;
+
+    private ObservableList<String> dataIn;
+    public void validador(DatePicker inicioDefinido, DatePicker fimDefinido) {
+        LocalDate inicio = inicioDefinido.getValue();
+        LocalDate fim = fimDefinido.getValue();
+        if (inicio != null && fim != null) {
+            if (inicio.isAfter(fim)) {
+                System.out.println("nao");
+            } else {
+                System.out.println("Valido");
+            }
+        } else {
+            System.out.println("Coloca as duas");
+        }
+    }
 
     @FXML
     void novoProjBtn(ActionEvent event) {
@@ -199,11 +206,6 @@ public class AtividadeController {
     public static void btnDeletar() {
         cardDeletar.setVisible(true);
     }
-
-    private AtividadeController atividadeController;
-    private EmpresasController empresasController;
-
-
 
     private void deixarBorrado() {
         BoxBlur boxBlur = new BoxBlur(5, 5, 2); // Ajuste os parâmetros conforme necessário
@@ -236,11 +238,7 @@ public class AtividadeController {
         title.setEffect(null);
     }
 
-    private ObservableList<String> açoes;
 
-    private ObservableList<String> dataFn;
-
-    private ObservableList<String> dataIn;
     public void initialize(){
         dataIn = FXCollections.observableArrayList();
         açoes = FXCollections.observableArrayList();
@@ -276,13 +274,15 @@ public class AtividadeController {
     public void cancelarDelet(ActionEvent event) {
         cardDeletar.setVisible(false);
     }
-    int numeroID = 0;
+
     public void btnAddAtividade(ActionEvent event) {
 
         Atividade atividade = new Atividade();
 
 
         numeroID += 1;
+
+
         atividade.setId(numeroID);
 
         atividade.setNome(nomeID.getText());
@@ -296,7 +296,10 @@ public class AtividadeController {
         mexerPane(newPane);
         anchorPanefazer.getChildren().add(newPane);
         addPane.setVisible(false);
-        detalhesController.receberDadosCheckBox(açoes);
+        detalhesController.receberDadosCheckBox(String.valueOf(atividade.getId()), açoes);
+        açoes.clear();
+        dataFn.clear();
+        dataIn.clear();
         limpaBorrado();
 
     }
@@ -386,8 +389,7 @@ public class AtividadeController {
 
         //eixoX += 15;
 
-        CheckBox checkBox = new CheckBox();
-        checkBox.setText("oi");
+
 
         Pane novaAtividade = new Pane();
         novaAtividade.setPrefSize(318, 104);
@@ -451,7 +453,7 @@ public class AtividadeController {
         detalhesItem.setOnAction (new EventHandler<ActionEvent>() {
             @Override
             public void handle (ActionEvent event) {
-                detalhesController.usarDadosRecebidos(nomeAtividade,descricao,dataInFormat,dataFnFormat,area,responsavel);
+                detalhesController.usarDadosRecebidos(nomeAtividade,descricao,dataInFormat,dataFnFormat,responsavel);
 
                 Main.mudarTela ("detalhes");
             }
@@ -472,7 +474,7 @@ public class AtividadeController {
 
 
         // Adicione os Labels à Pane
-        novaAtividade.getChildren().addAll(checkBox,labelTituloCard, labelDescriçãoCard, labelInicio, labelFim, labelStatus, menuButton,labelResponsavel,progressIndicator);
+        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard, labelInicio, labelFim, labelStatus, menuButton,labelResponsavel,progressIndicator);
 
         return novaAtividade;
     }
