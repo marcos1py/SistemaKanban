@@ -165,13 +165,7 @@ public class ProjetoController {
     GeraPane novoPane = new GeraPane();
     @FXML
     private TextField txtFieldResp;
-    @FXML
-    private void initialize() {
-        mexerPane(atividade1);
-        mexerPane(atividade2);
-        mexerPane(atividade3);
 
-    }
     @FXML
     private AnchorPane addPane;
     List<Pane> listaProjetos = novoPane.getListaProjetos();

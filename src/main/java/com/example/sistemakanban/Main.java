@@ -52,7 +52,7 @@ public class Main extends Application {
         Image icon = new Image(getClass().getResourceAsStream("/Imagens/icone deletar.png"));
         primaryStage.getIcons().add(icon);
 
-        primaryStage.setScene(empresas);
+        primaryStage.setScene(atividades);
         primaryStage.setMaximized(true);
 
         // Configurar controladores

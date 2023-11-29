@@ -1,6 +1,8 @@
 package com.example.sistemakanban;
 import com.example.sistemakanban.classes.Atividade;
+import com.example.sistemakanban.classes.Ação;
 import com.example.sistemakanban.classes.GeraPane;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +19,7 @@ import javafx.scene.text.Font;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.Manifest;
 
@@ -133,9 +136,18 @@ public class AtividadeController {
     double x = 0, y = 0;
     int contagem;
     int eixoY = 0;
-    @FXML
-    private void initialize() {
-
+    public void validador(DatePicker inicioDefinido, DatePicker fimDefinido) {
+        LocalDate inicio = inicioDefinido.getValue();
+        LocalDate fim = fimDefinido.getValue();
+        if (inicio != null && fim != null) {
+            if (inicio.isAfter(fim)) {
+                System.out.println("nao");
+            } else {
+                System.out.println("Valido");
+            }
+        } else {
+            System.out.println("Coloca as duas");
+        }
     }
     @FXML
     private TextField responsavelID;
@@ -144,7 +156,10 @@ public class AtividadeController {
     @FXML
     private TextArea descriçaoInput;
     @FXML
-    private ListView<?> listaAçoes;
+    private ListView<String> listaAçoes;
+
+    @FXML
+    private ListView<String> listaAçoesData;
     @FXML
     private TextField açaoInput;
     @FXML
@@ -156,9 +171,16 @@ public class AtividadeController {
     @FXML
     private DatePicker fimDefinido;
     @FXML
+    private ListView<String> listaAçoesDataFn;
+    @FXML
+    private Label labelErro;
+    @FXML
     public static Pane cardDeletar;
     @FXML
     private AnchorPane addPane;
+
+    int cont = 0;
+
     @FXML
     void novoProjBtn(ActionEvent event) {
         addPane.setVisible(true);
@@ -213,9 +235,43 @@ public class AtividadeController {
         nav1.setEffect(null);
         title.setEffect(null);
     }
-    public void btnAddAçao(ActionEvent event) {
 
+    private ObservableList<String> açoes;
+
+    private ObservableList<String> dataFn;
+
+    private ObservableList<String> dataIn;
+    public void initialize(){
+        dataIn = FXCollections.observableArrayList();
+        açoes = FXCollections.observableArrayList();
+        dataFn = FXCollections.observableArrayList();
+        listaAçoes.setItems(açoes);
+        listaAçoesData.setItems(dataIn);
+        listaAçoesDataFn.setItems(dataFn);
     }
+
+    public void btnAddAçao(ActionEvent event) {
+        LocalDate inicio = inicioDefinidoAçao.getValue();
+        LocalDate fim = fimDefinidoAçao.getValue();
+        if(inicio == null || fim == null || açaoInput.getText() == null){
+            System.out.println("por favor corrija");
+        }else {
+
+
+
+            String dataFnFormat = fim.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            String dataInFormat = inicio.format((DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            dataIn.add(cont + ". " + dataInFormat);
+            dataFn.add(cont + ". " + dataFnFormat);
+            açoes.add(cont + ". " + açaoInput.getText());
+            cont++;
+            validador(inicioDefinidoAçao, fimDefinidoAçao);
+        }
+    }
+
+
+
+
 
     public void cancelarDelet(ActionEvent event) {
         cardDeletar.setVisible(false);
@@ -240,6 +296,7 @@ public class AtividadeController {
         mexerPane(newPane);
         anchorPanefazer.getChildren().add(newPane);
         addPane.setVisible(false);
+        detalhesController.receberDadosCheckBox(açoes);
         limpaBorrado();
 
     }
