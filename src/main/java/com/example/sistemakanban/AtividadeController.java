@@ -1,7 +1,8 @@
 package com.example.sistemakanban;
 import com.example.sistemakanban.classes.Atividade;
-import com.example.sistemakanban.classes.Ação;
-import com.example.sistemakanban.classes.GeraPane;
+import com.example.sistemakanban.classes.Empresa;
+
+import com.example.sistemakanban.classes.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,12 +26,18 @@ import java.util.jar.Manifest;
 
 
 public class AtividadeController {
-    private DetalhesController detalhesController;
     private GeraPane geraPane;
+    private DetalhesController detalhesController;
 
-    // Método para configurar o controlador da tela ProjetoController
+
     public void setDetalhesController(DetalhesController detalhesController) {
         this.detalhesController = detalhesController;
+    }
+    private ProjetoController projetoController;
+
+
+    public void setProjetoController(ProjetoController projetoController) {
+        this.projetoController = projetoController;
     }
     @FXML
     private Label LabelResponsavel1;
@@ -172,6 +179,31 @@ public class AtividadeController {
     private ObservableList<String> açoes;
 
     private ObservableList<String> dataFn;
+    @FXML
+    void btnVoltarprojetos(ActionEvent event) {
+        Main.mudarTela("projetos");
+    }
+    @FXML
+    private Label labelNomeProjeto;
+    @FXML
+    private Label idDaProjeto;
+    public void usarDadosRecebidosProjeto(String nomeProjeto, int idDaProjeto1) {
+        labelNomeProjeto.setText(nomeProjeto);
+        idDaProjeto.setText(String.valueOf(idDaProjeto1));
+
+        anchorPanefazer.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
+
+        Projeto meuProjeto = projetoController.getProjetoById(idDaProjeto1);
+
+        if (meuProjeto != null) {
+            for (Atividade atividade : meuProjeto.getAtividades()) {
+                System.out.println("Atividade: " + atividade);
+                Pane newPane = newAtividade(atividade);
+                anchorPanefazer.getChildren().add(newPane);
+            }
+        }
+    }
+
 
     private ObservableList<String> dataIn;
     public void validador(DatePicker inicioDefinido, DatePicker fimDefinido) {
@@ -278,11 +310,9 @@ public class AtividadeController {
     public void btnAddAtividade(ActionEvent event) {
 
         Atividade atividade = new Atividade();
-
+        Projeto meuprojeto = new Projeto();
 
         numeroID += 1;
-
-
         atividade.setId(numeroID);
 
         atividade.setNome(nomeID.getText());
@@ -291,9 +321,33 @@ public class AtividadeController {
         atividade.setResponsavel(responsavelID.getText());
         atividade.setDescrição(descriçaoInput.getText());
         //atividade.setAções(açaoInput.getText());
+        meuprojeto.adicionarAtividade(atividade);
+        System.out.println("=============");
+            int idProjetoSelecionada = Integer.parseInt(idDaProjeto.getText());
+            if (projetoController != null) {
+                System.out.println(idProjetoSelecionada);
+                meuprojeto = projetoController.getProjetoById(idProjetoSelecionada);
+                if (meuprojeto != null) {
+                    atividade.setProjeto(meuprojeto);
+                    System.out.println("Projeto: " + meuprojeto.getTitulo());
+                    System.out.println("Atividade:"+meuprojeto.getAtividades());
+                    for (Atividade a : meuprojeto.getAtividades()) {
+                        System.out.println("  - " + a.getNome());
+                    }
+                    System.out.println("ID: " + idProjetoSelecionada);
+                } else {
+                    System.err.println("Empresa não encontrada com o ID: " + idProjetoSelecionada);
+                }
+            } else {
+                System.err.println("EmpresasController não está definido.");
+            }
+        System.out.println("=============");
+
+        meuprojeto.addAtividade(atividade);
 
         Pane newPane = newAtividade(atividade);
         mexerPane(newPane);
+
         anchorPanefazer.getChildren().add(newPane);
         addPane.setVisible(false);
         detalhesController.receberDadosCheckBox(String.valueOf(atividade.getId()), açoes);

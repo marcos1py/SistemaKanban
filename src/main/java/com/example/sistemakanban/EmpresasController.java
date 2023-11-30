@@ -87,7 +87,6 @@ public class EmpresasController {
     @FXML
     void confirmarBtn(ActionEvent event) {
         Empresa meuEmpresa = new Empresa( ) ;
-        GeraPane gerador = new GeraPane();
 
         numeroID += 1;
         meuEmpresa.setId(numeroID);

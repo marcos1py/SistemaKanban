@@ -13,6 +13,7 @@ public class Projeto {
     private String titulo;
     private String descricao;
     private List<Atividade> atividades;
+
     private Pane pane;
     private LocalDate inícioDefinido;
     private LocalDate fimDefinido;
@@ -36,7 +37,7 @@ public class Projeto {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.atividades = atividades;
+
         this.titulo = titulo;
         this.descricao = descricao;
         this.fimDefinido = fimDefinido;
@@ -45,11 +46,24 @@ public class Projeto {
         this.responsavel = responsavel;
         this.area = area;
         this.projetos = new ArrayList<>();
+        this.atividades = new ArrayList<>();
 
     }
     // Getter e Setter para a lista de projetos
     public List<Projeto> getProjetos() {
         return projetos;
+    }
+
+    public void adicionarAtividade(Atividade atividade) {
+        this.atividades.add(atividade);
+    }
+    public void addAtividade(Atividade atividade) {
+        this.atividades.add(atividade);
+    }
+    // Obtém a lista de atividades do projeto
+    public List<Atividade> getAtividades() {
+        System.out.println("get atividade chamado: "+ atividades);
+        return atividades;
     }
 
     // Getters e Setters
@@ -77,9 +91,7 @@ public class Projeto {
         this.descricao = descricao;
     }
 
-    public List<Atividade> getAtividades() {
-        return atividades;
-    }
+
 
     public void setAtividades(List<Atividade> atividades) {
         this.atividades = atividades;
@@ -118,5 +130,6 @@ public class Projeto {
     public String getArea(){
         return area;
     }
+
 
 }

@@ -25,7 +25,11 @@ public class Atividade {
     public String getArea() {
         return area;
     }
+    private Projeto projeto;
 
+    public void setProjeto(Projeto projeto) {
+        this.projeto = projeto;
+    }
     public void setArea(String novaArea) {
         this.area = novaArea;
     }

@@ -1,4 +1,5 @@
 package com.example.sistemakanban;
+import com.example.sistemakanban.classes.Atividade;
 import com.example.sistemakanban.classes.Empresa;
 import com.example.sistemakanban.classes.GeraPane;
 import com.example.sistemakanban.classes.Projeto;
@@ -24,6 +25,10 @@ import java.util.List;
 public class ProjetoController {
     private DetalhesController detalhesController;
     private GeraPane geraPane;
+    private AtividadeController atividadeController;
+    public void setAtividadeController(AtividadeController atividadeController) {
+        this.atividadeController = atividadeController;
+    }
     private EmpresasController empresasController;  // Adiciona esta linha
     public void setEmpresasController(EmpresasController empresasController) {
         this.empresasController = empresasController;
@@ -35,14 +40,7 @@ public class ProjetoController {
     public void setGeraPane(GeraPane geraPane) {
         this.geraPane = geraPane;
     }
-    @FXML
-    void BtnIrparaDetalhes(ActionEvent event) {
-        // Chama o método diretamente no DetalhesController
-        detalhesController.usarDadosRecebidos("teste","aaa","","","","");
 
-        // Muda para a tela "detalhes"
-        Main.mudarTela("detalhes");
-    }
 
     @FXML
     private Label LabelResponsavel1;
@@ -69,8 +67,23 @@ public class ProjetoController {
 
     @FXML
     private DatePicker datePickInicio;
-    private List<Projeto> projetos = new ArrayList<>();
+    private List<Projeto> listaProjeto = new ArrayList<>();
+    int numeroID = 0;
+    public Projeto getProjetoById(int id) {
 
+        for (Projeto projeto : listaProjeto) {
+            System.out.println("++++++++++++===");
+            System.out.println(projeto.getTitulo());
+            System.out.println(projeto.getId());
+            System.out.println("++++++++++++===");
+
+            if (projeto.getId() == id) {
+                System.out.println(projeto.getId());
+                return projeto;
+            }
+        }
+        return null;
+    }
     public void usarDadosRecebidosEmpresa(String nomeEmpresa, int idDaEmpresa1) {
 
         empresaNome.setText(nomeEmpresa);
@@ -196,7 +209,6 @@ public class ProjetoController {
     }
     @FXML
     private AnchorPane addPane;
-    List<Pane> listaProjetos = novoPane.getListaProjetos();
 
 
 
@@ -219,7 +231,7 @@ public class ProjetoController {
     }
 
 
-    int numeroID = 0;
+
     @FXML
     void confirmarBtn(ActionEvent event) {
         Projeto projeto = new Projeto();
@@ -258,8 +270,9 @@ public class ProjetoController {
 
             Pane newPane = newProject(projeto);
             minhaEmpresa.addProjeto(projeto);
-            System.out.println("listaProjetos: "+ minhaEmpresa.getProjetos());
-            anchorPanefazer.getChildren().add(newPane);
+            listaProjeto.add(projeto);
+
+        anchorPanefazer.getChildren().add(newPane);
             mexerPane(newPane);
             addPane.setVisible(false);
             limparBorrado();
@@ -426,6 +439,7 @@ public class ProjetoController {
         labelTituloCard.setOnMouseClicked (new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent event) {
+                atividadeController.usarDadosRecebidosProjeto(meuProjeto.getTitulo(), meuProjeto.getId());
 
                 Main.mudarTela("atividades");
             }
