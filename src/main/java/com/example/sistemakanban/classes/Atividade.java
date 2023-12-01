@@ -125,6 +125,7 @@ public class Atividade {
 
     // Getter para ações
     public List<Ação> getAções() {
+
         return ações;
     }
 

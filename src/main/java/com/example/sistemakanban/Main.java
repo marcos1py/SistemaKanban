@@ -54,6 +54,7 @@ public class Main extends Application {
         // Configurar relacionamentos entre controladores
         atividadeController.setDetalhesController(detalhesController);
         projetoController.setAtividadeController(atividadeController);
+        detalhesController.setAtividadeController(atividadeController);
 
         atividadeController.setProjetoController(projetoController);
 

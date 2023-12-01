@@ -2,6 +2,8 @@ package com.example.sistemakanban;
 
 
 import com.example.sistemakanban.classes.Atividade;
+import com.example.sistemakanban.classes.Ação;
+import com.example.sistemakanban.classes.Projeto;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +24,12 @@ public class DetalhesController {
 
     @FXML
     private VBox vboxPaneAçao;
+    private AtividadeController atividadeController;
+
+
+    public void setAtividadeController(AtividadeController atividadeController) {
+        this.atividadeController = atividadeController;
+    }
 
     // Método para configurar o controlador da tela ProjetoController
     public void setProjetoController(ProjetoController projetoController) {
@@ -38,7 +46,11 @@ public class DetalhesController {
 
         return checkBox;
     }
-    public void receberDadosCheckBox(String idAtividade, ObservableList<String> lista) {
+    @FXML
+    private Label labelNomeAtividade;
+    @FXML
+    private Label idDaAtividade;
+    public void receberDadosCheckBox1(String idAtividade, ObservableList<String> lista) {
         vboxPaneAçao.getChildren().clear();
 
         for (String acao : lista) {
@@ -46,16 +58,30 @@ public class DetalhesController {
             CheckBox acaoTemporaria = newcheckBox(idAtividade, acao);
             vboxPaneAçao.getChildren().add(acaoTemporaria);
 
-
         }}
 
 
+    public void receberDadosCheckBox(String nomeAtividade, int idDaAtividade1, ObservableList<String> listaAçao) {
+        labelNomeAtividade.setText(nomeAtividade);
+        idDaAtividade.setText(String.valueOf(idDaAtividade1));
 
+        vboxPaneAçao.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
+
+        Atividade minhaAtividade = atividadeController.getAtividadeById(idDaAtividade1);
+
+        if (minhaAtividade != null) {
+            for (Ação ação : minhaAtividade.getAções()) {
+                System.out.println("-------hk----"+ação.getNome());
+                CheckBox acaoTemporaria = newcheckBox(idDaAtividade.getId(), String.valueOf(ação.getNome()));
+                vboxPaneAçao.getChildren().add(acaoTemporaria);
+            }
+        }
+    }
     public void usarDadosRecebidos(String tituloDoProjeto, String descriçãoDoProjeto,String inicio, String fim, String responsavel) {
         labelResponsavel.setText(responsavel);
         labelInicio.setText(inicio);
         labelFim.setText(fim);
-        atv1.setText(tituloDoProjeto);
+        labelNomeAtividade.setText(tituloDoProjeto);
         txtArea.setText(descriçãoDoProjeto);
     }
     @FXML

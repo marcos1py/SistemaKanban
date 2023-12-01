@@ -1,6 +1,5 @@
 package com.example.sistemakanban;
 import com.example.sistemakanban.classes.Atividade;
-import com.example.sistemakanban.classes.Empresa;
 
 import com.example.sistemakanban.classes.*;
 import javafx.collections.FXCollections;
@@ -22,7 +21,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Manifest;
 
 
 public class AtividadeController {
@@ -152,7 +150,7 @@ public class AtividadeController {
     @FXML
     private TextArea descriçaoInput;
     @FXML
-    private ListView<String> listaAçoes;
+    private ListView<Ação> listaAçoes;
 
     @FXML
     private ListView<String> listaAçoesData;
@@ -176,7 +174,7 @@ public class AtividadeController {
     private AnchorPane addPane;
     int numeroID = 0;
     int cont = 0;
-    private ObservableList<String> açoes;
+    private ObservableList<Ação> açoes;
 
     private ObservableList<String> dataFn;
     @FXML
@@ -269,8 +267,24 @@ public class AtividadeController {
         nav1.setEffect(null);
         title.setEffect(null);
     }
+    private List<Atividade> listaAtividade = new ArrayList<>();
 
 
+    public Atividade getAtividadeById(int id) {
+
+        for (Atividade atividade : listaAtividade) {
+            System.out.println("++++++++++++===");
+            System.out.println(atividade.getNome());
+            System.out.println(atividade.getId());
+            System.out.println("++++++++++++===");
+
+            if (atividade.getId() == id) {
+                System.out.println(atividade.getId());
+                return atividade;
+            }
+        }
+        return null;
+    }
     public void initialize(){
         dataIn = FXCollections.observableArrayList();
         açoes = FXCollections.observableArrayList();
@@ -279,21 +293,31 @@ public class AtividadeController {
         listaAçoesData.setItems(dataIn);
         listaAçoesDataFn.setItems(dataFn);
     }
-
+    int numeroIDAçao;
     public void btnAddAçao(ActionEvent event) {
+        Ação addação = new Ação();
         LocalDate inicio = inicioDefinidoAçao.getValue();
         LocalDate fim = fimDefinidoAçao.getValue();
         if(inicio == null || fim == null || açaoInput.getText() == null){
             System.out.println("por favor corrija");
         }else {
+            addação.setNome(açaoInput.getText());
+            addação.setDataInicio(inicio);
+            addação.setDataFim(fim);
+            numeroIDAçao +=1;
+            addação.setId(numeroIDAçao);
 
-
+            System.out.println(addação.getId());
 
             String dataFnFormat = fim.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             String dataInFormat = inicio.format((DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            dataIn.add(cont + ". " + dataInFormat);
-            dataFn.add(cont + ". " + dataFnFormat);
-            açoes.add(cont + ". " + açaoInput.getText());
+            Ação novaAção = new Ação();
+            novaAção.setNome(açaoInput.getText());
+            novaAção.setDataInicio(inicioDefinidoAçao.getValue());
+            novaAção.setDataFim(fimDefinidoAçao.getValue());
+
+            açoes.add(novaAção);
+
             cont++;
             validador(inicioDefinidoAçao, fimDefinidoAçao);
         }
@@ -332,7 +356,7 @@ public class AtividadeController {
                     System.out.println("Projeto: " + meuprojeto.getTitulo());
                     System.out.println("Atividade:"+meuprojeto.getAtividades());
                     for (Atividade a : meuprojeto.getAtividades()) {
-                        System.out.println("  - " + a.getNome());
+                        System.out.println("  ´´´´´´- " + a.getAções());
                     }
                     System.out.println("ID: " + idProjetoSelecionada);
                 } else {
@@ -344,13 +368,21 @@ public class AtividadeController {
         System.out.println("=============");
 
         meuprojeto.addAtividade(atividade);
+        listaAtividade.add(atividade);
+        atividade.setAções(FXCollections.observableArrayList(açoes));
+// Convertendo a lista de Ação para uma lista de String
+        ObservableList<String> stringsAcoes = FXCollections.observableArrayList();
+        for (Ação acao : açoes) {
+            stringsAcoes.add(acao.toString()); // Você pode precisar ajustar isso dependendo da sua classe Ação
+        }
+
+// Chamando o método com a lista de strings
+        detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
 
         Pane newPane = newAtividade(atividade);
         mexerPane(newPane);
-
         anchorPanefazer.getChildren().add(newPane);
         addPane.setVisible(false);
-        detalhesController.receberDadosCheckBox(String.valueOf(atividade.getId()), açoes);
         açoes.clear();
         dataFn.clear();
         dataIn.clear();

@@ -1,19 +1,20 @@
 package com.example.sistemakanban.classes;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Ação {
     private int id;
     private String descricao;
-    private Date dataInicio;
-    private Date dataFim;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
     private String areaResponsavel;
     private int barraProgresso;
     private String status;
     private String nome;
 
     // Construtor
-    public Ação(String nome) {
+    public Ação() {
         this.id = id;
         this.descricao = descricao;
         this.dataInicio = dataInicio;
@@ -41,19 +42,19 @@ public class Ação {
         this.descricao = descricao;
     }
 
-    public Date getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataFim() {
+    public LocalDate getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
     }
 
