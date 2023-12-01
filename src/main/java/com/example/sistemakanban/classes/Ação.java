@@ -1,6 +1,7 @@
 package com.example.sistemakanban.classes;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Ação {
@@ -89,5 +90,9 @@ public class Ação {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    @Override
+    public String toString() {
+        return id+". "+nome;
     }
 }

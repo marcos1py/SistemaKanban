@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AtividadeController {
+public class    AtividadeController {
     private GeraPane geraPane;
     private DetalhesController detalhesController;
 
@@ -309,6 +309,9 @@ public class AtividadeController {
 
             System.out.println(addação.getId());
 
+
+
+
             String dataFnFormat = fim.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             String dataInFormat = inicio.format((DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             Ação novaAção = new Ação();
@@ -316,7 +319,10 @@ public class AtividadeController {
             novaAção.setDataInicio(inicioDefinidoAçao.getValue());
             novaAção.setDataFim(fimDefinidoAçao.getValue());
 
+            dataFn.add(numeroIDAçao+". "+dataFnFormat);
+            dataIn.add(numeroIDAçao+". "+dataInFormat);
             açoes.add(novaAção);
+            System.out.println(novaAção.getNome());
 
             cont++;
             validador(inicioDefinidoAçao, fimDefinidoAçao);
