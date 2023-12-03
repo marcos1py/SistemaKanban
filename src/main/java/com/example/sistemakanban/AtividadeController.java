@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class    AtividadeController {
+public class AtividadeController {
     private GeraPane geraPane;
     private DetalhesController detalhesController;
 
@@ -309,20 +309,15 @@ public class    AtividadeController {
 
             System.out.println(addação.getId());
 
-
-
-
             String dataFnFormat = fim.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             String dataInFormat = inicio.format((DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
             Ação novaAção = new Ação();
             novaAção.setNome(açaoInput.getText());
             novaAção.setDataInicio(inicioDefinidoAçao.getValue());
             novaAção.setDataFim(fimDefinidoAçao.getValue());
 
-            dataFn.add(numeroIDAçao+". "+dataFnFormat);
-            dataIn.add(numeroIDAçao+". "+dataInFormat);
-            açoes.add(novaAção);
-            System.out.println(novaAção.getNome());
+            açoes.add(addação);
 
             cont++;
             validador(inicioDefinidoAçao, fimDefinidoAçao);
@@ -353,33 +348,33 @@ public class    AtividadeController {
         //atividade.setAções(açaoInput.getText());
         meuprojeto.adicionarAtividade(atividade);
         System.out.println("=============");
-            int idProjetoSelecionada = Integer.parseInt(idDaProjeto.getText());
-            if (projetoController != null) {
-                System.out.println(idProjetoSelecionada);
-                meuprojeto = projetoController.getProjetoById(idProjetoSelecionada);
-                if (meuprojeto != null) {
-                    atividade.setProjeto(meuprojeto);
-                    System.out.println("Projeto: " + meuprojeto.getTitulo());
-                    System.out.println("Atividade:"+meuprojeto.getAtividades());
-                    for (Atividade a : meuprojeto.getAtividades()) {
-                        System.out.println("  ´´´´´´- " + a.getAções());
-                    }
-                    System.out.println("ID: " + idProjetoSelecionada);
-                } else {
-                    System.err.println("Empresa não encontrada com o ID: " + idProjetoSelecionada);
+        int idProjetoSelecionada = Integer.parseInt(idDaProjeto.getText());
+        if (projetoController != null) {
+            System.out.println(idProjetoSelecionada);
+            meuprojeto = projetoController.getProjetoById(idProjetoSelecionada);
+            if (meuprojeto != null) {
+                atividade.setProjeto(meuprojeto);
+                System.out.println("Projeto: " + meuprojeto.getTitulo());
+                System.out.println("Atividade:"+meuprojeto.getAtividades());
+                for (Atividade a : meuprojeto.getAtividades()) {
+                    System.out.println("  ´´´´´´- " + a.getAções());
                 }
+                System.out.println("ID: " + idProjetoSelecionada);
             } else {
-                System.err.println("EmpresasController não está definido.");
+                System.err.println("Empresa não encontrada com o ID: " + idProjetoSelecionada);
             }
+        } else {
+            System.err.println("EmpresasController não está definido.");
+        }
         System.out.println("=============");
 
         meuprojeto.addAtividade(atividade);
         listaAtividade.add(atividade);
         atividade.setAções(FXCollections.observableArrayList(açoes));
-// Convertendo a lista de Ação para uma lista de String
+        // Convertendo a lista de Ação para uma lista de String
         ObservableList<String> stringsAcoes = FXCollections.observableArrayList();
         for (Ação acao : açoes) {
-            stringsAcoes.add(acao.toString()); // Você pode precisar ajustar isso dependendo da sua classe Ação
+            stringsAcoes.add(acao.toString());
         }
 
 // Chamando o método com a lista de strings
@@ -546,7 +541,14 @@ public class    AtividadeController {
             @Override
             public void handle (ActionEvent event) {
                 detalhesController.usarDadosRecebidos(nomeAtividade,descricao,dataInFormat,dataFnFormat,responsavel);
+                // Convertendo a lista de Ação para uma lista de String
+                ObservableList<String> stringsAcoes = FXCollections.observableArrayList();
+                for (Ação acao : açoes) {
+                    stringsAcoes.add(acao.toString());
+                }
 
+                // Chamando o método com a lista de strings
+                detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
                 Main.mudarTela ("detalhes");
             }
         });
