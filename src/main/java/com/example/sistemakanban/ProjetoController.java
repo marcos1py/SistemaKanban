@@ -72,13 +72,8 @@ public class ProjetoController {
     public Projeto getProjetoById(int id) {
 
         for (Projeto projeto : listaProjeto) {
-            System.out.println("++++++++++++===");
-            System.out.println(projeto.getTitulo());
-            System.out.println(projeto.getId());
-            System.out.println("++++++++++++===");
 
             if (projeto.getId() == id) {
-                System.out.println(projeto.getId());
                 return projeto;
             }
         }
@@ -90,6 +85,8 @@ public class ProjetoController {
         idDaEmpresa.setText(String.valueOf(idDaEmpresa1));
 
         anchorPanefazer.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
+        anchorPaneAndamento.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
+        anchorPaneConcluidas.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
 
         Empresa minhaEmpresa = empresasController.getEmpresaById(idDaEmpresa1);
 
@@ -97,13 +94,20 @@ public class ProjetoController {
         // Verifica se a empresa foi encontrada
         if (minhaEmpresa != null) {
             for (Projeto projeto : minhaEmpresa.getProjetos()) {
-                System.out.println("Projetos: " + projeto);
-                Pane newPane = newProject(projeto);
-                anchorPanefazer.getChildren().add(newPane);
+                if (projeto.getStatus() == "afazer"){
+                    Pane newPane = newProject(projeto);
+                    mexerPane(newPane,projeto);
+                    anchorPanefazer.getChildren().add(newPane);                }
+                if (projeto.getStatus() == "andamento"){
+                    Pane newPane = newProject(projeto);
+                    mexerPane(newPane,projeto);
+                    anchorPaneAndamento.getChildren().add(newPane);                   }
+                if (projeto.getStatus() == "concluido"){
+                    Pane newPane = newProject(projeto);
+                    mexerPane(newPane,projeto);
+                    anchorPaneConcluidas.getChildren().add(newPane);                   }
             }
         }
-
-
     }
 
     @FXML
@@ -253,12 +257,7 @@ public class ProjetoController {
                 minhaEmpresa = empresasController.getEmpresaById(idEmpresaSelecionada);
                 if (minhaEmpresa != null) {
                     projeto.setEmpresa(minhaEmpresa);
-                    System.out.println("Empresa: " + minhaEmpresa.getNomeEmpresa());
-                    System.out.println("Projetos:"+minhaEmpresa.getProjetos());
-                    for (Projeto p : minhaEmpresa.getProjetos()) {
-                        System.out.println("  - " + p.getTitulo());
-                    }
-                    System.out.println("ID: " + idEmpresaSelecionada);
+                    projeto.setStatus("Afazer");
                 } else {
                     System.err.println("Empresa não encontrada com o ID: " + idEmpresaSelecionada);
                 }
@@ -274,11 +273,11 @@ public class ProjetoController {
             listaProjeto.add(projeto);
 
         anchorPanefazer.getChildren().add(newPane);
-            mexerPane(newPane);
+            mexerPane(newPane,projeto);
             addPane.setVisible(false);
             limparBorrado();
     }
-    private void mexerPane(Pane atividade) {
+    private void mexerPane(Pane atividade, Projeto projeto1) {
 
 
         atividade.setOnMousePressed(event -> {
@@ -296,7 +295,7 @@ public class ProjetoController {
         // Adicione um evento de soltar o mouse
         atividade.setOnMouseReleased(event -> {
             atividade.toFront();
-            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(),atividade);
+            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(),atividade,projeto1);
 
             // Check if atividade is already a child of a panel and remove it if so
             if (atividade.getParent() != null) {
@@ -366,7 +365,7 @@ public class ProjetoController {
     }
 
 
-    private Pane findNearestPanel(double x, double y,Pane projeto) {
+    private Pane findNearestPanel(double x, double y,Pane projeto, Projeto projeto1) {
         try {
 
             double distanceToPanel1 = calculateDistance(x, y, paneAfazer);
@@ -374,23 +373,52 @@ public class ProjetoController {
             double distanceToPanel3 = calculateDistance(x, y, paneConcluidas);
             double minDistance = Math.min(distanceToPanel1, Math.min(distanceToPanel2, distanceToPanel3));
 
-
-
-
-
             if (minDistance == distanceToPanel1) {
                 projeto.setStyle("-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
+                Empresa minhaEmpresa = empresasController.getEmpresaById(Integer.parseInt(idDaEmpresa.getText()));
 
+
+                projeto1.setStatus("afazer");
+                // Verifica se a empresa foi encontrada
+                if (minhaEmpresa != null) {
+                    for (Projeto projetos : minhaEmpresa.getProjetos()) {
+                        if (projetos.getStatus() == "afazer"){
+                            System.out.println("Projetos que estao no afazer:"+projetos);
+                        }
+                    }
+                }
                 return anchorPanefazer;
 
             } else if (minDistance == distanceToPanel2) {
                 projeto.setStyle("-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
+                Empresa minhaEmpresa = empresasController.getEmpresaById(Integer.parseInt(idDaEmpresa.getText()));
 
+
+                projeto1.setStatus("andamento");
+                // Verifica se a empresa foi encontrada
+                if (minhaEmpresa != null) {
+                    for (Projeto projetos : minhaEmpresa.getProjetos()) {
+                        if (projetos.getStatus() == "andamento"){
+                            System.out.println("Projetos que estao no andamento:"+projetos);
+                        }
+                    }
+                }
                 return anchorPaneAndamento;
 
             } else {
                 projeto.setStyle("-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
+                Empresa minhaEmpresa = empresasController.getEmpresaById(Integer.parseInt(idDaEmpresa.getText()));
 
+
+                projeto1.setStatus("concluido");
+                // Verifica se a empresa foi encontrada
+                if (minhaEmpresa != null) {
+                    for (Projeto projetos : minhaEmpresa.getProjetos()) {
+                        if (projetos.getStatus() == "concluido"){
+                            System.out.println("Projetos que estao no concluido:"+projetos);
+                        }
+                    }
+                }
                 return anchorPaneConcluidas;
 
             }
@@ -412,8 +440,8 @@ public class ProjetoController {
 
            // eixoY += 110;
 
-        System.out.println(eixoY);
-        System.out.println("");
+        meuProjeto.setStatus("afazer");
+
         String nomePane = "projeto "+contagem;
 
 

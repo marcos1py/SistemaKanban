@@ -7,8 +7,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Projeto {
     private int id;
+    private  String status;
     private Hyperlink nome;
     private String titulo;
     private String descricao;
@@ -17,7 +19,6 @@ public class Projeto {
     private Pane pane;
     private LocalDate inícioDefinido;
     private LocalDate fimDefinido;
-    private String status;
     private String responsavel;
     private String area;
     private Empresa empresa;
@@ -62,7 +63,6 @@ public class Projeto {
     }
     // Obtém a lista de atividades do projeto
     public List<Atividade> getAtividades() {
-        System.out.println("get atividade chamado: "+ atividades);
         return atividades;
     }
 
@@ -130,7 +130,13 @@ public class Projeto {
     public String getArea(){
         return area;
     }
+    public void setStatus(String status){
+        this.status = status;
+    }
 
+    public String getStatus(){
+        return status;
+    }
     public String toString(){
         return titulo;
     }

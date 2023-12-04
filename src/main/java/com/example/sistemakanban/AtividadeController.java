@@ -70,7 +70,7 @@ public class AtividadeController {
     @FXML
     private Label labelDataInicio;
     @FXML
-    private Label title;
+    private Label labelNomeProjeto;
 
     @FXML
     private AnchorPane anchorPaneAndamento;
@@ -181,8 +181,7 @@ public class AtividadeController {
     void btnVoltarprojetos(ActionEvent event) {
         Main.mudarTela("projetos");
     }
-    @FXML
-    private Label labelNomeProjeto;
+
     @FXML
     private Label idDaProjeto;
     public void usarDadosRecebidosProjeto(String nomeProjeto, int idDaProjeto1) {
@@ -197,6 +196,7 @@ public class AtividadeController {
             for (Atividade atividade : meuProjeto.getAtividades()) {
                 System.out.println("Atividade: " + atividade);
                 Pane newPane = newAtividade(atividade);
+                mexerPane(newPane);
                 anchorPanefazer.getChildren().add(newPane);
             }
         }
@@ -249,7 +249,7 @@ public class AtividadeController {
         nav.setEffect(boxBlur);
         dashbord.setEffect(boxBlur);
         nav1.setEffect(boxBlur);
-        title.setEffect(boxBlur);
+        labelNomeProjeto.setEffect(boxBlur);
     }
     private void limpaBorrado() {
         DropShadow dropShadow = new DropShadow();
@@ -265,7 +265,7 @@ public class AtividadeController {
         nav.setEffect(null);
         dashbord.setEffect(dropShadow);
         nav1.setEffect(null);
-        title.setEffect(null);
+        labelNomeProjeto.setEffect(null);
     }
     private List<Atividade> listaAtividade = new ArrayList<>();
 
@@ -285,13 +285,18 @@ public class AtividadeController {
         }
         return null;
     }
-    public void initialize(){
+    public void initialize() {
         dataIn = FXCollections.observableArrayList();
         açoes = FXCollections.observableArrayList();
         dataFn = FXCollections.observableArrayList();
         listaAçoes.setItems(açoes);
         listaAçoesData.setItems(dataIn);
         listaAçoesDataFn.setItems(dataFn);
+
+        // Limpa o anchorPane antes de adicionar novas atividades
+        anchorPanefazer.getChildren().clear();
+
+
     }
     int numeroIDAçao;
     public void btnAddAçao(ActionEvent event) {

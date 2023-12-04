@@ -78,24 +78,7 @@
       <Label layoutX="1312.0" layoutY="480.0" text="Deletar" />
       <ScrollPane layoutX="32.0" layoutY="516.0" prefHeight="248.0" prefWidth="1444.0">
         <content>
-          <AnchorPane fx:id="achorPaneEmpresa" minHeight="0.0" minWidth="0.0" prefHeight="237.0" prefWidth="1438.0">
-               <children>
-                  <Pane fx:id="atividade1" layoutX="13.0" layoutY="6.0" prefHeight="104.0" prefWidth="1412.0" style="-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;">
-                     <cursor>
-                        <Cursor fx:constant="DEFAULT" />
-                     </cursor>
-                     <children>
-                        <Label layoutX="31.0" layoutY="47.0" text="01" />
-                        <Label layoutX="963.0" layoutY="46.0" text="65" />
-                        <Label layoutX="751.0" layoutY="45.0" text="62 999999999" />
-                        <Label layoutX="399.0" layoutY="44.0" text="Goiania Goias Jardim novo mundo" />
-                        <Button layoutX="1175.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: 0;" />
-                        <Button layoutX="1288.0" layoutY="39.0" mnemonicParsing="false" />
-                        <Hyperlink fx:id="teste" layoutX="116.0" layoutY="43.0" text="Bar do ze" />
-                     </children>
-                  </Pane>
-               </children>
-            </AnchorPane>
+          <AnchorPane fx:id="achorPaneEmpresa" minHeight="0.0" minWidth="0.0" prefHeight="237.0" prefWidth="1438.0" />
         </content>
       </ScrollPane>
       <Label layoutX="795.0" layoutY="481.0" text="telefone" />
