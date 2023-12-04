@@ -222,6 +222,7 @@ public class ProjetoController {
     @FXML
     void btnVoltar(ActionEvent event) {
         Main.mudarTela("empresas");
+        eixoY = 0;
     }
     @FXML
     void cancelarBtn(ActionEvent event) {
@@ -408,7 +409,9 @@ public class ProjetoController {
     public Pane newProject(Projeto  meuProjeto){
         int contagem = 0;
         contagem = meuProjeto.getId();
-        eixoY += 110;
+
+           // eixoY += 110;
+
         System.out.println(eixoY);
         System.out.println("");
         String nomePane = "projeto "+contagem;
@@ -420,7 +423,8 @@ public class ProjetoController {
         novoProjeto.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
         novoProjeto.setLayoutX(15);
         novoProjeto.setLayoutY(eixoY);
-
+        eixoY += 110;
+        
         String tituloProj =  meuProjeto.getTitulo();
         LocalDate inicio = meuProjeto.getInicioDefinido();
         inicio = datePickInicio.getValue();

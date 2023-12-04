@@ -131,5 +131,9 @@ public class Projeto {
         return area;
     }
 
+    public String toString(){
+        return titulo;
+    }
+
 
 }
