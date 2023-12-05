@@ -20,7 +20,9 @@ import javafx.scene.text.Font;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class AtividadeController {
@@ -176,6 +178,7 @@ public class AtividadeController {
     private AnchorPane addPane;
     int numeroID = 0;
     int cont = 0;
+    int total =0;
     private ObservableList<Ação> açoes;
 
     private ObservableList<String> dataFn;
@@ -350,7 +353,7 @@ public class AtividadeController {
 
             açoes.add(addação);
 
-            cont++;
+            total++;
             validador(inicioDefinidoAçao, fimDefinidoAçao);
 
         }
@@ -408,10 +411,11 @@ public class AtividadeController {
         ObservableList<String> stringsAcoes = FXCollections.observableArrayList();
         for (Ação acao : açoes) {
             stringsAcoes.add(acao.toString());
+
         }
 
 // Chamando o método com a lista de strings
-        detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
+        //detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
 
         Pane newPane = newAtividade(atividade, meuprojeto);
         mexerPane(newPane,atividade);
@@ -481,6 +485,8 @@ public class AtividadeController {
             }
         }
     }
+    private Map<String, Boolean> estadoCheckBoxes = new HashMap<>();
+
     @FXML
     void btnVoltar(ActionEvent event) {
         Main.mudarTela("atividades");
@@ -583,7 +589,13 @@ public class AtividadeController {
                 }
 
                 // Chamando o método com a lista de strings
+
                 detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
+                for (String acao : stringsAcoes) {
+                    CheckBox checkBox = detalhesController.newcheckBox(String.valueOf(atividade.getId()),acao);
+                    estadoCheckBoxes.put(acao, checkBox.isSelected());
+                    System.out.println(checkBox.isSelected());
+                }
                 Main.mudarTela ("detalhes");
             }
         });
