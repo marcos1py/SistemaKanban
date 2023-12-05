@@ -79,19 +79,22 @@ public class ProjetoController {
         }
         return null;
     }
+    int eixoYAFazer = 0;
+    int eixoYAndamento = 0;
+    int eixoYConcluido = 0;
+    int cont = 0;
     public void usarDadosRecebidosEmpresa(String nomeEmpresa, int idDaEmpresa1) {
 
         empresaNome.setText(nomeEmpresa);
         idDaEmpresa.setText(String.valueOf(idDaEmpresa1));
+
 
         anchorPanefazer.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
         anchorPaneAndamento.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
         anchorPaneConcluidas.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
 
         Empresa minhaEmpresa = empresasController.getEmpresaById(idDaEmpresa1);
-        int eixoYAFazer = 0;
-        int eixoYAndamento = 0;
-        int eixoYConcluido = 0;
+
 
         // Verifica se a empresa foi encontrada
         if (minhaEmpresa != null) {
@@ -100,13 +103,15 @@ public class ProjetoController {
 
                 if (projeto.getStatus() == "afazer"){
 
+
                     Pane newPane = newProject(projeto);
                     mexerPane(newPane,projeto);
                     projeto.setStatus("afazer");
                     newPane.setStyle("-fx-background-color: #fff ;-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
-                    newPane.setLayoutY(eixoYAFazer);
+                    newPane.setLayoutY(eixoY);
                     anchorPanefazer.getChildren().add(newPane);
-                    eixoYAFazer+=110;
+
+
                 }
                 if (projeto.getStatus() == "andamento"){
                     Pane newPane = newProject(projeto);
@@ -116,6 +121,8 @@ public class ProjetoController {
                     anchorPaneAndamento.getChildren().add(newPane);
                     projeto.setStatus("andamento");
                     eixoYAndamento+=110;
+
+
                 }
                 if (projeto.getStatus() == "concluido"){
                     Pane newPane = newProject(projeto);
@@ -125,6 +132,7 @@ public class ProjetoController {
                     anchorPaneConcluidas.getChildren().add(newPane);
                     projeto.setStatus("concluido");
                     eixoYConcluido+=110;
+
                 }
             }
         }
@@ -233,8 +241,8 @@ public class ProjetoController {
     }
     @FXML
     private AnchorPane addPane;
-
-
+    @FXML
+    private int count;
 
     @FXML
     void novoProjBtn(ActionEvent event) {
@@ -246,6 +254,11 @@ public class ProjetoController {
     @FXML
     void btnVoltar(ActionEvent event) {
         Main.mudarTela("empresas");
+        System.out.println("alou"+eixoYAFazer);
+        eixoY = 0;
+        eixoYAndamento = 0;
+        eixoYConcluido = 0;
+
 
     }
     @FXML
@@ -296,6 +309,13 @@ public class ProjetoController {
             mexerPane(newPane,projeto);
             addPane.setVisible(false);
             limparBorrado();
+            count = (int) anchorPanefazer.getChildren().stream().filter(node -> node instanceof Pane).count();
+        System.out.println("COUNT:"+count);
+        reorganizarAtividades(anchorPanefazer);
+        reorganizarAtividades(anchorPaneAndamento);
+        reorganizarAtividades(anchorPaneConcluidas);
+
+
     }
     private void mexerPane(Pane atividade, Projeto projeto1) {
 
@@ -317,6 +337,7 @@ public class ProjetoController {
             atividade.toFront();
             Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(),atividade,projeto1);
 
+
             // Check if atividade is already a child of a panel and remove it if so
             if (atividade.getParent() != null) {
                 ((Pane) atividade.getParent()).getChildren().remove(atividade);
@@ -324,8 +345,10 @@ public class ProjetoController {
             double espaçamento = 0;
             if (nearestPanel != null) {
                 nearestPanel.getChildren().add(atividade);
-
-                reorganizarAtividades(nearestPanel);
+                System.out.println("Anchorpane ="+nearestPanel);
+                reorganizarAtividades(anchorPanefazer);
+                reorganizarAtividades(anchorPaneAndamento);
+                reorganizarAtividades(anchorPaneConcluidas);
                 currentPanel = nearestPanel;
 
 
@@ -340,7 +363,7 @@ public class ProjetoController {
 
 
     private void reorganizarAtividades(Pane panel) {
-        List<Node> atividades = panel.getChildren().filtered(node -> node instanceof Pane);
+            List<Node> atividades = panel.getChildren().filtered(node -> node instanceof Pane);
         double spacing = 0;
 
         for (Node node : atividades) {
@@ -385,8 +408,12 @@ public class ProjetoController {
     }
 
 
+    int contConcluido = 0;
+
     private Pane findNearestPanel(double x, double y,Pane projeto, Projeto projeto1) {
         try {
+
+
 
             double distanceToPanel1 = calculateDistance(x, y, paneAfazer);
             double distanceToPanel2 = calculateDistance(x, y, paneAndamento);
@@ -401,8 +428,12 @@ public class ProjetoController {
                 projeto1.setStatus("afazer");
                 // Verifica se a empresa foi encontrada
                 if (minhaEmpresa != null) {
+                    int contAfazer = 0;
                     for (Projeto projetos : minhaEmpresa.getProjetos()) {
                         if (projetos.getStatus() == "afazer"){
+
+                           count = (int) anchorPanefazer.getChildren().stream().filter(node -> node instanceof Pane).count();
+
                             System.out.println("Projetos que estao no afazer:"+projetos);
                         }
                     }
@@ -417,9 +448,18 @@ public class ProjetoController {
                 projeto1.setStatus("andamento");
                 // Verifica se a empresa foi encontrada
                 if (minhaEmpresa != null) {
+
                     for (Projeto projetos : minhaEmpresa.getProjetos()) {
                         if (projetos.getStatus() == "andamento"){
-                            System.out.println("Projetos que estao no andamento:"+projetos);
+
+                                int aux = count;
+                                count -= 1;
+
+
+                                System.out.println("AaADADADADA "+count);
+                                System.out.println("eixoY: "+eixoY);
+
+
                         }
                     }
                 }
@@ -433,8 +473,14 @@ public class ProjetoController {
                 projeto1.setStatus("concluido");
                 // Verifica se a empresa foi encontrada
                 if (minhaEmpresa != null) {
+
                     for (Projeto projetos : minhaEmpresa.getProjetos()) {
                         if (projetos.getStatus() == "concluido"){
+                            projeto.layoutYProperty().addListener((observable,oldValue,newValue) ->{
+                                System.out.println("Mudou con:"+eixoYConcluido);
+                                eixoYAndamento -= 110;
+                            });
+                            System.out.println("concluida"+contConcluido);
                             System.out.println("Projetos que estao no concluido:"+projetos);
                         }
                     }
@@ -448,6 +494,8 @@ public class ProjetoController {
         }
     }
 
+
+
     private double calculateDistance(double x, double y, Pane panel) {
         double panelCenterX = panel.getLayoutX() + panel.getWidth() / 2;
         double panelCenterY = panel.getLayoutY() + panel.getHeight() / 2;
@@ -457,8 +505,8 @@ public class ProjetoController {
     public Pane newProject(Projeto  meuProjeto){
         int contagem = 0;
         contagem = meuProjeto.getId();
+        count = (int) anchorPanefazer.getChildren().stream().filter(node -> node instanceof Pane).count();
 
-           // eixoY += 110;
 
         meuProjeto.setStatus("afazer");
 
@@ -471,8 +519,8 @@ public class ProjetoController {
         novoProjeto.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
         novoProjeto.setLayoutX(15);
         novoProjeto.setLayoutY(eixoY);
-        eixoY += 110;
-        
+
+
         String tituloProj =  meuProjeto.getTitulo();
         LocalDate inicio = meuProjeto.getInicioDefinido();
         inicio = datePickInicio.getValue();

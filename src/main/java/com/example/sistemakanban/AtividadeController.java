@@ -204,17 +204,25 @@ public class AtividadeController {
                 if (atividade.getStatus() == "afazer"){
                     Pane newPane = newAtividade(atividade,meuProjeto);
                     mexerPane(newPane,atividade);
+                    atividade.setStatus("afazer");
+                    newPane.setStyle("-fx-background-color: #fff ;-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
                     anchorPanefazer.getChildren().add(newPane);
+
                 }
                 if (atividade.getStatus() == "andamento"){
                     Pane newPane = newAtividade(atividade,meuProjeto);
                     mexerPane(newPane,atividade);
+                    newPane.setStyle("-fx-background-color: #fff ;-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
                     anchorPaneAndamento.getChildren().add(newPane);
+                    atividade.setStatus("andamento");
                 }
                 if (atividade.getStatus() == "concluido"){
                     Pane newPane = newAtividade(atividade,meuProjeto);
                     mexerPane(newPane,atividade);
+                    newPane.setStyle("-fx-background-color: #fff ;-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
                     anchorPaneConcluidas.getChildren().add(newPane);
+                    atividade.setStatus("concluido");
+
                 }
             }
         }
@@ -408,11 +416,15 @@ public class AtividadeController {
         Pane newPane = newAtividade(atividade, meuprojeto);
         mexerPane(newPane,atividade);
         anchorPanefazer.getChildren().add(newPane);
+        reorganizarAtividades(anchorPanefazer);
+        reorganizarAtividades(anchorPaneAndamento);
+        reorganizarAtividades(anchorPaneConcluidas);
         addPane.setVisible(false);
         açoes.clear();
         dataFn.clear();
         dataIn.clear();
         limpaBorrado();
+
 
     }
     private void mexerPane(Pane atividade, Atividade atividade1) {
@@ -441,7 +453,9 @@ public class AtividadeController {
                 nearestPanel.getChildren().add(atividade);
                 System.out.println(nearestPanel);
 
-                reorganizarAtividades(nearestPanel);
+                reorganizarAtividades(anchorPanefazer);
+                reorganizarAtividades(anchorPaneAndamento);
+                reorganizarAtividades(anchorPaneConcluidas);
                 currentPanel = nearestPanel;
 
             }
@@ -476,12 +490,7 @@ public class AtividadeController {
         int contagem = 0;
         contagem = atividade.getId();
 
-        if (contagem == 0){
-            eixoY = 70;
-        }
-        else {
-            eixoY += 110;
-        }
+
         contagem += 1;
 
         String nomeAtividade = atividade.getNome();
@@ -508,6 +517,7 @@ public class AtividadeController {
         novaAtividade.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
         novaAtividade.setLayoutX(3);
         novaAtividade.setLayoutY(eixoY);
+
 
 
         Label labelTituloCard = new Label(nomeAtividade);
@@ -581,6 +591,9 @@ public class AtividadeController {
             @Override
             public void handle (ActionEvent event) {
                 System.out.println("oi");
+                addPane.setVisible(true);
+
+
             }
         });
         deletarItem.setOnAction (new EventHandler<ActionEvent> () {
@@ -608,21 +621,21 @@ public class AtividadeController {
             double minDistance = Math.min(distanceToPanel1, Math.min(distanceToPanel2, distanceToPanel3));
 
             if (minDistance == distanceToPanel1) {
-                atividade.setStyle("-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
+                atividade.setStyle("-fx-background-color: #fff ;-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
                 Projeto meuProjeto = projetoController.getProjetoById(Integer.parseInt(idDaProjeto.getText()));
 
                 atividade1.setStatus("afazer");
                 return anchorPanefazer;
 
             } else if (minDistance == distanceToPanel2) {
-                atividade.setStyle("-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
+                atividade.setStyle("-fx-background-color: #fff ;-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
                 Projeto meuProjeto = projetoController.getProjetoById(Integer.parseInt(idDaProjeto.getText()));
 
                 atividade1.setStatus("andamento");
                 return anchorPaneAndamento;
 
             } else {
-                atividade.setStyle("-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
+                atividade.setStyle("-fx-background-color: #fff ;-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
                 Projeto meuProjeto = projetoController.getProjetoById(Integer.parseInt(idDaProjeto.getText()));
 
                 atividade1.setStatus("concluido");

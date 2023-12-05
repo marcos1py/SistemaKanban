@@ -121,12 +121,6 @@ public class EmpresasController {
         int contagem = 0;
         contagem = meuEmpresa.getId();
 
-        if (contagem == 0){
-            eixoY = 70;
-        }
-        else {
-            eixoY += 110;
-        }
         contagem += 1;
         String nomePane = "Empresa "+contagem;
         Pane novaEmpresa = new Pane();
@@ -134,6 +128,7 @@ public class EmpresasController {
         novaEmpresa.setStyle("-fx-border-color: black black black #0038FF; -fx-background-color: #fff; -fx-border-width: 1 1 1 10px;");
         novaEmpresa.setLayoutX(13);
         novaEmpresa.setLayoutY(eixoY);
+        eixoY += 110;
 
         String nomeEmpresa =  meuEmpresa.getNomeEmpresa();
         String labelLocalGet =  meuEmpresa.getLocal();
