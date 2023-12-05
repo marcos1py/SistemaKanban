@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -30,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -54,6 +42,7 @@
             </Text>
             <Circle fill="DODGERBLUE" layoutX="1485.0" layoutY="39.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
             <Button layoutX="243.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnVoltar" text="Voltar" />
+            <Label fx:id="idDaEmpresa" layoutX="347.0" layoutY="58.0" text="Label" />
          </children>
       </Pane>
       <Label fx:id="title" layoutX="56.0" layoutY="91.0" text="Projetos" textFill="#11a9ff">
@@ -76,7 +65,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Text>
-            <Pane layoutX="28.0" layoutY="350.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: E4EDFF; -fx-border-radius: 10; -fx-background-radius: 15;">
+            <Pane layoutX="28.0" layoutY="350.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: E4EDFF; -fx-border-radius: 10; -fx-background-radius: 15;">
                <children>
                   <Text fill="#909090" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
                      <font>
@@ -91,7 +80,7 @@
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #1563FF; -fx-background-radius: 10;" />
                </children>
             </Pane>
-            <Pane layoutX="197.0" layoutY="349.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: FFF2C2; -fx-border-radius: 10; -fx-background-radius: 15;">
+            <Pane layoutX="28.0" layoutY="544.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: FFF2C2; -fx-border-radius: 10; -fx-background-radius: 15;">
                <children>
                   <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="50" textAlignment="CENTER">
                      <font>
@@ -106,22 +95,7 @@
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: FFC700; -fx-background-radius: 10;" />
                </children>
             </Pane>
-            <Pane layoutX="197.0" layoutY="447.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: CAFFFC; -fx-border-radius: 10; -fx-background-radius: 15;">
-               <children>
-                  <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="50" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Text fill="#909090" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faturamento">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #00FFF1; -fx-background-radius: 10;" />
-               </children>
-            </Pane>
-            <Pane layoutX="28.0" layoutY="447.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: D9FFCC; -fx-border-radius: 10; -fx-background-radius: 15;">
+            <Pane layoutX="28.0" layoutY="447.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: D9FFCC; -fx-border-radius: 10; -fx-background-radius: 15;">
                <children>
                   <Text fill="#909090" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Concluido">
                      <font>
@@ -134,36 +108,6 @@
                      </font>
                   </Label>
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #41FA00; -fx-background-radius: 10;" />
-               </children>
-            </Pane>
-            <Pane layoutX="29.0" layoutY="539.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: #FFC8C8; -fx-border-radius: 10; -fx-background-radius: 15;">
-               <children>
-                  <Text fill="#909090" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atrasados">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="100" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: F00; -fx-background-radius: 10;" />
-               </children>
-            </Pane>
-            <Pane layoutX="198.0" layoutY="539.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: #FFC8C8; -fx-border-radius: 10; -fx-background-radius: 15;">
-               <children>
-                  <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="50" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Text fill="#909090" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: F00; -fx-background-radius: 10;" />
                </children>
             </Pane>
          </children>
@@ -326,7 +270,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <Label fx:id="empresaNome" layoutX="304.0" layoutY="99.0" text="Label" />
-      <Label fx:id="idDaEmpresa" layoutX="346.0" layoutY="99.0" text="Label" />
    </children>
 </AnchorPane>

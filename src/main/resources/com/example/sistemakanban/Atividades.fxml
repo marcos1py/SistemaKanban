@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.ImageInput?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -32,7 +19,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.AtividadeController">
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.AtividadeController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -103,7 +90,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Text>
-            <Pane layoutX="28.0" layoutY="350.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: E4EDFF; -fx-border-radius: 10; -fx-background-radius: 15;">
+            <Pane layoutX="28.0" layoutY="350.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: E4EDFF; -fx-border-radius: 10; -fx-background-radius: 15;">
                <children>
                   <Text fill="#909090" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
                      <font>
@@ -118,7 +105,7 @@
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #1563FF; -fx-background-radius: 10;" />
                </children>
             </Pane>
-            <Pane layoutX="197.0" layoutY="349.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: FFF2C2; -fx-border-radius: 10; -fx-background-radius: 15;">
+            <Pane layoutX="28.0" layoutY="539.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: FFF2C2; -fx-border-radius: 10; -fx-background-radius: 15;">
                <children>
                   <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="50" textAlignment="CENTER">
                      <font>
@@ -133,22 +120,7 @@
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: FFC700; -fx-background-radius: 10;" />
                </children>
             </Pane>
-            <Pane layoutX="197.0" layoutY="447.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: CAFFFC; -fx-border-radius: 10; -fx-background-radius: 15;">
-               <children>
-                  <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="50" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Text fill="#909090" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faturamento">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #00FFF1; -fx-background-radius: 10;" />
-               </children>
-            </Pane>
-            <Pane layoutX="28.0" layoutY="447.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: D9FFCC; -fx-border-radius: 10; -fx-background-radius: 15;">
+            <Pane layoutX="28.0" layoutY="447.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: D9FFCC; -fx-border-radius: 10; -fx-background-radius: 15;">
                <children>
                   <Text fill="#909090" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Concluido">
                      <font>
@@ -161,36 +133,6 @@
                      </font>
                   </Label>
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #41FA00; -fx-background-radius: 10;" />
-               </children>
-            </Pane>
-            <Pane layoutX="29.0" layoutY="539.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: #FFC8C8; -fx-border-radius: 10; -fx-background-radius: 15;">
-               <children>
-                  <Text fill="#909090" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Atrasados">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="100" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: F00; -fx-background-radius: 10;" />
-               </children>
-            </Pane>
-            <Pane layoutX="198.0" layoutY="539.0" prefHeight="66.0" prefWidth="102.0" style="-fx-background-color: #FFC8C8; -fx-border-radius: 10; -fx-background-radius: 15;">
-               <children>
-                  <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="50" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <Text fill="#909090" layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Despesas">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Text>
-                  <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: F00; -fx-background-radius: 10;" />
                </children>
             </Pane>
          </children>
@@ -372,8 +314,8 @@
             </Text>
             <DatePicker fx:id="inicioDefinidoAçao" editable="false" layoutX="526.0" layoutY="119.0" prefHeight="27.0" prefWidth="143.0" promptText="dd/mm/aaaa" />
             <ListView fx:id="listaAçoes" layoutX="446.0" layoutY="272.0" prefHeight="212.0" prefWidth="195.0" />
-            <DatePicker fx:id="fimDefinido" editable="false" layoutX="196.0" layoutY="187.0" promptText="dd/mm/aaaa" />
-            <DatePicker fx:id="inicioDefinido" editable="false" layoutX="196.0" layoutY="140.0" promptText="dd/mm/aaaa" />
+            <DatePicker fx:id="fimDefinido" layoutX="196.0" layoutY="187.0" promptText="dd/mm/aaaa" />
+            <DatePicker fx:id="inicioDefinido" layoutX="196.0" layoutY="140.0" promptText="dd/mm/aaaa" />
             <Button layoutX="446.0" layoutY="207.0" mnemonicParsing="false" onAction="#btnAddAçao" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Adicionar" />
             <Label fx:id="labelErro" layoutX="346.0" layoutY="509.0" textFill="RED" />
             <ListView fx:id="listaAçoesData" layoutX="638.0" layoutY="272.0" prefHeight="212.0" prefWidth="108.0" />

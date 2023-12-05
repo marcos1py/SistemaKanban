@@ -188,7 +188,7 @@ public class AtividadeController {
     private Label idDaProjeto;
     public void usarDadosRecebidosProjeto(String nomeProjeto, int idDaProjeto1) {
 
-        labelNomeProjeto.setText(nomeProjeto);
+        labelNomeProjeto.setText("Projeto "+nomeProjeto);
         idDaProjeto.setText(String.valueOf(idDaProjeto1));
 
         anchorPanefazer.getChildren().clear();

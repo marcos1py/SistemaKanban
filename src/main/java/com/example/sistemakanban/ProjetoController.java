@@ -85,7 +85,7 @@ public class ProjetoController {
     int cont = 0;
     public void usarDadosRecebidosEmpresa(String nomeEmpresa, int idDaEmpresa1) {
 
-        empresaNome.setText(nomeEmpresa);
+        title.setText("Projetos da empresa "+nomeEmpresa);
         idDaEmpresa.setText(String.valueOf(idDaEmpresa1));
 
 
