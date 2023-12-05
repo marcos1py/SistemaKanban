@@ -84,9 +84,9 @@ public class ProjetoController {
         empresaNome.setText(nomeEmpresa);
         idDaEmpresa.setText(String.valueOf(idDaEmpresa1));
 
-        anchorPanefazer.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
-        anchorPaneAndamento.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
-        anchorPaneConcluidas.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
+        anchorPanefazer.getChildren().clear();
+        anchorPaneAndamento.getChildren().clear();
+        anchorPaneConcluidas.getChildren().clear();
 
         Empresa minhaEmpresa = empresasController.getEmpresaById(idDaEmpresa1);
 
@@ -97,15 +97,22 @@ public class ProjetoController {
                 if (projeto.getStatus() == "afazer"){
                     Pane newPane = newProject(projeto);
                     mexerPane(newPane,projeto);
-                    anchorPanefazer.getChildren().add(newPane);                }
+
+                    anchorPanefazer.getChildren().add(newPane);
+                }
                 if (projeto.getStatus() == "andamento"){
                     Pane newPane = newProject(projeto);
+
                     mexerPane(newPane,projeto);
-                    anchorPaneAndamento.getChildren().add(newPane);                   }
+
+                    anchorPaneAndamento.getChildren().add(newPane);
+                }
                 if (projeto.getStatus() == "concluido"){
                     Pane newPane = newProject(projeto);
                     mexerPane(newPane,projeto);
-                    anchorPaneConcluidas.getChildren().add(newPane);                   }
+
+                    anchorPaneConcluidas.getChildren().add(newPane);
+                }
             }
         }
     }

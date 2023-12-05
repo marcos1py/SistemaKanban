@@ -185,19 +185,35 @@ public class AtividadeController {
     @FXML
     private Label idDaProjeto;
     public void usarDadosRecebidosProjeto(String nomeProjeto, int idDaProjeto1) {
+
         labelNomeProjeto.setText(nomeProjeto);
         idDaProjeto.setText(String.valueOf(idDaProjeto1));
 
-        anchorPanefazer.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
+        anchorPanefazer.getChildren().clear();
+        anchorPaneAndamento.getChildren().clear();
+        anchorPaneConcluidas.getChildren().clear();
 
         Projeto meuProjeto = projetoController.getProjetoById(idDaProjeto1);
 
         if (meuProjeto != null) {
             for (Atividade atividade : meuProjeto.getAtividades()) {
                 System.out.println("Atividade: " + atividade);
-                Pane newPane = newAtividade(atividade);
-                mexerPane(newPane);
-                anchorPanefazer.getChildren().add(newPane);
+
+                if (atividade.getStatus() == "afazer"){
+                    Pane newPane = newAtividade(atividade);
+                    mexerPane(newPane,atividade);
+                    anchorPanefazer.getChildren().add(newPane);
+                }
+                if (atividade.getStatus() == "andamento"){
+                    Pane newPane = newAtividade(atividade);
+                    mexerPane(newPane,atividade);
+                    anchorPaneAndamento.getChildren().add(newPane);
+                }
+                if (atividade.getStatus() == "concluido"){
+                    Pane newPane = newAtividade(atividade);
+                    mexerPane(newPane,atividade);
+                    anchorPaneConcluidas.getChildren().add(newPane);
+                }
             }
         }
     }
@@ -386,7 +402,7 @@ public class AtividadeController {
         detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
 
         Pane newPane = newAtividade(atividade);
-        mexerPane(newPane);
+        mexerPane(newPane,atividade);
         anchorPanefazer.getChildren().add(newPane);
         addPane.setVisible(false);
         açoes.clear();
@@ -395,7 +411,7 @@ public class AtividadeController {
         limpaBorrado();
 
     }
-    private void mexerPane(Pane atividade) {
+    private void mexerPane(Pane atividade, Atividade atividade1) {
 
 
         atividade.setOnMousePressed(event -> {
@@ -411,7 +427,7 @@ public class AtividadeController {
 
         // Adicione um evento de soltar o mouse
         atividade.setOnMouseReleased(event -> {
-            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(),atividade);
+            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(),atividade,atividade1);
 
             // Check if atividade is already a child of a panel and remove it if so
             if (atividade.getParent() != null) {
@@ -452,7 +468,7 @@ public class AtividadeController {
         Main.mudarTela("atividades");
     }
     public Pane newAtividade(Atividade atividade) {
-
+        atividade.setStatus("afazer");
         int contagem = 0;
         contagem = atividade.getId();
 
@@ -577,8 +593,42 @@ public class AtividadeController {
 
         return novaAtividade;
     }
+    private Pane findNearestPanel(double x, double y,Pane atividade, Atividade atividade1) {
+        try {
 
-    private Pane findNearestPanel(double x, double y,Pane atividade) {
+            double distanceToPanel1 = calculateDistance(x, y, paneAfazer);
+            double distanceToPanel2 = calculateDistance(x, y, paneAndamento);
+            double distanceToPanel3 = calculateDistance(x, y, paneConcluidas);
+            double minDistance = Math.min(distanceToPanel1, Math.min(distanceToPanel2, distanceToPanel3));
+
+            if (minDistance == distanceToPanel1) {
+                atividade.setStyle("-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
+                Projeto meuProjeto = projetoController.getProjetoById(Integer.parseInt(idDaProjeto.getText()));
+
+                atividade1.setStatus("afazer");
+                return anchorPanefazer;
+
+            } else if (minDistance == distanceToPanel2) {
+                atividade.setStyle("-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
+                Projeto meuProjeto = projetoController.getProjetoById(Integer.parseInt(idDaProjeto.getText()));
+
+                atividade1.setStatus("andamento");
+                return anchorPaneAndamento;
+
+            } else {
+                atividade.setStyle("-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
+                Projeto meuProjeto = projetoController.getProjetoById(Integer.parseInt(idDaProjeto.getText()));
+
+                atividade1.setStatus("concluido");
+                return anchorPaneConcluidas;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private Pane findNearestPanel2(double x, double y,Pane atividade) {
         try {
             double distanceToPanel1 = calculateDistance(x, y, paneAfazer);
             double distanceToPanel2 = calculateDistance(x, y, paneAndamento);
