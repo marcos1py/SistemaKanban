@@ -84,34 +84,47 @@ public class ProjetoController {
         empresaNome.setText(nomeEmpresa);
         idDaEmpresa.setText(String.valueOf(idDaEmpresa1));
 
-        anchorPanefazer.getChildren().clear();
-        anchorPaneAndamento.getChildren().clear();
-        anchorPaneConcluidas.getChildren().clear();
+        anchorPanefazer.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
+        anchorPaneAndamento.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
+        anchorPaneConcluidas.getChildren().clear(); // Limpa os projetos existentes antes de adicionar novos
 
         Empresa minhaEmpresa = empresasController.getEmpresaById(idDaEmpresa1);
-
+        int eixoYAFazer = 0;
+        int eixoYAndamento = 0;
+        int eixoYConcluido = 0;
 
         // Verifica se a empresa foi encontrada
         if (minhaEmpresa != null) {
+
             for (Projeto projeto : minhaEmpresa.getProjetos()) {
+
                 if (projeto.getStatus() == "afazer"){
+
                     Pane newPane = newProject(projeto);
                     mexerPane(newPane,projeto);
-
+                    projeto.setStatus("afazer");
+                    newPane.setStyle("-fx-background-color: #fff ;-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
+                    newPane.setLayoutY(eixoYAFazer);
                     anchorPanefazer.getChildren().add(newPane);
+                    eixoYAFazer+=110;
                 }
                 if (projeto.getStatus() == "andamento"){
                     Pane newPane = newProject(projeto);
-
                     mexerPane(newPane,projeto);
-
+                    newPane.setStyle("-fx-background-color: #fff ;-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
+                    newPane.setLayoutY(eixoYAndamento);
                     anchorPaneAndamento.getChildren().add(newPane);
+                    projeto.setStatus("andamento");
+                    eixoYAndamento+=110;
                 }
                 if (projeto.getStatus() == "concluido"){
                     Pane newPane = newProject(projeto);
                     mexerPane(newPane,projeto);
-
+                    newPane.setStyle("-fx-background-color: #fff ;-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
+                    newPane.setLayoutY(eixoYConcluido);
                     anchorPaneConcluidas.getChildren().add(newPane);
+                    projeto.setStatus("concluido");
+                    eixoYConcluido+=110;
                 }
             }
         }
@@ -233,7 +246,7 @@ public class ProjetoController {
     @FXML
     void btnVoltar(ActionEvent event) {
         Main.mudarTela("empresas");
-        eixoY = 0;
+
     }
     @FXML
     void cancelarBtn(ActionEvent event) {
@@ -381,9 +394,9 @@ public class ProjetoController {
             double minDistance = Math.min(distanceToPanel1, Math.min(distanceToPanel2, distanceToPanel3));
 
             if (minDistance == distanceToPanel1) {
-                projeto.setStyle("-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
+                projeto.setStyle("-fx-background-color: #fff ;-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
                 Empresa minhaEmpresa = empresasController.getEmpresaById(Integer.parseInt(idDaEmpresa.getText()));
-
+                System.out.println("BLALVALLALA");
 
                 projeto1.setStatus("afazer");
                 // Verifica se a empresa foi encontrada
@@ -397,7 +410,7 @@ public class ProjetoController {
                 return anchorPanefazer;
 
             } else if (minDistance == distanceToPanel2) {
-                projeto.setStyle("-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
+                projeto.setStyle("-fx-background-color: #fff ;-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
                 Empresa minhaEmpresa = empresasController.getEmpresaById(Integer.parseInt(idDaEmpresa.getText()));
 
 
@@ -413,7 +426,7 @@ public class ProjetoController {
                 return anchorPaneAndamento;
 
             } else {
-                projeto.setStyle("-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
+                projeto.setStyle("-fx-background-color: #fff ;-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
                 Empresa minhaEmpresa = empresasController.getEmpresaById(Integer.parseInt(idDaEmpresa.getText()));
 
 
