@@ -171,6 +171,8 @@ public class AtividadeController {
     @FXML
     public static Pane cardDeletar;
     @FXML
+    private Pane cardDeletar1;
+    @FXML
     private AnchorPane addPane;
     int numeroID = 0;
     int cont = 0;
@@ -200,17 +202,17 @@ public class AtividadeController {
                 System.out.println("Atividade: " + atividade);
 
                 if (atividade.getStatus() == "afazer"){
-                    Pane newPane = newAtividade(atividade);
+                    Pane newPane = newAtividade(atividade,meuProjeto);
                     mexerPane(newPane,atividade);
                     anchorPanefazer.getChildren().add(newPane);
                 }
                 if (atividade.getStatus() == "andamento"){
-                    Pane newPane = newAtividade(atividade);
+                    Pane newPane = newAtividade(atividade,meuProjeto);
                     mexerPane(newPane,atividade);
                     anchorPaneAndamento.getChildren().add(newPane);
                 }
                 if (atividade.getStatus() == "concluido"){
-                    Pane newPane = newAtividade(atividade);
+                    Pane newPane = newAtividade(atividade,meuProjeto);
                     mexerPane(newPane,atividade);
                     anchorPaneConcluidas.getChildren().add(newPane);
                 }
@@ -342,12 +344,14 @@ public class AtividadeController {
 
             cont++;
             validador(inicioDefinidoAçao, fimDefinidoAçao);
+
         }
     }
 
 
 
-
+//@FXML
+//private Projeto meuprojeto = new Projeto();
 
     public void cancelarDelet(ActionEvent event) {
         cardDeletar.setVisible(false);
@@ -401,7 +405,7 @@ public class AtividadeController {
 // Chamando o método com a lista de strings
         detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
 
-        Pane newPane = newAtividade(atividade);
+        Pane newPane = newAtividade(atividade, meuprojeto);
         mexerPane(newPane,atividade);
         anchorPanefazer.getChildren().add(newPane);
         addPane.setVisible(false);
@@ -467,7 +471,7 @@ public class AtividadeController {
     void btnVoltar(ActionEvent event) {
         Main.mudarTela("atividades");
     }
-    public Pane newAtividade(Atividade atividade) {
+    public Pane newAtividade(Atividade atividade, Projeto projeto) {
         atividade.setStatus("afazer");
         int contagem = 0;
         contagem = atividade.getId();
@@ -583,6 +587,8 @@ public class AtividadeController {
             @Override
             public void handle (ActionEvent event) {
                 System.out.println("");
+                ((Pane) novaAtividade.getParent()).getChildren().remove(novaAtividade);
+                projeto.removerAtividades(atividade);
             }
         });
         menuButton.getItems().addAll(detalhesItem, editarItem, deletarItem);

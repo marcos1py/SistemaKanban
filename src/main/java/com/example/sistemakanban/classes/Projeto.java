@@ -58,6 +58,7 @@ public class Projeto {
     public void adicionarAtividade(Atividade atividade) {
         this.atividades.add(atividade);
     }
+    public void removerAtividades(Atividade atividade){this.atividades.remove(atividade);}
     public void addAtividade(Atividade atividade) {
         this.atividades.add(atividade);
     }
