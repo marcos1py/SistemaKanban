@@ -4,6 +4,7 @@ package com.example.sistemakanban;
 import com.example.sistemakanban.classes.Empresa;
 import com.example.sistemakanban.classes.GeraPane;
 import com.example.sistemakanban.classes.Projeto;
+import com.example.sistemakanban.classes.Validador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +21,7 @@ import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EmpresasController {
     private ProjetoController projetoController;
@@ -86,30 +88,54 @@ public class EmpresasController {
 
     @FXML
     void confirmarBtn(ActionEvent event) {
-        Empresa meuEmpresa = new Empresa( ) ;
+        if (Objects.equals(localEmpresaADD.getText(), "") || Objects.equals(telefoneEmpresaADD.getText(), "") || Objects.equals(qtFuncionarioADD.getText(), "") || Objects.equals(nomeEmpresaADD.getText(), "")) {
+            labelErro.setVisible(true);
+        } else {
+            labelErro.setVisible(false);
 
-        numeroID += 1;
-        meuEmpresa.setId(numeroID);
+            Empresa meuEmpresa = new Empresa();
+            numeroID += 1;
+            meuEmpresa.setId(numeroID);
 
-        meuEmpresa.setNomeEmpresa(nomeEmpresaADD.getText());
-        meuEmpresa.setLocal(localEmpresaADD.getText());
-        meuEmpresa.setTel(telefoneEmpresaADD.getText());
-        meuEmpresa.setQtFuncionario(qtFuncionarioADD.getText());
-        Pane newPane = newEmpresa(meuEmpresa);
-        listaEmpresas.add(meuEmpresa);
-        achorPaneEmpresa.getChildren().add(newPane);
-        int teste =meuEmpresa.getYeixo();
-        int teste1 = (int) achorPaneEmpresa.getHeight();
-        teste += 100;
+            meuEmpresa.setNomeEmpresa(nomeEmpresaADD.getText());
+            meuEmpresa.setLocal(localEmpresaADD.getText());
+            meuEmpresa.setTel(telefoneEmpresaADD.getText());
+            meuEmpresa.setQtFuncionario(qtFuncionarioADD.getText());
 
-        int teste3 = teste1+teste;
-        achorPaneEmpresa.setPrefHeight(teste3);
+            Pane newPane = newEmpresa(meuEmpresa);
+            listaEmpresas.add(meuEmpresa);
+            achorPaneEmpresa.getChildren().add(newPane);
 
+            int teste = meuEmpresa.getYeixo();
+            int teste1 = (int) achorPaneEmpresa.getHeight();
+            teste += 100;
+
+            int teste3 = teste1 + teste;
+            achorPaneEmpresa.setPrefHeight(teste3);
+            labelErro.setVisible(false);
+            nomeEmpresaADD.clear();
+            qtFuncionarioADD.clear();
+            telefoneEmpresaADD.clear();
+            localEmpresaADD.clear();
+        }
+    }
+    @FXML
+    private Label labelErro;
+    public void initialize(){
+        Validador.mskNumero(nomeEmpresaADD,40);
+        Validador.mskLetra(telefoneEmpresaADD,11);
+        Validador.mskLetra(qtFuncionarioADD,6);
+        Validador.mskNumero(localEmpresaADD1,60);
 
     }
     @FXML
     void cancelarBtn(ActionEvent event) {
         addPane.setVisible(false);
+        labelErro.setVisible(false);
+        nomeEmpresaADD.clear();
+        qtFuncionarioADD.clear();
+        telefoneEmpresaADD.clear();
+        localEmpresaADD.clear();
 
     }
     @FXML

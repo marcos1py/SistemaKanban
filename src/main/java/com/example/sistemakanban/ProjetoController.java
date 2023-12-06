@@ -1,8 +1,5 @@
 package com.example.sistemakanban;
-import com.example.sistemakanban.classes.Atividade;
-import com.example.sistemakanban.classes.Empresa;
-import com.example.sistemakanban.classes.GeraPane;
-import com.example.sistemakanban.classes.Projeto;
+import com.example.sistemakanban.classes.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -247,6 +244,8 @@ public class ProjetoController {
     private TextField txtFieldResp;
     @FXML
     private void initialize() {
+        Validador.mskNumero(txtFieldProjNome,40);
+        Validador.mskNumero(txtFieldResp,40);
     }
     @FXML
     private AnchorPane addPane;
@@ -271,10 +270,16 @@ public class ProjetoController {
 
     }
     @FXML
+    private TextField txtFieldArea;
+    @FXML
     void cancelarBtn(ActionEvent event) {
 
         addPane.setVisible(false);
         limparBorrado();
+        txtFieldProjNome.clear();
+        txtAreaDesc.clear();
+        txtFieldResp.clear();
+        txtFieldArea.clear();
     }
 
 

@@ -2,7 +2,9 @@ package com.example.sistemakanban.classes;
 
 import com.example.sistemakanban.AtividadeController;
 import com.example.sistemakanban.ProjetoController;
+import javafx.application.Platform;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -52,8 +54,42 @@ public class Validador {
 
 
 
+    private static void limiteTamanhoCampo(TextField txtfield, Integer tamanho) {
+        txtfield.textProperty().addListener((observableValue, valorAntigo, novoValor) -> {
+            if (novoValor == null || novoValor.length() > tamanho) {
+                txtfield.setText(valorAntigo);
+            }
+        });
+    }
 
+    private static void posicionarCursor(TextField txtfield) {
+        Platform.runLater(() -> {
+            if (txtfield.getText().length() != 0) {
+                txtfield.positionCaret(txtfield.getText().length());
+            }
+        });
+    }
 
-
-
+    public static void  mskNumero(TextField txtfield,int tamanho) {
+        Validador.limiteTamanhoCampo(txtfield, tamanho);
+        txtfield.lengthProperty().addListener((observable, valorAntigo, valorNovo) -> {
+            String textoDigitado = txtfield.getText();
+            textoDigitado = textoDigitado.replaceAll("[^a-zA-Z0-9]", "");
+            txtfield.setText(textoDigitado);
+            Validador.posicionarCursor(txtfield);
+        });
+    }
+    public static void  mskLetra(TextField txtfield, int tamanho) {
+        Validador.limiteTamanhoCampo(txtfield, tamanho);
+        txtfield.lengthProperty().addListener((observable, valorAntigo, valorNovo) -> {
+            String textoDigitado = txtfield.getText();
+            textoDigitado = textoDigitado.replaceAll("[^0-9]", "");
+            txtfield.setText(textoDigitado);
+            Validador.posicionarCursor(txtfield);
+        });
+    }
 }
+
+
+
+

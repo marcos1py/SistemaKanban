@@ -371,10 +371,13 @@ public class AtividadeController {
             novaAção.setDataFim(fimDefinidoAçao.getValue());
 
             açoes.add(addação);
+            dataFn.add(dataFnFormat);
+            dataIn.add(dataInFormat);
+
 
             total++;
 
-            validador(inicioDefinidoAçao, fimDefinidoAçao);
+
 
         }
     }
@@ -413,6 +416,7 @@ public class AtividadeController {
             }
         }
     }
+    int count = 0;
     public void btnAddAtividade(ActionEvent event) {
 
         Atividade atividade = new Atividade();
@@ -428,7 +432,7 @@ public class AtividadeController {
         atividade.setDescrição(descriçaoInput.getText());
         //atividade.setAções(açaoInput.getText());
         validaData(atividade.getInícioDefinido(),atividade.getFimDefinido(),labelInicio.getText(),labelFim.getText());
-        System.out.println(valido);
+
         if(valido) {
             meuprojeto.adicionarAtividade(atividade);
             System.out.println("=============");

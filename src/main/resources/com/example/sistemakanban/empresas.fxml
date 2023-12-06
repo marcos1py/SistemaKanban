@@ -81,7 +81,7 @@
             <Image url="@../../../Imagens/banner-empresa.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="addPane" layoutX="473.0" layoutY="150.0" prefHeight="347.0" prefWidth="480.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;" visible="false">
+      <AnchorPane fx:id="addPane" layoutX="473.0" layoutY="150.0" prefHeight="347.0" prefWidth="480.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;">
          <children>
             <Text fill="#11a9ff" layoutX="149.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar empresa">
                <font>
@@ -114,6 +114,7 @@
                </font>
             </Text>
             <TextField fx:id="qtFuncionarioADD" layoutX="341.0" layoutY="223.0" prefHeight="34.0" prefWidth="70.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <Label fx:id="labelErro" layoutX="180.0" layoutY="320.0" text="Por favor, preencher as informações corretamente" textFill="#f20000" visible="false" />
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />

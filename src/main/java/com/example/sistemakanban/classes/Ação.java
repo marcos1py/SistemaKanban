@@ -102,6 +102,6 @@ public class Ação {
     }
     @Override
     public String toString() {
-        return id+". "+nome;
+        return ". "+nome;
     }
 }
