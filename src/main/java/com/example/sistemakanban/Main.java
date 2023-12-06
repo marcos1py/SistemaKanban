@@ -64,7 +64,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("Confia");
 
-        Image icon = new Image(getClass().getResourceAsStream("/Imagens/icone deletar.png"));
+        Image icon = new Image(getClass().getResourceAsStream("/Imagens/logo.png"));
         primaryStage.getIcons().add(icon);
 
         primaryStage.setScene(empresas);

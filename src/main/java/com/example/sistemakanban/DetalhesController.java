@@ -140,7 +140,6 @@ double progresso;
     public void Btnvoltar(ActionEvent event) {
 
 
-        atividadeController.receberPorcentagem(idDaAtividade.getId(), porcentagemProgresso);
 
         Main.mudarTela("atividades");
     }

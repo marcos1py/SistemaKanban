@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
@@ -17,7 +26,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.DetalhesController">
+<AnchorPane fx:id="principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.DetalhesController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -121,15 +130,14 @@
                   <Font name="Arial" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="51.0" text="pppppppp" textFill="RED">
+            <Label layoutX="45.0" layoutY="48.0" text="Normal" textFill="#00ff60">
                <font>
-                  <Font name="Arial" size="15.0" />
+                  <Font name="Arial" size="20.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <PieChart fx:id="grafico2" layoutX="1163.0" layoutY="506.0" prefHeight="224.0" prefWidth="279.0" style="-fx-background-color: #EEE;" title="Grafico 2" />
-      <PieChart fx:id="grafico1" layoutX="924.0" layoutY="506.0" prefHeight="224.0" prefWidth="279.0" style="-fx-background-color: #EEE;" title="Grafico 2" />
+      <PieChart fx:id="grafico2" layoutX="951.0" layoutY="504.0" prefHeight="224.0" prefWidth="473.0" style="-fx-background-color: #EEE;" title="Grafico de andamento das açao" />
       <ScrollPane layoutX="193.0" layoutY="454.0" prefHeight="200.0" prefWidth="593.0">
          <content>
             <VBox fx:id="vboxPaneAçao" prefHeight="200.0" prefWidth="577.0" />

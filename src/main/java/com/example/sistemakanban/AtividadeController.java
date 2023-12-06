@@ -248,6 +248,9 @@ public class AtividadeController {
                 }
             }
         }
+        reorganizarAtividades(anchorPanefazer);
+        reorganizarAtividades(anchorPaneAndamento);
+        reorganizarAtividades(anchorPaneConcluidas);
     }
 
 
@@ -274,6 +277,9 @@ public class AtividadeController {
     @FXML
     void cancelarBtn(ActionEvent event) {
         addPane.setVisible(false);
+        açoes.clear();
+        dataFn.clear();
+        dataIn.clear();
         limpaBorrado();
     }
     public static void ativarBtnDelet(){
@@ -540,6 +546,8 @@ public class AtividadeController {
             }
         }
     }
+    @FXML
+    private ProgressIndicator idProgreçoIndicador;
     private void countActivities() {
         int afazerCount = countActivitiesInPane(anchorPanefazer);
         int andamentoCount = countActivitiesInPane(anchorPaneAndamento);
@@ -547,13 +555,19 @@ public class AtividadeController {
 
         int totalActivities = afazerCount + andamentoCount + concluidoCount;
 
+        double progress = (double) concluidoCount / totalActivities; // Calculate progress as a percentage
+
         idTotalProjetos.setText(String.valueOf(totalActivities));
         idTotalAfazer.setText(String.valueOf(afazerCount));
         idTotalAndamento.setText(String.valueOf(andamentoCount));
         idTotalConcluido.setText(String.valueOf(concluidoCount));
 
+        idProgreçoIndicador.setProgress(progress); // Set the progress indicator
+
         System.out.println("Total de Atividades: " + totalActivities);
+        System.out.println("Progresso: " + (int)(progress * 100) + "%");
     }
+
     private int countActivitiesInPane(Pane panel) {
         return (int) panel.getChildren().filtered(node -> node instanceof Pane).size();
     }
@@ -697,17 +711,7 @@ public class AtividadeController {
 
         return novaAtividade;
     }
-    public void receberPorcentagem(String idDaProgresso , double porcentagem) {
 
-        ProgressIndicator progressIndicator = new ProgressIndicator();
-
-        progressIndicator.setId(idDaProgresso);
-
-        // Atualize o ProgressIndicator com a porcentagem
-        progressIndicator.setProgress(100);
-
-        // Faça qualquer outra coisa que você precise com o ID e a porcentagem na tela de destino
-    }
     private Pane findNearestPanel(double x, double y,Pane atividade, Atividade atividade1) {
         try {
 

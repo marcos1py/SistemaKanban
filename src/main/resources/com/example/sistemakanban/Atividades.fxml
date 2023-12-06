@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -20,7 +29,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.AtividadeController">
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.AtividadeController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -153,7 +162,7 @@
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #1563FF; -fx-background-radius: 10;" />
                </children>
             </Pane>
-            <ProgressIndicator fx:id="progressIndicator" layoutX="121.0" layoutY="528.0" minHeight="114.0" minWidth="100.0" prefHeight="114.0" prefWidth="100.0" progress="0.0" />
+            <ProgressIndicator fx:id="idProgreçoIndicador" layoutX="121.0" layoutY="528.0" minHeight="114.0" minWidth="100.0" prefHeight="114.0" prefWidth="100.0" progress="0.0" />
          </children>
       </Pane>
       <Pane fx:id="paneAndamento" layoutX="420.0" layoutY="207.0" prefHeight="580.0" prefWidth="350.0" style="-fx-border-style: solid; -fx-border-width: 6px 0 0 0; -fx-border-color: FFC700; -fx-background-color: #F0F0F0; -fx-background-radius: 5; -fx-border-radius: 0,2;">
