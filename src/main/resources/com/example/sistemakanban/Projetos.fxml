@@ -23,6 +23,9 @@
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
    <children>
+      <Label fx:id="idDaEmpresa" text="Label" />
+      <Label text="Label" />
+      <Label text="Label" />
       <Pane fx:id="nav" layoutX="-3.0" layoutY="-1.0" prefHeight="81.0" prefWidth="1642.0" style="-fx-background-color: black;">
          <children>
             <Text fill="WHITE" layoutX="48.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONFIA">
@@ -35,14 +38,8 @@
                   <Font name="High Tower Text" size="20.0" />
                </font>
             </Button>
-            <Text fill="WHITE" layoutX="1392.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Area">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
             <Circle fill="DODGERBLUE" layoutX="1485.0" layoutY="39.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
             <Button layoutX="243.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnVoltar" text="Voltar" />
-            <Label fx:id="idDaEmpresa" layoutX="347.0" layoutY="58.0" text="Label" />
          </children>
       </Pane>
       <Label fx:id="title" layoutX="56.0" layoutY="91.0" text="Projetos" textFill="#11a9ff">
@@ -235,7 +232,7 @@
             <DropShadow />
          </effect>
       </Pane>
-      <AnchorPane fx:id="addPane" layoutX="463.0" layoutY="140.0" prefHeight="554.0" prefWidth="451.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;">
+      <AnchorPane fx:id="addPane" layoutX="463.0" layoutY="140.0" prefHeight="554.0" prefWidth="451.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;" visible="false">
          <children>
             <Text fill="#11a9ff" layoutX="140.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar projeto">
                <font>
@@ -287,7 +284,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <Label text="Label" />
-      <Label text="Label" />
    </children>
 </AnchorPane>

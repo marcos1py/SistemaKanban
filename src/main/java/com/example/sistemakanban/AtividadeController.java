@@ -625,11 +625,11 @@ public class AtividadeController {
         labelDescriçãoCard.setFont(new Font(9.0));
 
 
-        Label labelInicio = new Label("Início: " );//+ dataInicio.toString());
+        Label labelInicio = new Label("Início: " +dataInFormat);//+ dataInicio.toString());
         labelInicio.setLayoutX(24.0);
         labelInicio.setLayoutY(53.0);
 
-        Label labelFim = new Label("Fim: "); // + dataFim.toString());
+        Label labelFim = new Label("Fim: "+dataFnFormat); // + dataFim.toString());
         labelFim.setLayoutX(120.0);
         labelFim.setLayoutY(53.0);
 

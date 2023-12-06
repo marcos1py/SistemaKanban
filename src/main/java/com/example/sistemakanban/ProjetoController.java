@@ -136,6 +136,10 @@ public class ProjetoController {
                 }
             }
         }
+        reorganizarAtividades(anchorPanefazer);
+        reorganizarAtividades(anchorPaneAndamento);
+        reorganizarAtividades(anchorPaneConcluidas);
+        countActivities();
     }
 
     @FXML
@@ -331,6 +335,12 @@ public class ProjetoController {
         reorganizarAtividades(anchorPaneAndamento);
         reorganizarAtividades(anchorPaneConcluidas);
         countActivities();
+        int teste = minhaEmpresa.getYeixo();
+        int teste1 = (int) anchorPanefazer.getHeight();
+        teste += 100;
+
+        int teste3 = teste1 + teste;
+        anchorPanefazer.setPrefHeight(teste3);
 
 
     }
@@ -361,6 +371,9 @@ public class ProjetoController {
                 reorganizarAtividades(anchorPaneAndamento);
                 reorganizarAtividades(anchorPaneConcluidas);
                 countActivities(); // Update the activity count
+                reorganizarAtividades(anchorPanefazer);
+                reorganizarAtividades(anchorPaneAndamento);
+                reorganizarAtividades(anchorPaneConcluidas);
                 currentPanel = nearestPanel;
             }
         });
@@ -614,7 +627,11 @@ public class ProjetoController {
                 System.out.println("");
                 ((Pane) novoProjeto.getParent()).getChildren().remove(novoProjeto);
                 empresa.removerProjeto(meuProjeto);
+                reorganizarAtividades(anchorPanefazer);
+                reorganizarAtividades(anchorPaneAndamento);
+                reorganizarAtividades(anchorPaneConcluidas);
                 countActivities();
+
             }
         });
         menuButton.getItems().addAll(deletarItem);
