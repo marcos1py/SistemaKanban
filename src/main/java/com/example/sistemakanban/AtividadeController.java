@@ -555,12 +555,6 @@ public class AtividadeController {
         labelResponsavel.setLayoutX(23.0);
         labelResponsavel.setLayoutY(80);
 
-        ProgressIndicator progressIndicator = new ProgressIndicator();
-        progressIndicator.setLayoutX(245.0);
-        progressIndicator.setLayoutY(31.0);
-        progressIndicator.setPrefHeight(59.0);
-        progressIndicator.setPrefWidth(40.0);
-        progressIndicator.setProgress(0);
 
         MenuButton menuButton = new MenuButton("");
         menuButton.setLayoutX(284.0);
@@ -584,18 +578,25 @@ public class AtividadeController {
                 detalhesController.usarDadosRecebidos(nomeAtividade,descricao,dataInFormat,dataFnFormat,responsavel);
                 // Convertendo a lista de Ação para uma lista de String
                 ObservableList<String> stringsAcoes = FXCollections.observableArrayList();
+                ObservableList<Ação> listaAcoes = FXCollections.observableArrayList();
+
                 for (Ação acao : açoes) {
                     stringsAcoes.add(acao.toString());
+                    listaAcoes.add(acao);
                 }
 
                 // Chamando o método com a lista de strings
 
                 detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
-                for (String acao : stringsAcoes) {
-                    CheckBox checkBox = detalhesController.newcheckBox(String.valueOf(atividade.getId()),acao);
-                    estadoCheckBoxes.put(acao, checkBox.isSelected());
+                for (int i = 0; i < stringsAcoes.size(); i++) {
+                    String acaoStr = stringsAcoes.get(i);
+                    Ação açaoReal = listaAcoes.get(i);
+
+                    CheckBox checkBox = detalhesController.newcheckBox(String.valueOf(atividade.getId()), acaoStr, açaoReal);
+                    estadoCheckBoxes.put(acaoStr, checkBox.isSelected());
                     System.out.println(checkBox.isSelected());
                 }
+
                 Main.mudarTela ("detalhes");
             }
         });
@@ -620,9 +621,20 @@ public class AtividadeController {
 
 
         // Adicione os Labels à Pane
-        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard, labelInicio, labelFim, labelStatus, menuButton,labelResponsavel,progressIndicator);
+        novaAtividade.getChildren().addAll(labelTituloCard, labelDescriçãoCard, labelInicio, labelFim, labelStatus, menuButton,labelResponsavel);
 
         return novaAtividade;
+    }
+    public void receberPorcentagem(String idDaProgresso , double porcentagem) {
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+
+        progressIndicator.setId(idDaProgresso);
+
+        // Atualize o ProgressIndicator com a porcentagem
+        progressIndicator.setProgress(100);
+
+        // Faça qualquer outra coisa que você precise com o ID e a porcentagem na tela de destino
     }
     private Pane findNearestPanel(double x, double y,Pane atividade, Atividade atividade1) {
         try {

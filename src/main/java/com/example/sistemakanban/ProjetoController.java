@@ -568,18 +568,11 @@ public class ProjetoController {
         labelResponsavel.setLayoutX(23.0);
         labelResponsavel.setLayoutY(80);
 
-        ProgressIndicator progressIndicator = new ProgressIndicator();
-        progressIndicator.setLayoutX(245.0);
-        progressIndicator.setLayoutY(31.0);
-        progressIndicator.setPrefHeight(59.0);
-        progressIndicator.setPrefWidth(40.0);
-        progressIndicator.setProgress(0);
-
         // Adicione o novo nome como um identificador à nova Pane
         novoProjeto.setId(nomePane);
 
         // Adicione os Labels à Pane
-        novoProjeto.getChildren().addAll(labelTituloCard, labelDescriçãoCard,labelInicio,labelFim,labelStatus,labelResponsavel,progressIndicator);
+        novoProjeto.getChildren().addAll(labelTituloCard, labelDescriçãoCard,labelInicio,labelFim,labelStatus,labelResponsavel);
 
         return novoProjeto;
     }

@@ -13,6 +13,7 @@ public class Ação {
     private int barraProgresso;
     private String status;
     private String nome;
+    private  String feito;
 
     // Construtor
     public Ação() {
@@ -41,6 +42,14 @@ public class Ação {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public String getfeito() {
+        return feito;
+    }
+
+    public void setFeito(String feito) {
+        this.feito = feito;
     }
 
     public LocalDate getDataInicio() {

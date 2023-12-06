@@ -3,26 +3,17 @@ package com.example.sistemakanban;
 
 import com.example.sistemakanban.classes.Atividade;
 import com.example.sistemakanban.classes.Ação;
-import com.example.sistemakanban.classes.Projeto;
-import javafx.beans.property.ReadOnlyProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class DetalhesController {
 
@@ -42,17 +33,18 @@ public class DetalhesController {
         this.projetoController = projetoController;
     }
 
-    private Map<String, Boolean> estadoCheckBoxes = new HashMap<>();
 private int cont;
 private int total;
 double progresso;
-
-    public CheckBox newcheckBox(String idAtividade, String acao){
+    public double getPorcentagemProgresso() {
+        return porcentagemProgresso;
+    }
+    public CheckBox newcheckBox(String idAtividade, String acao, Ação açaoReal){
         CheckBox checkBox = new CheckBox();
         checkBox.setText("Atividade " + idAtividade + ": " + acao);
-
+        grafico2.getData().clear();
+        cont= 0;
         checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-
             // Sua ação personalizada aqui
             System.out.println("Ação para " + acao + " da Atividade " + idAtividade + " selecionada: " + newValue);
 
@@ -60,25 +52,46 @@ double progresso;
             if (newValue) {
                 cont++;
                 System.out.println("CheckBox marcado");
-                estadoCheckBoxes.put(acao,true);
-                // Adicione mais lógica aqui, se necessário
+                açaoReal.setFeito("marcado");
             } else {
                 cont--;
                 System.out.println("CheckBox desmarcado");
-                estadoCheckBoxes.put(acao,false);
-                System.out.println("mmmmmmmm"+acao);
-
+                açaoReal.setFeito("desmarcado");
             }
-            progresso = ((double) cont /total)*100;
 
-            System.out.println("Total"+total);
-            System.out.println("alooo"+progresso);
+            // Atualizar o progresso no gráfico 2
+            updateGrafico2Progresso();
 
 
+            System.out.println("Total " + total);
+            System.out.println("Progresso " + progresso);
         });
 
         return checkBox;
     }
+
+    private void updateGrafico2Progresso() {
+        double percentualMarcado = cont * 100.0 / total;
+
+        porcentagemProgresso = percentualMarcado;
+
+
+        double percentualDesmarcado = 100.0 - percentualMarcado;
+
+
+
+        PieChart.Data sliceMarcado = new PieChart.Data("Feito", percentualMarcado);
+        PieChart.Data sliceDesmarcado = new PieChart.Data("Andamento", percentualDesmarcado);
+
+        // Limpar os dados antigos
+        grafico2.getData().clear();
+        // Adicionar os novos dados
+        grafico2.getData().addAll(sliceMarcado, sliceDesmarcado);
+
+        sliceMarcado.getNode().setStyle("-fx-pie-color: #33a02c;");
+        sliceDesmarcado.getNode().setStyle("-fx-pie-color: #1f78b4;");
+    }
+    private double porcentagemProgresso;
 
     public void receberDadosCheckBox(String nomeAtividade, int idDaAtividade1, ObservableList<String> listaAcao) {
         labelNomeAtividade.setText(nomeAtividade);
@@ -87,37 +100,30 @@ double progresso;
         vboxPaneAçao.getChildren().clear();
 
         Atividade minhaAtividade = atividadeController.getAtividadeById(idDaAtividade1);
+        double marcado = 0.0;
+        double desmarcado = 0.0;
 
         for (Ação acao : minhaAtividade.getAções()) {
-            System.out.println("-------hk----" + acao.getNome());
-            CheckBox acaoTemporaria = newcheckBox(String.valueOf(idDaAtividade1), String.valueOf(acao.getNome()));
-
-            // Restaurar o estado da CheckBox se já existir na lista
-            if (listaAcao.contains(acao.getNome())) {
+            if (acao.getfeito() == "marcado") {
+                CheckBox acaoTemporaria = newcheckBox(String.valueOf(idDaAtividade1), String.valueOf(acao.getNome()), acao);
                 acaoTemporaria.setSelected(true);
+                vboxPaneAçao.getChildren().add(acaoTemporaria);
+                marcado++;
+            } else {
+                CheckBox acaoTemporaria = newcheckBox(String.valueOf(idDaAtividade1), String.valueOf(acao.getNome()), acao);
+                acaoTemporaria.setSelected(false);
+                vboxPaneAçao.getChildren().add(acaoTemporaria);
+                desmarcado++;
             }
-
-            vboxPaneAçao.getChildren().add(acaoTemporaria);
-            total++;
-
-
-            System.out.println("Total"+total);
-
-
-
-
         }
 
+        // Atualizar o total com a soma de marcados e desmarcados
+        total = (int) (marcado + desmarcado);
 
+        // Atualizar o progresso no gráfico 2
+        cont = (int) marcado; // Ajustar cont para o número inicial de marcados
+        updateGrafico2Progresso();
     }
-
-
-
-
-
-
-
-
     @FXML
     private Label labelNomeAtividade;
     @FXML
@@ -128,9 +134,13 @@ double progresso;
         labelFim.setText(fim);
         labelNomeAtividade.setText(tituloDoProjeto);
         txtArea.setText(descriçãoDoProjeto);
+        cont = 0;
     }
     @FXML
     public void Btnvoltar(ActionEvent event) {
+
+
+        atividadeController.receberPorcentagem(idDaAtividade.getId(), porcentagemProgresso);
 
         Main.mudarTela("atividades");
     }
@@ -143,8 +153,7 @@ double progresso;
     private Pane nav;
     @FXML
     private TextArea txtArea;
-    @FXML
-    private  PieChart grafico1;
+
     @FXML
     private  PieChart grafico2;
     @FXML
@@ -156,20 +165,20 @@ double progresso;
 
     @FXML
     private Label labelInicio;
+
     @FXML
     private void initialize() {
         // Configurar dados do gráfico
-       PieChart.Data slice1 = new PieChart.Data("andamento", 75.00);
-       PieChart.Data slice2 = new PieChart.Data("andamento", 25.0);
+        PieChart.Data slice1 = new PieChart.Data("Andamento", 75.00);
+        PieChart.Data slice2 = new PieChart.Data("Feito", 25.0);
 
-        PieChart.Data slice3 = new PieChart.Data("andamento", 75.0);
-        PieChart.Data slice4 = new PieChart.Data("concluido", 25.0);
 
-        grafico1.getData().addAll(slice3, slice4);
-        grafico2.getData().addAll(slice1,slice2);
+        grafico2.getData().addAll(slice1, slice2);
 
-        // Outras inicializações, se necessário
-    }
+        // Definir cores diretamente
+        slice1.getNode().setStyle("-fx-pie-color: #1f78b4;");
+        slice2.getNode().setStyle("-fx-pie-color: #33a02c;");
+        grafico2.setLegendVisible(false);    }
 
 
 }
