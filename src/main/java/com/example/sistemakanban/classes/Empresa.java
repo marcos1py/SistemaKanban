@@ -20,6 +20,9 @@ public class Empresa {
         this.projetos.add(projeto);
     }
     // Getters e Setters
+
+    public void removerProjeto(Projeto projeto){this.projetos.remove(projeto);}
+
     public int getId() {
         return id;
     }

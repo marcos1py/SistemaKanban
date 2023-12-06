@@ -8,6 +8,7 @@ import com.example.sistemakanban.classes.Validador;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -118,6 +119,7 @@ public class EmpresasController {
             telefoneEmpresaADD.clear();
             localEmpresaADD.clear();
         }
+        reorganizarEmpresa(achorPaneEmpresa);
     }
     @FXML
     private Label labelErro;
@@ -255,9 +257,33 @@ public class EmpresasController {
                     }
             }
         });
+        meuBotaoDeletar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ((Pane) novaEmpresa.getParent()).getChildren().remove(novaEmpresa);
+                reorganizarEmpresa(achorPaneEmpresa);
+            }
+        });
 
         // Adicione os Labels à Pane
         novaEmpresa.getChildren().addAll(tituloEmpresa, labelLocal,labelTel,labelQtFuncionario,labelID,meuBotaoDeletar,meuBotaoEditar);
         return novaEmpresa;
+    }
+    private void reorganizarEmpresa(Pane panel) {
+        List<Node> atividades = panel.getChildren().filtered(node -> node instanceof Pane);
+        double spacing = 0;
+
+        for (Node node : atividades) {
+
+            if (node instanceof Pane) {
+                node.setLayoutX(3);
+                node.setLayoutY(spacing);
+                double teste =  panel.getHeight();
+                teste =+ spacing;
+                panel.setPrefHeight(teste);
+                spacing += 108;
+
+            }
+        }
     }
 }

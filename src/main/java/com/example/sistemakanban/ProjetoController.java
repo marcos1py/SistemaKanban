@@ -7,6 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.ImageInput;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -102,7 +104,7 @@ public class ProjetoController {
                 if (projeto.getStatus() == "afazer"){
 
 
-                    Pane newPane = newProject(projeto);
+                    Pane newPane = newProject(projeto,minhaEmpresa);
                     mexerPane(newPane,projeto);
                     projeto.setStatus("afazer");
                     newPane.setStyle("-fx-background-color: #fff ;-fx-border-color: black black black #0038FF;-fx-border-width: 1 1 1 10px;");
@@ -112,7 +114,7 @@ public class ProjetoController {
 
                 }
                 if (projeto.getStatus() == "andamento"){
-                    Pane newPane = newProject(projeto);
+                    Pane newPane = newProject(projeto, minhaEmpresa);
                     mexerPane(newPane,projeto);
                     newPane.setStyle("-fx-background-color: #fff ;-fx-border-color:  black black black #ffc700;-fx-border-width: 1 1 1 10px;");
                     newPane.setLayoutY(eixoYAndamento);
@@ -123,7 +125,7 @@ public class ProjetoController {
 
                 }
                 if (projeto.getStatus() == "concluido"){
-                    Pane newPane = newProject(projeto);
+                    Pane newPane = newProject(projeto, minhaEmpresa);
                     mexerPane(newPane,projeto);
                     newPane.setStyle("-fx-background-color: #fff ;-fx-border-color:   black black black #41fa00;-fx-border-width: 1 1 1 10px;");
                     newPane.setLayoutY(eixoYConcluido);
@@ -315,7 +317,7 @@ public class ProjetoController {
             System.err.println("O ID da empresa não é um número válido");
         }
 
-            Pane newPane = newProject(projeto);
+            Pane newPane = newProject(projeto, minhaEmpresa);
             minhaEmpresa.addProjeto(projeto);
             listaProjeto.add(projeto);
 
@@ -526,7 +528,7 @@ public class ProjetoController {
         return Math.sqrt(Math.pow(x - panelCenterX, 2) + Math.pow(y - panelCenterY, 2));
     }
 
-    public Pane newProject(Projeto  meuProjeto){
+    public Pane newProject(Projeto  meuProjeto, Empresa empresa){
         int contagem = 0;
         contagem = meuProjeto.getId();
         count = (int) anchorPanefazer.getChildren().stream().filter(node -> node instanceof Pane).count();
@@ -595,8 +597,30 @@ public class ProjetoController {
         // Adicione o novo nome como um identificador à nova Pane
         novoProjeto.setId(nomePane);
 
+        MenuButton menuButton = new MenuButton("");
+        menuButton.setLayoutX(284.0);
+        menuButton.setLayoutY(4.0);
+        menuButton.setStyle("-fx-background-color: 0; -fx-cursor: hand;");
+
+// Adicione a imagem à ImageInput do MenuButton
+        ImageInput imageInput = new ImageInput();
+        Image minhaImagem3pontos = new Image(getClass().getResourceAsStream("/Imagens/3pontos.png"));
+        imageInput.setSource(minhaImagem3pontos);
+        menuButton.setEffect(imageInput);
+        MenuItem deletarItem = new MenuItem("Deletar");
+        deletarItem.setOnAction (new EventHandler<ActionEvent> () {
+            @Override
+            public void handle (ActionEvent event) {
+                System.out.println("");
+                ((Pane) novoProjeto.getParent()).getChildren().remove(novoProjeto);
+                empresa.removerProjeto(meuProjeto);
+                countActivities();
+            }
+        });
+        menuButton.getItems().addAll(deletarItem);
+
         // Adicione os Labels à Pane
-        novoProjeto.getChildren().addAll(labelTituloCard, labelDescriçãoCard,labelInicio,labelFim,labelStatus,labelResponsavel);
+        novoProjeto.getChildren().addAll(labelTituloCard, labelDescriçãoCard,labelInicio,labelFim,labelStatus,labelResponsavel,menuButton);
 
         return novoProjeto;
     }

@@ -701,6 +701,7 @@ public class AtividadeController {
                 System.out.println("");
                 ((Pane) novaAtividade.getParent()).getChildren().remove(novaAtividade);
                 projeto.removerAtividades(atividade);
+                countActivities();
             }
         });
         menuButton.getItems().addAll(detalhesItem, editarItem, deletarItem);
