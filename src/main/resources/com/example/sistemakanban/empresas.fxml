@@ -119,5 +119,43 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
+      <AnchorPane fx:id="addPaneEditar" layoutX="483.0" layoutY="160.0" prefHeight="347.0" prefWidth="480.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;" visible="false">
+         <children>
+            <Text fill="#11a9ff" layoutX="149.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Empresa">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nomeEmpresaADD1" layoutX="125.0" layoutY="63.0" prefHeight="34.0" prefWidth="287.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Button layoutX="47.0" layoutY="277.0" mnemonicParsing="false" onAction="#cancelarBtn" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Cancelar" />
+            <Button layoutX="295.0" layoutY="277.0" mnemonicParsing="false" onAction="#confirmarBtn1" prefHeight="36.0" prefWidth="116.0" style="-fx-background-color: #11ACFF; -fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" text="Confirmar" />
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Local:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="localEmpresaADD1" layoutX="125.0" layoutY="122.0" prefHeight="34.0" prefWidth="287.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <TextField fx:id="telefoneEmpresaADD1" layoutX="147.0" layoutY="176.0" prefHeight="34.0" prefWidth="265.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefone:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#11a9ff" layoutX="47.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantidade de funcionario:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextField fx:id="qtFuncionarioADD1" layoutX="341.0" layoutY="223.0" prefHeight="34.0" prefWidth="70.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
@@ -17,7 +8,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -27,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.DetalhesController">
+<AnchorPane fx:id="principal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.DetalhesController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -58,26 +48,6 @@
          </font>
       </Button>
       <Line endX="11.199951171875" endY="494.39996337890625" layoutX="803.0" layoutY="205.0" startX="11.199951171875" startY="25.599990844726562" />
-      <Button layoutX="1381.0" layoutY="137.0" mnemonicParsing="false" style="-fx-background-color: #9c0720; -fx-border-radius: 20px;" text="Deletar" textFill="WHITE">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
-      <Button layoutX="119.0" layoutY="765.0" mnemonicParsing="false" style="-fx-background-color: #1eff05; -fx-border-radius: 20px;" text="Salvar" textFill="WHITE">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Button>
-      <TextField layoutX="226.0" layoutY="765.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #1eff05; -fx-background-color: #EEE;" text="Mudo com sucesso">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font>
-      </TextField>
-      <TextField layoutX="226.0" layoutY="791.0" prefHeight="28.0" prefWidth="204.0" style="-fx-text-fill: #9c0720; -fx-background-color: #EEE;" text="Falta algo">
-         <font>
-            <Font name="Arial" size="12.0" />
-         </font>
-      </TextField>
       <Pane layoutX="983.0" layoutY="244.0" prefHeight="95.0" prefWidth="160.0" style="-fx-background-color: #EEE; -fx-border-radius: 10px; -fx-background-radius: 10px;">
          <effect>
             <DropShadow />

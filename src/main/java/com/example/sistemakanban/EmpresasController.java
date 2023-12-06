@@ -116,6 +116,18 @@ public class EmpresasController {
     void novoProjBtn(ActionEvent event) {
         addPane.setVisible(true);
     }
+    @FXML
+    private TextField nomeEmpresaADD1;
+    @FXML
+    private TextField localEmpresaADD1;
+    @FXML
+    private Pane addPaneEditar;
+    int ab = 0;
+    @FXML
+    void confirmarBtn1(ActionEvent event) {
+    ab++;
+    addPaneEditar.setVisible(false);
+    }
 
     public Pane newEmpresa(Empresa meuEmpresa){
         int contagem = 0;
@@ -147,6 +159,7 @@ public class EmpresasController {
         tituloEmpresa.setOnMouseClicked (new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent event) {
+
                 projetoController.usarDadosRecebidosEmpresa(meuEmpresa.getNomeEmpresa(),meuEmpresa.getId());
                 Main.mudarTela("projetos");
             }
@@ -200,6 +213,22 @@ public class EmpresasController {
         imageViewEditar.setFitWidth(20);
         imageViewEditar.setFitHeight(20);
         meuBotaoEditar.setGraphic(imageViewEditar);
+
+
+        meuBotaoEditar.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                addPaneEditar.setVisible(true);
+                    int cont = 0;
+                    nomeEmpresaADD1.setText(tituloEmpresa.getText());
+
+                    cont++;
+                    if(cont >= 1){
+                        meuEmpresa.setNomeEmpresa(nomeEmpresaADD1.getText());
+
+                    }
+            }
+        });
 
         // Adicione os Labels à Pane
         novaEmpresa.getChildren().addAll(tituloEmpresa, labelLocal,labelTel,labelQtFuncionario,labelID,meuBotaoDeletar,meuBotaoEditar);
