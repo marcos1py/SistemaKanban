@@ -316,6 +316,7 @@ public class ProjetoController {
         reorganizarAtividades(anchorPaneConcluidas);
 
 
+
     }
     private void mexerPane(Pane atividade, Projeto projeto1) {
 
@@ -539,7 +540,7 @@ public class ProjetoController {
         labelTituloCard.setOnMouseClicked (new EventHandler<MouseEvent>() {
             @Override
             public void handle (MouseEvent event) {
-                atividadeController.usarDadosRecebidosProjeto(meuProjeto.getTitulo(), meuProjeto.getId());
+                atividadeController.usarDadosRecebidosProjeto(meuProjeto.getTitulo(), meuProjeto.getId(),meuProjeto.getInicioDefinido(),meuProjeto.getFimDefinido());
 
                 Main.mudarTela("atividades");
             }

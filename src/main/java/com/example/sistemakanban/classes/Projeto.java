@@ -106,7 +106,7 @@ public class Projeto {
 
     public void setInicioDefinido(LocalDate inicioDefinido){this.inícioDefinido = inicioDefinido;}
 
-    public LocalDate getFimDefinido(){return inícioDefinido;}
+    public LocalDate getFimDefinido(){return fimDefinido;}
 
     public void setFimDefinido(LocalDate fimDefinido){this.fimDefinido = fimDefinido;}
 
