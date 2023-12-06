@@ -156,7 +156,7 @@
             </ImageView>
             <ScrollPane fx:id="scrollpaneAndamento" layoutX="7.0" layoutY="77.0" prefHeight="492.0" prefWidth="333.0">
                <content>
-                  <AnchorPane fx:id="anchorPaneAndamento" layoutX="7.0" layoutY="77.0" minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="323.0" />
+                  <AnchorPane fx:id="anchorPaneAndamento" layoutX="7.0" layoutY="77.0" minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="323.0" />
                </content>
             </ScrollPane>
          </children>
@@ -212,7 +212,7 @@
             </ImageView>
             <ScrollPane fx:id="scrollpaneAfazer" layoutX="7.0" layoutY="77.0" prefHeight="492.0" prefWidth="333.0">
               <content>
-                <AnchorPane fx:id="anchorPanefazer" minHeight="0.0" minWidth="0.0" prefHeight="488.0" prefWidth="323.0" />
+                <AnchorPane fx:id="anchorPanefazer" minHeight="0.0" minWidth="0.0" prefHeight="495.0" prefWidth="323.0" />
               </content>
             </ScrollPane>
          </children>
@@ -265,10 +265,14 @@
                </font>
             </Text>
             <TextField fx:id="txtFieldArea" layoutX="197.0" layoutY="218.0" prefHeight="26.0" prefWidth="219.0" style="-fx-border-color: black; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <Label fx:id="labelErroFim" layoutX="203.0" layoutY="201.0" text="A data final não pode ser antes da inicial" textFill="#f20000" visible="false" />
+            <Label fx:id="labelErroInicio" layoutX="203.0" layoutY="151.0" text="A data inicial não pode ser depois da final" textFill="#f20000" visible="false" />
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
+      <Label text="Label" />
+      <Label text="Label" />
    </children>
 </AnchorPane>
