@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.time.LocalDate.parse;
+
 
 public class AtividadeController {
     private GeraPane geraPane;
@@ -189,10 +191,18 @@ public class AtividadeController {
 
     @FXML
     private Label idDaProjeto;
-    public void usarDadosRecebidosProjeto(String nomeProjeto, int idDaProjeto1) {
+    @FXML
+    private Label labelInicio;
+    @FXML
+    private Label labelFim;
+    public void usarDadosRecebidosProjeto(String nomeProjeto, int idDaProjeto1, LocalDate inicio, LocalDate fim) {
+
 
         labelNomeProjeto.setText("Projeto "+nomeProjeto);
         idDaProjeto.setText(String.valueOf(idDaProjeto1));
+        labelFim.setText(String.valueOf(fim));
+        labelInicio.setText(String.valueOf(inicio));
+
 
         anchorPanefazer.getChildren().clear();
         anchorPaneAndamento.getChildren().clear();
@@ -354,6 +364,7 @@ public class AtividadeController {
             açoes.add(addação);
 
             total++;
+
             validador(inicioDefinidoAçao, fimDefinidoAçao);
 
         }
@@ -367,7 +378,32 @@ public class AtividadeController {
     public void cancelarDelet(ActionEvent event) {
         cardDeletar.setVisible(false);
     }
+    boolean valido;
+    public  void validaData(LocalDate inicioAtv, LocalDate fimAtv, String inicio, String fim) {
+        //Projeto projeto = new Projeto();
 
+        System.out.println(inicio);
+        System.out.println(fim);
+        LocalDate inicioProj = parse(inicio);
+        LocalDate fimProj = parse(fim);
+
+        if(inicioProj.isAfter(inicioAtv) || fimProj.isBefore(fimAtv)){
+            valido = false;
+            System.out.println("NO");
+        }else {
+            if (inicioAtv != null || fimAtv != null) {
+                if (inicioAtv.isAfter(fimAtv)) {
+                    valido = false;
+                } else {
+                    valido = true;
+                    System.out.println("Valido");
+                }
+            } else {
+                valido = false;
+                System.out.println("Alguma data nula");
+            }
+        }
+    }
     public void btnAddAtividade(ActionEvent event) {
 
         Atividade atividade = new Atividade();
@@ -382,53 +418,57 @@ public class AtividadeController {
         atividade.setResponsavel(responsavelID.getText());
         atividade.setDescrição(descriçaoInput.getText());
         //atividade.setAções(açaoInput.getText());
-        meuprojeto.adicionarAtividade(atividade);
-        System.out.println("=============");
-        int idProjetoSelecionada = Integer.parseInt(idDaProjeto.getText());
-        if (projetoController != null) {
-            System.out.println(idProjetoSelecionada);
-            meuprojeto = projetoController.getProjetoById(idProjetoSelecionada);
-            if (meuprojeto != null) {
-                atividade.setProjeto(meuprojeto);
-                System.out.println("Projeto: " + meuprojeto.getTitulo());
-                System.out.println("Atividade:"+meuprojeto.getAtividades());
-                for (Atividade a : meuprojeto.getAtividades()) {
-                    System.out.println("  ´´´´´´- " + a.getAções());
+        validaData(atividade.getInícioDefinido(),atividade.getFimDefinido(),labelInicio.getText(),labelFim.getText());
+        System.out.println(valido);
+        if(valido) {
+            meuprojeto.adicionarAtividade(atividade);
+            System.out.println("=============");
+
+            int idProjetoSelecionada = Integer.parseInt(idDaProjeto.getText());
+            if (projetoController != null) {
+                System.out.println(idProjetoSelecionada);
+                meuprojeto = projetoController.getProjetoById(idProjetoSelecionada);
+                if (meuprojeto != null) {
+                    atividade.setProjeto(meuprojeto);
+                    System.out.println("Projeto: " + meuprojeto.getTitulo());
+                    System.out.println("Atividade:" + meuprojeto.getAtividades());
+                    for (Atividade a : meuprojeto.getAtividades()) {
+                        System.out.println("  ´´´´´´- " + a.getAções());
+                    }
+                    System.out.println("ID: " + idProjetoSelecionada);
+                } else {
+                    System.err.println("Empresa não encontrada com o ID: " + idProjetoSelecionada);
                 }
-                System.out.println("ID: " + idProjetoSelecionada);
             } else {
-                System.err.println("Empresa não encontrada com o ID: " + idProjetoSelecionada);
+                System.err.println("EmpresasController não está definido.");
             }
-        } else {
-            System.err.println("EmpresasController não está definido.");
-        }
-        System.out.println("=============");
+            System.out.println("=============");
 
-        meuprojeto.addAtividade(atividade);
-        listaAtividade.add(atividade);
-        atividade.setAções(FXCollections.observableArrayList(açoes));
-        // Convertendo a lista de Ação para uma lista de String
-        ObservableList<String> stringsAcoes = FXCollections.observableArrayList();
-        for (Ação acao : açoes) {
-            stringsAcoes.add(acao.toString());
+            meuprojeto.addAtividade(atividade);
+            listaAtividade.add(atividade);
+            atividade.setAções(FXCollections.observableArrayList(açoes));
+            // Convertendo a lista de Ação para uma lista de String
+            ObservableList<String> stringsAcoes = FXCollections.observableArrayList();
+            for (Ação acao : açoes) {
+                stringsAcoes.add(acao.toString());
 
-        }
+            }
 
 // Chamando o método com a lista de strings
-        //detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
+            //detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
 
-        Pane newPane = newAtividade(atividade, meuprojeto);
-        mexerPane(newPane,atividade);
-        anchorPanefazer.getChildren().add(newPane);
-        reorganizarAtividades(anchorPanefazer);
-        reorganizarAtividades(anchorPaneAndamento);
-        reorganizarAtividades(anchorPaneConcluidas);
-        addPane.setVisible(false);
-        açoes.clear();
-        dataFn.clear();
-        dataIn.clear();
-        limpaBorrado();
-
+            Pane newPane = newAtividade(atividade, meuprojeto);
+            mexerPane(newPane, atividade);
+            anchorPanefazer.getChildren().add(newPane);
+            reorganizarAtividades(anchorPanefazer);
+            reorganizarAtividades(anchorPaneAndamento);
+            reorganizarAtividades(anchorPaneConcluidas);
+            addPane.setVisible(false);
+            açoes.clear();
+            dataFn.clear();
+            dataIn.clear();
+            limpaBorrado();
+        }
 
     }
     private void mexerPane(Pane atividade, Atividade atividade1) {
