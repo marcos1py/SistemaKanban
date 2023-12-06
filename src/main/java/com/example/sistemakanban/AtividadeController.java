@@ -31,6 +31,15 @@ public class AtividadeController {
     private GeraPane geraPane;
     private DetalhesController detalhesController;
 
+    @FXML
+    private Label idTotalProjetos;
+    @FXML
+    private Label idTotalAndamento;
+    @FXML
+    private Label idTotalConcluido;
+
+    @FXML
+    private Label idTotalAfazer;
 
     public void setDetalhesController(DetalhesController detalhesController) {
         this.detalhesController = detalhesController;
@@ -463,6 +472,7 @@ public class AtividadeController {
             reorganizarAtividades(anchorPanefazer);
             reorganizarAtividades(anchorPaneAndamento);
             reorganizarAtividades(anchorPaneConcluidas);
+            countActivities();
             addPane.setVisible(false);
             açoes.clear();
             dataFn.clear();
@@ -500,6 +510,7 @@ public class AtividadeController {
                 reorganizarAtividades(anchorPanefazer);
                 reorganizarAtividades(anchorPaneAndamento);
                 reorganizarAtividades(anchorPaneConcluidas);
+                countActivities();
                 currentPanel = nearestPanel;
 
             }
@@ -524,6 +535,23 @@ public class AtividadeController {
 
             }
         }
+    }
+    private void countActivities() {
+        int afazerCount = countActivitiesInPane(anchorPanefazer);
+        int andamentoCount = countActivitiesInPane(anchorPaneAndamento);
+        int concluidoCount = countActivitiesInPane(anchorPaneConcluidas);
+
+        int totalActivities = afazerCount + andamentoCount + concluidoCount;
+
+        idTotalProjetos.setText(String.valueOf(totalActivities));
+        idTotalAfazer.setText(String.valueOf(afazerCount));
+        idTotalAndamento.setText(String.valueOf(andamentoCount));
+        idTotalConcluido.setText(String.valueOf(concluidoCount));
+
+        System.out.println("Total de Atividades: " + totalActivities);
+    }
+    private int countActivitiesInPane(Pane panel) {
+        return (int) panel.getChildren().filtered(node -> node instanceof Pane).size();
     }
     private Map<String, Boolean> estadoCheckBoxes = new HashMap<>();
 

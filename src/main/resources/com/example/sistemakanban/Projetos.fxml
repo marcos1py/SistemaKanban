@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import java.net.URL?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -18,7 +27,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
+<AnchorPane fx:id="principal" prefHeight="790.0" prefWidth="1639.0" style="-fx-background-color: #EEE;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sistemakanban.ProjetoController">
    <stylesheets>
       <URL value="@../Documents/NetBeansProjects/JavaFXApplication1/src/javafxapplication1/fxml1.css" />
    </stylesheets>
@@ -65,14 +74,14 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Text>
-            <Pane layoutX="28.0" layoutY="350.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: E4EDFF; -fx-border-radius: 10; -fx-background-radius: 15;">
+            <Pane layoutX="27.0" layoutY="335.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: E4EDFF; -fx-border-radius: 10; -fx-background-radius: 15;">
                <children>
                   <Text fill="#909090" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="100" textAlignment="CENTER">
+                  <Label fx:id="idTotalProjetos" layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="0" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -80,9 +89,9 @@
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #1563FF; -fx-background-radius: 10;" />
                </children>
             </Pane>
-            <Pane layoutX="28.0" layoutY="544.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: FFF2C2; -fx-border-radius: 10; -fx-background-radius: 15;">
+            <Pane layoutX="27.0" layoutY="490.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: FFF2C2; -fx-border-radius: 10; -fx-background-radius: 15;">
                <children>
-                  <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="50" textAlignment="CENTER">
+                  <Label fx:id="idTotalAndamento" layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="0" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -95,19 +104,34 @@
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: FFC700; -fx-background-radius: 10;" />
                </children>
             </Pane>
-            <Pane layoutX="28.0" layoutY="447.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: D9FFCC; -fx-border-radius: 10; -fx-background-radius: 15;">
+            <Pane layoutX="27.0" layoutY="565.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: D9FFCC; -fx-border-radius: 10; -fx-background-radius: 15;">
                <children>
                   <Text fill="#909090" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Concluido">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Text>
-                  <Label layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="100" textAlignment="CENTER">
+                  <Label fx:id="idTotalConcluido" layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="0" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
                   <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #41FA00; -fx-background-radius: 10;" />
+               </children>
+            </Pane>
+            <Pane layoutX="27.0" layoutY="413.0" prefHeight="66.0" prefWidth="287.0" style="-fx-background-color: E4EDFF; -fx-border-radius: 10; -fx-background-radius: 15;">
+               <children>
+                  <Text fill="#909090" layoutX="13.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="idTotalAfazer" layoutX="21.0" layoutY="34.0" prefHeight="21.0" prefWidth="81.0" text="0" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Pane layoutX="12.0" layoutY="32.0" prefHeight="25.0" prefWidth="7.0" style="-fx-background-color: #1563FF; -fx-background-radius: 10;" />
                </children>
             </Pane>
          </children>

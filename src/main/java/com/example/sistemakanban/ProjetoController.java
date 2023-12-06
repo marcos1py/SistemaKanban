@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.stream.Collectors;
 
 public class ProjetoController {
     private DetalhesController detalhesController;
@@ -205,7 +206,15 @@ public class ProjetoController {
 
     @FXML
     private Label labelDataFim1;
+    @FXML
+    private Label idTotalProjetos;
+    @FXML
+    private Label idTotalAndamento;
+    @FXML
+    private Label idTotalConcluido;
 
+    @FXML
+    private Label idTotalAfazer;
     @FXML
     private Label labelTituloCard;
 
@@ -314,48 +323,39 @@ public class ProjetoController {
         reorganizarAtividades(anchorPanefazer);
         reorganizarAtividades(anchorPaneAndamento);
         reorganizarAtividades(anchorPaneConcluidas);
-
+        countActivities();
 
 
     }
     private void mexerPane(Pane atividade, Projeto projeto1) {
-
-
         atividade.setOnMousePressed(event -> {
             offsetX = event.getSceneX() - atividade.getLayoutX();
             offsetY = event.getSceneY() - atividade.getLayoutY();
-
         });
-        // Adicione um evento de arrastar o mouse
+
         atividade.setOnMouseDragged(event -> {
             atividade.setLayoutX(event.getSceneX() - offsetX);
             atividade.setLayoutY(event.getSceneY() - offsetY);
-
         });
 
-        // Adicione um evento de soltar o mouse
         atividade.setOnMouseReleased(event -> {
             atividade.toFront();
-            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(),atividade,projeto1);
+            Pane nearestPanel = findNearestPanel(event.getSceneX(), event.getSceneY(), atividade, projeto1);
 
-
-            // Check if atividade is already a child of a panel and remove it if so
             if (atividade.getParent() != null) {
                 ((Pane) atividade.getParent()).getChildren().remove(atividade);
             }
+
             double espaçamento = 0;
             if (nearestPanel != null) {
                 nearestPanel.getChildren().add(atividade);
-                System.out.println("Anchorpane ="+nearestPanel);
+                System.out.println("Anchorpane =" + nearestPanel);
                 reorganizarAtividades(anchorPanefazer);
                 reorganizarAtividades(anchorPaneAndamento);
                 reorganizarAtividades(anchorPaneConcluidas);
+                countActivities(); // Update the activity count
                 currentPanel = nearestPanel;
-
-
             }
-
-
         });
     }
 
@@ -364,17 +364,35 @@ public class ProjetoController {
 
 
     private void reorganizarAtividades(Pane panel) {
-            List<Node> atividades = panel.getChildren().filtered(node -> node instanceof Pane);
+        List<Node> atividades = panel.getChildren().filtered(node -> node instanceof Pane);
         double spacing = 0;
 
         for (Node node : atividades) {
-
             if (node instanceof Pane) {
                 node.setLayoutX(3);
                 node.setLayoutY(spacing);
                 spacing += 108;
             }
         }
+    }
+
+    private void countActivities() {
+        int afazerCount = countActivitiesInPane(anchorPanefazer);
+        int andamentoCount = countActivitiesInPane(anchorPaneAndamento);
+        int concluidoCount = countActivitiesInPane(anchorPaneConcluidas);
+
+        int totalActivities = afazerCount + andamentoCount + concluidoCount;
+
+        idTotalProjetos.setText(String.valueOf(totalActivities));
+        idTotalAfazer.setText(String.valueOf(afazerCount));
+        idTotalAndamento.setText(String.valueOf(andamentoCount));
+        idTotalConcluido.setText(String.valueOf(concluidoCount));
+
+        System.out.println("Total de Atividades: " + totalActivities);
+    }
+
+    private int countActivitiesInPane(Pane panel) {
+        return (int) panel.getChildren().filtered(node -> node instanceof Pane).size();
     }
 
     private void deixarBorrado() {
