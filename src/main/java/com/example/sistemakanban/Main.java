@@ -67,7 +67,7 @@ public class Main extends Application {
         Image icon = new Image(getClass().getResourceAsStream("/Imagens/logo.png"));
         primaryStage.getIcons().add(icon);
 
-        primaryStage.setScene(empresas);
+        primaryStage.setScene(login);
         primaryStage.setMaximized(true);
 
         primaryStage.show();

@@ -251,6 +251,7 @@ public class AtividadeController {
         reorganizarAtividades(anchorPanefazer);
         reorganizarAtividades(anchorPaneAndamento);
         reorganizarAtividades(anchorPaneConcluidas);
+        countActivities();
     }
 
 
