@@ -120,7 +120,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </AnchorPane>
-      <AnchorPane fx:id="addPaneEditar" layoutX="473.0" layoutY="150.0" prefHeight="347.0" prefWidth="480.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;" visible="false">
+      <AnchorPane fx:id="addPaneEditar" layoutX="473.0" layoutY="160.0" prefHeight="347.0" prefWidth="480.0" style="-fx-background-color: #D9D9D9; -fx-border-color: black; -fx-border-radius: 10;" visible="false">
          <children>
             <Text fill="#11a9ff" layoutX="149.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar Empresa">
                <font>

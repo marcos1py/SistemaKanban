@@ -118,6 +118,7 @@ public class EmpresasController {
             qtFuncionarioADD.clear();
             telefoneEmpresaADD.clear();
             localEmpresaADD.clear();
+            addPane.setVisible(false);
         }
         reorganizarEmpresa(achorPaneEmpresa);
     }
@@ -154,6 +155,7 @@ public class EmpresasController {
     @FXML
     void confirmarBtn1(ActionEvent event) {
     ab++;
+
     addPaneEditar.setVisible(false);
     }
 

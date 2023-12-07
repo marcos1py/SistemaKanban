@@ -74,7 +74,7 @@ public class Validador {
         Validador.limiteTamanhoCampo(txtfield, tamanho);
         txtfield.lengthProperty().addListener((observable, valorAntigo, valorNovo) -> {
             String textoDigitado = txtfield.getText();
-            textoDigitado = textoDigitado.replaceAll("[^a-zA-Z0-9]", "");
+            textoDigitado = textoDigitado.replaceAll("[^a-zA-Z0-9\\\\s]", "");
             txtfield.setText(textoDigitado);
             Validador.posicionarCursor(txtfield);
         });

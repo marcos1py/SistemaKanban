@@ -255,9 +255,9 @@ public class AtividadeController {
 
 
     private ObservableList<String> dataIn;
-    public void validador(DatePicker inicioDefinido, DatePicker fimDefinido) {
-        LocalDate inicio = inicioDefinido.getValue();
-        LocalDate fim = fimDefinido.getValue();
+
+    public void validador(LocalDate inicio, LocalDate fim) {
+
         if (inicio != null && fim != null) {
             if (inicio.isAfter(fim)) {
                 System.out.println("nao");
@@ -349,21 +349,24 @@ public class AtividadeController {
 
         // Limpa o anchorPane antes de adicionar novas atividades
         anchorPanefazer.getChildren().clear();
+        Validador.mskNumero(nomeID, 60);
+        Validador.mskNumero(responsavelID, 40);
+        Validador.mskNumero(açaoInput, 40);
 
 
     }
     int numeroIDAçao;
     public void btnAddAçao(ActionEvent event) {
         Ação addação = new Ação();
+
         LocalDate inicio = inicioDefinidoAçao.getValue();
         LocalDate fim = fimDefinidoAçao.getValue();
         if(inicio == null || fim == null || açaoInput.getText() == null){
             System.out.println("por favor corrija");
-        }else {
             addação.setNome(açaoInput.getText());
             addação.setDataInicio(inicio);
             addação.setDataFim(fim);
-            numeroIDAçao +=1;
+            numeroIDAçao += 1;
             addação.setId(numeroIDAçao);
 
             System.out.println(addação.getId());
@@ -383,10 +386,12 @@ public class AtividadeController {
 
             total++;
 
-
+        }else{
+            labelErroCampos.setVisible(true);
+            }
 
         }
-    }
+
 
 
 
@@ -395,9 +400,16 @@ public class AtividadeController {
 
     public void cancelarDelet(ActionEvent event) {
         cardDeletar.setVisible(false);
+        nomeID.clear();
+        responsavelID.clear();
+        descriçaoInput.clear();
+        inicioDefinido.setValue(null);
+        fimDefinido.setValue(null);
+        labelErroCampos.setVisible(false);
+        labelErroData.setVisible(false);
     }
     boolean valido;
-    public  void validaData(LocalDate inicioAtv, LocalDate fimAtv, String inicio, String fim) {
+    public  boolean validaData(LocalDate inicioAtv, LocalDate fimAtv, String inicio, String fim) {
         //Projeto projeto = new Projeto();
 
         System.out.println(inicio);
@@ -405,23 +417,26 @@ public class AtividadeController {
         LocalDate inicioProj = parse(inicio);
         LocalDate fimProj = parse(fim);
 
-        if(inicioProj.isAfter(inicioAtv) || fimProj.isBefore(fimAtv)){
-            valido = false;
-            System.out.println("NO");
-        }else {
+
             if (inicioAtv != null || fimAtv != null) {
-                if (inicioAtv.isAfter(fimAtv)) {
-                    valido = false;
-                } else {
-                    valido = true;
-                    System.out.println("Valido");
+                if (inicioProj.isAfter(inicioAtv)) {
+                    System.out.println("NAO");
+                    return false;
+                } else if(fimProj.isBefore(fimAtv)) {
+                    System.out.println("nao");
+                    return false;
+
+                }else{
+                    System.out.println("marcos");
+                    return true;
                 }
             } else {
-                valido = false;
-                System.out.println("Alguma data nula");
+
+                return false;
+
             }
         }
-    }
+
     int count = 0;
     public void btnAddAtividade(ActionEvent event) {
 
@@ -437,60 +452,78 @@ public class AtividadeController {
         atividade.setResponsavel(responsavelID.getText());
         atividade.setDescrição(descriçaoInput.getText());
         //atividade.setAções(açaoInput.getText());
-        validaData(atividade.getInícioDefinido(),atividade.getFimDefinido(),labelInicio.getText(),labelFim.getText());
 
-        if(valido) {
-            meuprojeto.adicionarAtividade(atividade);
-            System.out.println("=============");
+        if(!nomeID.getText().equals("") && !responsavelID.getText().equals("") && !descriçaoInput.getText().equals("")) {
+            if (validaData(atividade.getInícioDefinido(), atividade.getFimDefinido(), labelInicio.getText(), labelFim.getText())) {
+                meuprojeto.adicionarAtividade(atividade);
+                System.out.println("=============");
 
-            int idProjetoSelecionada = Integer.parseInt(idDaProjeto.getText());
-            if (projetoController != null) {
-                System.out.println(idProjetoSelecionada);
-                meuprojeto = projetoController.getProjetoById(idProjetoSelecionada);
-                if (meuprojeto != null) {
-                    atividade.setProjeto(meuprojeto);
-                    System.out.println("Projeto: " + meuprojeto.getTitulo());
-                    System.out.println("Atividade:" + meuprojeto.getAtividades());
-                    for (Atividade a : meuprojeto.getAtividades()) {
-                        System.out.println("  ´´´´´´- " + a.getAções());
+                int idProjetoSelecionada = Integer.parseInt(idDaProjeto.getText());
+                if (projetoController != null) {
+                    System.out.println(idProjetoSelecionada);
+                    meuprojeto = projetoController.getProjetoById(idProjetoSelecionada);
+                    if (meuprojeto != null) {
+                        atividade.setProjeto(meuprojeto);
+                        System.out.println("Projeto: " + meuprojeto.getTitulo());
+                        System.out.println("Atividade:" + meuprojeto.getAtividades());
+                        for (Atividade a : meuprojeto.getAtividades()) {
+                            System.out.println("  ´´´´´´- " + a.getAções());
+                        }
+                        System.out.println("ID: " + idProjetoSelecionada);
+                    } else {
+                        System.err.println("Empresa não encontrada com o ID: " + idProjetoSelecionada);
                     }
-                    System.out.println("ID: " + idProjetoSelecionada);
                 } else {
-                    System.err.println("Empresa não encontrada com o ID: " + idProjetoSelecionada);
+                    System.err.println("EmpresasController não está definido.");
                 }
-            } else {
-                System.err.println("EmpresasController não está definido.");
-            }
-            System.out.println("=============");
+                System.out.println("=============");
 
-            meuprojeto.addAtividade(atividade);
-            listaAtividade.add(atividade);
-            atividade.setAções(FXCollections.observableArrayList(açoes));
-            // Convertendo a lista de Ação para uma lista de String
-            ObservableList<String> stringsAcoes = FXCollections.observableArrayList();
-            for (Ação acao : açoes) {
-                stringsAcoes.add(acao.toString());
+                meuprojeto.addAtividade(atividade);
+                listaAtividade.add(atividade);
+                atividade.setAções(FXCollections.observableArrayList(açoes));
+                // Convertendo a lista de Ação para uma lista de String
+                ObservableList<String> stringsAcoes = FXCollections.observableArrayList();
+                for (Ação acao : açoes) {
+                    stringsAcoes.add(acao.toString());
 
-            }
+                }
 
 // Chamando o método com a lista de strings
-            //detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
+                //detalhesController.receberDadosCheckBox(atividade.getNome(), atividade.getId(), stringsAcoes);
 
-            Pane newPane = newAtividade(atividade, meuprojeto);
-            mexerPane(newPane, atividade);
-            anchorPanefazer.getChildren().add(newPane);
-            reorganizarAtividades(anchorPanefazer);
-            reorganizarAtividades(anchorPaneAndamento);
-            reorganizarAtividades(anchorPaneConcluidas);
-            countActivities();
-            addPane.setVisible(false);
-            açoes.clear();
-            dataFn.clear();
-            dataIn.clear();
-            limpaBorrado();
+                Pane newPane = newAtividade(atividade, meuprojeto);
+                mexerPane(newPane, atividade);
+                anchorPanefazer.getChildren().add(newPane);
+                reorganizarAtividades(anchorPanefazer);
+                reorganizarAtividades(anchorPaneAndamento);
+                reorganizarAtividades(anchorPaneConcluidas);
+                countActivities();
+                addPane.setVisible(false);
+                açoes.clear();
+                dataFn.clear();
+                dataIn.clear();
+                limpaBorrado();
+                nomeID.clear();
+                responsavelID.clear();
+                descriçaoInput.clear();
+                inicioDefinido.setValue(null);
+                fimDefinido.setValue(null);
+                labelErroCampos.setVisible(false);
+                labelErroData.setVisible(false);
+            } else {
+                labelErroData.setVisible(true);
+                labelErroCampos.setVisible(false);
+            }
+        }else{
+            labelErroCampos.setVisible(true);
+            labelErroData.setVisible(false);
+
         }
-
     }
+    @FXML
+    private Label labelErroCampos;
+    @FXML
+    private Label labelErroData;
     private void mexerPane(Pane atividade, Atividade atividade1) {
 
 

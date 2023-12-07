@@ -287,9 +287,27 @@ public class ProjetoController {
         txtFieldResp.clear();
         txtFieldArea.clear();
     }
+@FXML
+private Label labelErroAdd;
 
+    public boolean validador(LocalDate inicio, LocalDate fim) {
 
+        if (inicio != null && fim != null) {
+            if (inicio.isAfter(fim)) {
+                labelErroAdd.setVisible(true);
+                System.out.println("nao");
 
+                return false;
+            } else {
+                System.out.println("Valido");
+                labelErroAdd.setVisible(false);
+                return true;
+            }
+        } else {
+            System.out.println("Coloca as duas");
+            return false;
+        }
+    }
     @FXML
     void confirmarBtn(ActionEvent event) {
         Projeto projeto = new Projeto();
@@ -304,46 +322,61 @@ public class ProjetoController {
         projeto.setResponsavel(txtFieldResp.getText());
         projeto.setDescricao(txtAreaDesc.getText());
 
-        try {
-            int idEmpresaSelecionada = Integer.parseInt(idDaEmpresa.getText());
-            if (empresasController != null) {
-                minhaEmpresa = empresasController.getEmpresaById(idEmpresaSelecionada);
-                if (minhaEmpresa != null) {
-                    projeto.setEmpresa(minhaEmpresa);
-                    projeto.setStatus("Afazer");
-                } else {
-                    System.err.println("Empresa não encontrada com o ID: " + idEmpresaSelecionada);
-                }
-            } else {
-                System.err.println("EmpresasController não está definido.");
+        if(!txtFieldProjNome.getText().equals("") && !txtFieldArea.getText().equals("") && !txtFieldResp.getText().equals("") && !txtAreaDesc.getText().equals("")) {
+
+            if (validador(datePickInicio.getValue(), datePickFim.getValue())) {
+                    try {
+                        int idEmpresaSelecionada = Integer.parseInt(idDaEmpresa.getText());
+                        if (empresasController != null) {
+                            minhaEmpresa = empresasController.getEmpresaById(idEmpresaSelecionada);
+                            if (minhaEmpresa != null) {
+                                projeto.setEmpresa(minhaEmpresa);
+                                projeto.setStatus("Afazer");
+                            } else {
+                                System.err.println("Empresa não encontrada com o ID: " + idEmpresaSelecionada);
+                            }
+                        } else {
+                            System.err.println("EmpresasController não está definido.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.err.println("O ID da empresa não é um número válido");
+                    }
+
+                    Pane newPane = newProject(projeto, minhaEmpresa);
+                    minhaEmpresa.addProjeto(projeto);
+                    listaProjeto.add(projeto);
+
+                    anchorPanefazer.getChildren().add(newPane);
+                    mexerPane(newPane, projeto);
+                    addPane.setVisible(false);
+                    limparBorrado();
+                    count = (int) anchorPanefazer.getChildren().stream().filter(node -> node instanceof Pane).count();
+                    System.out.println("COUNT:" + count);
+                    reorganizarAtividades(anchorPanefazer);
+                    reorganizarAtividades(anchorPaneAndamento);
+                    reorganizarAtividades(anchorPaneConcluidas);
+                    countActivities();
+                    int teste = minhaEmpresa.getYeixo();
+                    int teste1 = (int) anchorPanefazer.getHeight();
+                    teste += 100;
+
+                    int teste3 = teste1 + teste;
+                    anchorPanefazer.setPrefHeight(teste3);
+                    labelErroAdd.setVisible(false);
+                    txtFieldProjNome.clear();
+                    txtFieldResp.clear();
+                    txtFieldArea.clear();
+                    txtAreaDesc.clear();
+                    datePickFim.setValue(null);
+                    datePickInicio.setValue(null);
+                }else{
+                labelErroAdd.setVisible(true);
             }
-        } catch (NumberFormatException e) {
-            System.err.println("O ID da empresa não é um número válido");
+            }else{
+            labelErroAdd.setVisible(true);
+        }
         }
 
-            Pane newPane = newProject(projeto, minhaEmpresa);
-            minhaEmpresa.addProjeto(projeto);
-            listaProjeto.add(projeto);
-
-        anchorPanefazer.getChildren().add(newPane);
-            mexerPane(newPane,projeto);
-            addPane.setVisible(false);
-            limparBorrado();
-            count = (int) anchorPanefazer.getChildren().stream().filter(node -> node instanceof Pane).count();
-        System.out.println("COUNT:"+count);
-        reorganizarAtividades(anchorPanefazer);
-        reorganizarAtividades(anchorPaneAndamento);
-        reorganizarAtividades(anchorPaneConcluidas);
-        countActivities();
-        int teste = minhaEmpresa.getYeixo();
-        int teste1 = (int) anchorPanefazer.getHeight();
-        teste += 100;
-
-        int teste3 = teste1 + teste;
-        anchorPanefazer.setPrefHeight(teste3);
-
-
-    }
     private void mexerPane(Pane atividade, Projeto projeto1) {
         atividade.setOnMousePressed(event -> {
             offsetX = event.getSceneX() - atividade.getLayoutX();
